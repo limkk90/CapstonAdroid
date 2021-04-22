@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_notice"
+        android:iconTint="#000000"
+        android:title="공지사항"
+        android:visible="true" />
+
+    <item
+        android:id="@+id/action_freeBoard"
+        android:enabled="true"
+        android:iconTint="#000000"
+        android:title="자유게시판"
+        android:visible="true" />
+
+    <item
+        android:id="@+id/action_tip"
+        android:enabled="true"
+        android:iconTint="#000000"
+        android:title="Tip"
+        android:visible="true" />
+
+    <item
+        android:id="@+id/action_news"
+        android:enabled="true"
+        android:iconTint="#000000"
+        android:title="뉴스"
+        android:visible="true" />
+</menu>
