@@ -71,7 +71,27 @@ public class CommunityAcitivty extends AppCompatActivity {
     }
 
     private void setFrag(int n){
-        
+        fm = getSupportFragmentManager();
+        ft = fm.beginTransaction(); //프레그먼트 교체하는 행위
+
+        switch (n){
+            case 0 :
+                ft.replace(R.id.cm_frame, cm_notice);
+                ft.commit();
+                break;
+            case 1 :
+                ft.replace(R.id.cm_frame, cm_free);
+                ft.commit();
+                break;
+            case 2 :
+                ft.replace(R.id.cm_frame, cm_tip);
+                ft.commit();
+                break;
+            case 3 :
+                ft.replace(R.id.cm_frame, cm_news);
+                ft.commit();
+                break;
+        }
     }
 
 
