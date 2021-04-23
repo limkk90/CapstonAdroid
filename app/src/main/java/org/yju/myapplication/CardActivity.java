@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 public class CardActivity extends AppCompatActivity {
     String aaa;
+    String abc;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
