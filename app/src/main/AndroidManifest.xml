@@ -11,8 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
-        <activity android:name=".FreeCommunityInsert"></activity>
-        <activity android:name=".FeeInfoAcitivty" />
+        <activity android:name=".FeeInfoAcitivty"></activity>
         <activity android:name=".CardActivity" />
         <activity android:name=".QnaAcitivty" />
         <activity android:name=".FacilRecoActivity" />
@@ -20,27 +19,26 @@
         <activity android:name=".CommunityAcitivty" />
         <activity android:name=".MyPageActivity" />
         <activity android:name=".MainActivity">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
-        </activity>
-        <activity android:name=".UserProfileActivity" />
-        <activity android:name=".UpdatePwActivity" />
-        <activity android:name=".FindPwActivity" />
-        <activity android:name=".FindUserActivity" />
-        <activity android:name=".UpdateProfile" />
-        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".UserProfileActivity"></activity>
+        <activity android:name=".UpdatePwActivity" />
+        <activity android:name=".FindPwActivity" />
+        <activity android:name=".FindUserActivity" />
+        <activity android:name=".UpdateProfile" />
+        <activity android:name=".LoginActivity">
+<!--                        <intent-filter>-->
+<!--                            <action android:name="android.intent.action.MAIN" />-->
+
+<!--                            <category android:name="android.intent.category.LAUNCHER" />-->
+<!--                        </intent-filter>-->
+        </activity>
         <activity android:name=".RegisterActivity" />
+
     </application>
 
 </manifest>
