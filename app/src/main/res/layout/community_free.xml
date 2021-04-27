@@ -8,12 +8,32 @@
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="38dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="196dp"
-        android:layout_marginTop="244dp"
+        android:layout_width="127dp"
+        android:layout_height="61dp"
+        android:layout_marginTop="256dp"
+        android:layout_marginEnd="177dp"
+        android:layout_marginRight="177dp"
         android:text="자유게시판"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.906"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/float_btn_freeWrite"
+        android:layout_width="wrap_content"
+        android:layout_height="56dp"
+        android:layout_marginStart="311dp"
+        android:layout_marginLeft="311dp"
+        android:layout_marginTop="628dp"
+        android:layout_marginEnd="44dp"
+        android:layout_marginRight="44dp"
+        android:layout_marginBottom="47dp"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_edit" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
