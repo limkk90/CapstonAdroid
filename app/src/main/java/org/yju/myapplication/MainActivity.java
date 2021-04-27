@@ -1,38 +1,26 @@
 package org.yju.myapplication;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 
 import com.skt.Tmap.TMapData;
-import com.skt.Tmap.TMapPOIItem;
 import com.skt.Tmap.TMapView;
 
-import android.renderscript.ScriptGroup;
-import android.util.Log;
-import android.view.Gravity;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.Toolbar;
 
 import org.yju.myapplication.databinding.ActivityActionbarBinding;
 import org.yju.myapplication.databinding.ActivityDrawerBinding;
 import org.yju.myapplication.databinding.ActivityMainBinding;
 
-import java.util.ArrayList;
-
 public class MainActivity extends AppCompatActivity {
-    TextView txtMyPage,txtCommunity ,txtQna, txtIntro, txtFeeInfo, txtFacilReco, txtCard;
+    TextView txtMyPage,txtCommunity ,txtQna, txtIntro, txtFeeInfo, txtFacilReco, txtCard, txtLogin, txtJoin;
     Intent intent;
     ActivityMainBinding mainBinding;
     ActivityDrawerBinding drawerBinding;
@@ -65,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
         txtFeeInfo = (TextView)findViewById(R.id.txt_feeInfo);
         txtCard = (TextView)findViewById(R.id.txt_card);
         txtFacilReco = (TextView)findViewById(R.id.txt_facilReco);
+        txtLogin = (TextView)findViewById(R.id.txt_Login);
+        txtJoin = (TextView)findViewById(R.id.txt_Join);
         //===================================================
 
 
@@ -125,11 +115,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        drawerBinding.txtLogin.setOnClickListener(v ->{ //로그인 이동
-            //나중에 합침
+        txtLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               intent = new Intent(MainActivity.this, LoginActivity.class);
+               startActivity(intent);
+            }
         });
-        drawerBinding.txtJoin.setOnClickListener(v ->{ //회원가입 이동
-           //나중에 합침
+
+        txtJoin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(MainActivity.this, RegisterActivity.class);
+                startActivity(intent);
+            }
         });
         LinearLayout linearLayoutTmap = (LinearLayout)findViewById(R.id.tmap);
         TMapView tmapview = new TMapView(this);

@@ -9,6 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import org.yju.myapplication.R;
+
 public class CommunityTipFrag  extends Fragment {
     private View view;
 

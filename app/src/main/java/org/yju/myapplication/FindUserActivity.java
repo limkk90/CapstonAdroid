@@ -48,14 +48,14 @@ public class FindUserActivity extends AppCompatActivity {
                                 tv_findEm.setText(response.body().getU_id());
                             }
                         } catch (NullPointerException e) {
-                            Toast.makeText(org.yju.myapplication.FindUserActivity.this, "이메일을 적어주세요", Toast.LENGTH_LONG).show();
+                            Toast.makeText(FindUserActivity.this, "이메일을 적어주세요", Toast.LENGTH_LONG).show();
                         }
 
                     }
 
                     @Override
                     public void onFailure(Call<User> call, Throwable t) {
-                        Toast.makeText(org.yju.myapplication.FindUserActivity.this, "이메일을 확인해주세요", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(FindUserActivity.this, "이메일을 확인해주세요", Toast.LENGTH_SHORT).show();
                     }
                 });
 

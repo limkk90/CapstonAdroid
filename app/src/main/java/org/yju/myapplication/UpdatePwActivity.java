@@ -40,10 +40,10 @@ public class UpdatePwActivity extends AppCompatActivity {
                 String newPwd = et_upPwd.getText().toString();
                 String newPwd2 = et_upPwd2.getText().toString();
                 if (!newPwd.equals(newPwd2)) {
-                    Toast.makeText(org.yju.myapplication.UpdatePwActivity.this, "비밀번호가 일치하지 않습니다", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UpdatePwActivity.this, "비밀번호가 일치하지 않습니다", Toast.LENGTH_SHORT).show();
                     a = false;
                 } else {
-                    Toast.makeText(org.yju.myapplication.UpdatePwActivity.this, "변경되었습니다", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UpdatePwActivity.this, "변경되었습니다", Toast.LENGTH_SHORT).show();
                     a = true;
                 }
                 user.setU_id(u_id);
@@ -61,7 +61,7 @@ public class UpdatePwActivity extends AppCompatActivity {
 
                         }
                     });
-                    Intent intent = new Intent(org.yju.myapplication.UpdatePwActivity.this, LoginActivity.class);
+                    Intent intent = new Intent(UpdatePwActivity.this, LoginActivity.class);
                     startActivity(intent);
                 }
             }

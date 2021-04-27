@@ -55,7 +55,7 @@ public class RegisterActivity extends AppCompatActivity {
                         Log.i("TAG", "onResponse: 아이디중복검사&&&&" + response.body());
                         try {
                             if (et_id.getText().toString().equals(response.body().getU_id())) {
-                                Toast.makeText(org.yju.myapplication.RegisterActivity.this, "아이디 중복입니다", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(RegisterActivity.this, "아이디 중복입니다", Toast.LENGTH_SHORT).show();
 //                                Snackbar.make(, "아이디 중복입니다.", Snackbar.LENGTH_LONG).show();
                                 a = false;
                             }
@@ -92,7 +92,7 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<String> call, Response<String> response) {
                         Log.i("TAG", "onResponse: 이메일테스트1@#!@#!@#" + response.body());
-                        Toast.makeText(org.yju.myapplication.RegisterActivity.this, "이메일 인증을 전송하였습니다.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterActivity.this, "이메일 인증을 전송하였습니다.", Toast.LENGTH_SHORT).show();
 
                     }
 
@@ -116,10 +116,10 @@ public class RegisterActivity extends AppCompatActivity {
                     public void onResponse(Call<Integer> call, Response<Integer> response) {
                         if (response.body() == 1){
                             Log.i("TAG", "onResponse: dddddddss" + response.body());
-                            Toast.makeText(org.yju.myapplication.RegisterActivity.this, "인증되었습니다", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegisterActivity.this, "인증되었습니다", Toast.LENGTH_SHORT).show();
                             b = true;
                         }else{
-                            Toast.makeText(org.yju.myapplication.RegisterActivity.this, "인증번호를 확인해주세요", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegisterActivity.this, "인증번호를 확인해주세요", Toast.LENGTH_SHORT).show();
                             b = false;
                         }
                     }
@@ -152,31 +152,31 @@ public class RegisterActivity extends AppCompatActivity {
                 user.setU_phone(u_phone);
 
                 if (u_id.isEmpty()) {
-                    Toast.makeText(org.yju.myapplication.RegisterActivity.this, "아이디가 없습니다", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "아이디가 없습니다", Toast.LENGTH_SHORT).show();
 
                 } else if (a == false){
-                    Toast.makeText(org.yju.myapplication.RegisterActivity.this, "아이디 중복입니다", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "아이디 중복입니다", Toast.LENGTH_SHORT).show();
 
                 } else if (b == false){
-                    Toast.makeText(org.yju.myapplication.RegisterActivity.this, "인증번호를 확인해주세요", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "인증번호를 확인해주세요", Toast.LENGTH_SHORT).show();
 
                 } else if (u_pwd.isEmpty()) {
-                    Toast.makeText(org.yju.myapplication.RegisterActivity.this, "패스워드가 없습니다", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "패스워드가 없습니다", Toast.LENGTH_SHORT).show();
 
                 } else if (u_email.isEmpty()) {
-                    Toast.makeText(org.yju.myapplication.RegisterActivity.this, "이메일이 없습니다", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "이메일이 없습니다", Toast.LENGTH_SHORT).show();
 
                 } else if (u_ok.isEmpty()) {
-                    Toast.makeText(org.yju.myapplication.RegisterActivity.this, "인증을 부탁합니다", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "인증을 부탁합니다", Toast.LENGTH_SHORT).show();
 
                 } else if (u_phone.isEmpty()) {
-                    Toast.makeText(org.yju.myapplication.RegisterActivity.this, "폰넘버가 없습니다", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "폰넘버가 없습니다", Toast.LENGTH_SHORT).show();
 
                 } else if (a == true) {
                     dataService.insert.signup(user).enqueue(new Callback<String>() {
                         @Override
                         public void onResponse(Call<String> call, Response<String> response) {
-                            Intent intent = new Intent(org.yju.myapplication.RegisterActivity.this, LoginActivity.class);
+                            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                             startActivity(intent);
 
                         }

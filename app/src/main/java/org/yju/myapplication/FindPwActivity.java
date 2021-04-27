@@ -53,7 +53,7 @@ public class FindPwActivity extends AppCompatActivity {
 
                     }
                 });
-                Toast.makeText(org.yju.myapplication.FindPwActivity.this, "이메일 인증을 전송하였습니다.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(FindPwActivity.this, "이메일 인증을 전송하였습니다.", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -68,10 +68,10 @@ public class FindPwActivity extends AppCompatActivity {
                     public void onResponse(Call<Integer> call, Response<Integer> response) {
                         if (response.body() == 1){
                             Log.i("TAG", "onResponse: dddddddss" + response.body());
-                            Toast.makeText(org.yju.myapplication.FindPwActivity.this, "인증되었습니다", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(FindPwActivity.this, "인증되었습니다", Toast.LENGTH_SHORT).show();
                             a = true;
                         }else{
-                            Toast.makeText(org.yju.myapplication.FindPwActivity.this, "인증번호를 확인해주세요", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(FindPwActivity.this, "인증번호를 확인해주세요", Toast.LENGTH_SHORT).show();
                             a = false;
                         }
                     }
@@ -92,25 +92,25 @@ public class FindPwActivity extends AppCompatActivity {
                 String emailOk = et_pw_emailOk.getText().toString();
                 user.setU_id(id);
                 if (id.isEmpty()) {
-                    Toast.makeText(org.yju.myapplication.FindPwActivity.this, "아이디가 없습니다", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FindPwActivity.this, "아이디가 없습니다", Toast.LENGTH_SHORT).show();
                 } else if (email.isEmpty()) {
-                    Toast.makeText(org.yju.myapplication.FindPwActivity.this, "이메일이 없습니다", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FindPwActivity.this, "이메일이 없습니다", Toast.LENGTH_SHORT).show();
                 } else if (emailOk.isEmpty()) {
-                    Toast.makeText(org.yju.myapplication.FindPwActivity.this, "인증번호가 없습니다", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FindPwActivity.this, "인증번호가 없습니다", Toast.LENGTH_SHORT).show();
                 } else if (a == true) {
                     dataService.select.prifile(id).enqueue(new Callback<User>() {
                     @Override
                     public void onResponse(Call<User> call, Response<User> response) {
                         Log.i("TAG", "onResponse: 아이디들어옴?" + response.body());
                         u_id = response.body().getU_id();
-                        Intent intent = new Intent(org.yju.myapplication.FindPwActivity.this, UpdatePwActivity.class);
+                        Intent intent = new Intent(FindPwActivity.this, UpdatePwActivity.class);
                         intent.putExtra("id", u_id);
                         Log.i("TAG", "onClick: putput" + u_id);
                         startActivity(intent);
                     }
                     @Override
                     public void onFailure(Call<User> call, Throwable t) {
-                        Toast.makeText(org.yju.myapplication.FindPwActivity.this, "아이디을 확인해주세요", Toast.LENGTH_LONG).show();
+                        Toast.makeText(FindPwActivity.this, "아이디을 확인해주세요", Toast.LENGTH_LONG).show();
 
                     }
                 });

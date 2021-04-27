@@ -31,10 +31,10 @@ public class DataService {
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .build();
 
-    org.yju.myapplication.SelectAPI select = retrofitClient.create(org.yju.myapplication.SelectAPI.class);
-    org.yju.myapplication.InsertAPI insert = retrofitClient.create(org.yju.myapplication.InsertAPI.class);
-    org.yju.myapplication.UpdateAPI update = retrofitClient.create(org.yju.myapplication.UpdateAPI.class);
-    org.yju.myapplication.DeleteAPI delete = retrofitClient.create(org.yju.myapplication.DeleteAPI.class);
+    SelectAPI select = retrofitClient.create(SelectAPI.class);
+    InsertAPI insert = retrofitClient.create(InsertAPI.class);
+    public UpdateAPI update = retrofitClient.create(UpdateAPI.class);
+    DeleteAPI delete = retrofitClient.create(DeleteAPI.class);
 }
 
 interface SelectAPI{

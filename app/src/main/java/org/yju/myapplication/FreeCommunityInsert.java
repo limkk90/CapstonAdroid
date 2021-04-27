@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import org.yju.myapplication.R;
+
 public class FreeCommunityInsert extends AppCompatActivity {
 
     private EditText et_free_cmt_id_insert, et_free_cmt_content_insert;

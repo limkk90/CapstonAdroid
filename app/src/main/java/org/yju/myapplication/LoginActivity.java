@@ -43,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(org.yju.myapplication.LoginActivity.this, RegisterActivity.class);
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(intent);
             }
         });
@@ -52,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
         btn_find.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(org.yju.myapplication.LoginActivity.this, FindUserActivity.class);
+                Intent intent = new Intent(LoginActivity.this, FindUserActivity.class);
                 startActivity(intent);
             }
         });
@@ -61,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
         btn_pwFind.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(org.yju.myapplication.LoginActivity.this, FindPwActivity.class);
+                Intent intent = new Intent(LoginActivity.this, FindPwActivity.class);
                 startActivity(intent);
             }
         });
@@ -85,13 +85,13 @@ public class LoginActivity extends AppCompatActivity {
                         try {
                             if (!response.body().isEmpty()) {
                                 Log.i("TAG", "onResponse: " + response.body());
-                                Intent intent = new Intent(org.yju.myapplication.LoginActivity.this, UserProfileActivity.class);
+                                Intent intent = new Intent(LoginActivity.this, UserProfileActivity.class);
                                 intent.putExtra("u_id", u_id);
                                 startActivity(intent);
                             }
                         } catch (NullPointerException e) {
                             Log.i("TAG", "onResponse: 가르쳐주세용" + response.body());
-                            Toast.makeText(org.yju.myapplication.LoginActivity.this, "아이디 또는 비밀번호 오류입니다", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "아이디 또는 비밀번호 오류입니다", Toast.LENGTH_SHORT).show();
                         }
 
                     }
