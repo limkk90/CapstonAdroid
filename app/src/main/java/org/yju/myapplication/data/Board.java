@@ -1,9 +1,15 @@
 package org.yju.myapplication.data;
 
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import lombok.Data;
 
+@RequiresApi(api = Build.VERSION_CODES.O)
 @Data
 public class Board {
     private char cat_cd;
@@ -12,6 +18,10 @@ public class Board {
     private String b_content;
     private int b_visite;
     private String u_id;
+
+
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-ddTHH:mm:ss");
+    LocalDateTime dateTime = LocalDateTime.parse(b_dtt.toString(), formatter);
 
     @Override
     public String toString() {
@@ -34,11 +44,11 @@ public class Board {
     }
 
     public LocalDateTime getB_dtt() {
-        return b_dtt;
+        return dateTime;
     }
 
-    public void setB_dtt(LocalDateTime b_dtt) {
-        this.b_dtt = b_dtt;
+    public void setB_dtt(String b_dtt) {
+        this.b_dtt = dateTime;
     }
 
     public String getB_title() {
@@ -72,4 +82,5 @@ public class Board {
     public void setU_id(String u_id) {
         this.u_id = u_id;
     }
+
 }

@@ -1,5 +1,6 @@
 package org.yju.myapplication;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +8,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,6 +26,7 @@ public class CommunityFreeFrag extends Fragment {
     CommunityAdapter adapter = null;
     ArrayList<Board> bList = new ArrayList<Board>();
     LinearLayoutManager linearLayoutManager = null;
+    DataService dataService = new DataService();
 
     @Nullable
     @Override
@@ -39,33 +42,27 @@ public class CommunityFreeFrag extends Fragment {
 
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), linearLayoutManager.getOrientation());
         recyclerView.addItemDecoration(dividerItemDecoration);
-        addItem("김", "김", "임");
-        addItem("김", "김", "임");
-        addItem("김", "김", "임");
-        addItem("김", "김", "임");
-        addItem("김", "김", "임");
-        addItem("김", "김", "임");
-        addItem("김", "김", "임");
-        addItem("김", "김", "임");
-        addItem("김", "김", "임");
-        addItem("김", "김", "임");
-        addItem("김", "김", "임");
-        addItem("김", "김", "임");
-        addItem("김", "김", "임");
-        addItem("김", "김", "임");
-        addItem("김", "김", "임");
-        addItem("김", "김", "임");
-        addItem("김", "김", "임");
-        addItem("김", "김", "임");
-        addItem("김", "김", "임");
-        addItem("김", "김", "임");
-        addItem("김", "김", "임");
+
         adapter.notifyDataSetChanged();
+
+
+        dataService.select.ListCall(board).enqueue(new Callback<ArrayList<Board>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Board>> call, Response<ArrayList<Board>> response) {
+                Log.i("TAG", "onResponse: asdfasdf" + response.body());
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Board>> call, Throwable t) {
+
+            }
+        });
         return view;
 
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public void addItem(String title, String content, String writer){
         Board item = new Board();
         item.setB_title(title);

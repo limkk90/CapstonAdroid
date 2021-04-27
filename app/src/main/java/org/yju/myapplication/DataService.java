@@ -3,10 +3,12 @@ package org.yju.myapplication;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import org.yju.myapplication.data.Board;
 import org.yju.myapplication.data.Email;
 import org.yju.myapplication.data.User;
 
 import java.lang.reflect.Member;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -61,6 +63,9 @@ interface SelectAPI{
 
     @POST("api/confirm")
     Call<Integer> confirm(@Body Email email);
+
+    @GET("api/allboardlist")
+    Call<ArrayList<Board>> ListCall(@Body Board board);
 
 
 }
