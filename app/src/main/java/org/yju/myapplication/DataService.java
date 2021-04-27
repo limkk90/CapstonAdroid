@@ -3,6 +3,9 @@ package org.yju.myapplication;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import org.yju.myapplication.data.Email;
+import org.yju.myapplication.data.User;
+
 import java.lang.reflect.Member;
 import java.util.List;
 import java.util.Map;

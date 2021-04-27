@@ -10,6 +10,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import org.yju.myapplication.data.User;
+
 import java.util.HashMap;
 import java.util.Map;
 

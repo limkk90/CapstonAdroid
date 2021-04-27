@@ -1,4 +1,4 @@
-package org.yju.myapplication;
+package org.yju.myapplication.data;
 
 import java.time.LocalDateTime;
 
