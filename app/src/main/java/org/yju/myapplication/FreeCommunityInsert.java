@@ -28,7 +28,7 @@ public class FreeCommunityInsert extends AppCompatActivity {
         tv_fileName = findViewById(R.id.tv_fileName);
 
 
-        // ㅇㅇ
+
         btn_free_cmd_insert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
