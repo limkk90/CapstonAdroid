@@ -19,11 +19,11 @@
         <activity android:name=".CommunityAcitivty" />
         <activity android:name=".MyPageActivity" />
         <activity android:name=".MainActivity">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".UserProfileActivity"></activity>
         <activity android:name=".UpdatePwActivity" />
@@ -31,11 +31,11 @@
         <activity android:name=".FindUserActivity" />
         <activity android:name=".UpdateProfile" />
         <activity android:name=".LoginActivity">
-                        <intent-filter>
-                            <action android:name="android.intent.action.MAIN" />
+<!--                        <intent-filter>-->
+<!--                            <action android:name="android.intent.action.MAIN" />-->
 
-                            <category android:name="android.intent.category.LAUNCHER" />
-                        </intent-filter>
+<!--                            <category android:name="android.intent.category.LAUNCHER" />-->
+<!--                        </intent-filter>-->
         </activity>
         <activity android:name=".RegisterActivity" />
 

@@ -93,6 +93,4 @@ public class CommunityAcitivty extends AppCompatActivity {
                 break;
         }
     }
-
-
 }
