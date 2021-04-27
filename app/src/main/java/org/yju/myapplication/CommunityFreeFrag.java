@@ -18,6 +18,8 @@ public class CommunityFreeFrag extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.community_free, container, false);
+
+
         return view;
 
 
