@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
-        <activity android:name=".FeeInfoAcitivty"></activity>
+        <activity android:name=".CommunityInsertAcitivty"></activity>
+        <activity android:name=".FeeInfoAcitivty" />
         <activity android:name=".Fee.FeeInfoAcitivty" />
         <activity android:name=".CardActivity" />
         <activity android:name=".QnaAcitivty" />
