@@ -15,6 +15,7 @@ import java.util.Map;
 import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Body;
@@ -66,6 +67,9 @@ interface SelectAPI{
 
     @GET("api/allboardlist")
     Call<ArrayList<Board>> ListCall();
+
+    @GET("api/boardlist")
+    Call<Response<?>> BoardList(@Body Board board);
 
 
 }

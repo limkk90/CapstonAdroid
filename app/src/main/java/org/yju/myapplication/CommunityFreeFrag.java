@@ -80,6 +80,8 @@ public class CommunityFreeFrag extends Fragment {
         item.setB_content(content);
         item.setU_id(writer);
         bList.add(item);
+        adapter.notifyDataSetChanged();
+
         // 리사이클러뷰 어뎁터로 값 넘겨주고, 새로고침 시켜줘야됨.
     }
 }
