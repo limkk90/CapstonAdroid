@@ -72,6 +72,7 @@ interface SelectAPI{
     @GET("api/boardlist?cat_cd=2")
     Call<ArrayList<Board>> BoardList();
 
+    // 추가하기
 
 }
 
