@@ -1,5 +1,6 @@
 package org.yju.myapplication;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +16,8 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import org.yju.myapplication.R;
 import org.yju.myapplication.data.Board;
 
@@ -27,18 +30,31 @@ import retrofit2.Response;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class CommunityFreeFrag extends Fragment {
+    Intent intent;
     private View view;
     RecyclerView recyclerView = null;
     CommunityAdapter adapter = null;
     ArrayList<Board> bList = new ArrayList<Board>();
     LinearLayoutManager linearLayoutManager = null;
     DataService dataService = new DataService();
+    FloatingActionButton floatingActionButton;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.community_free, container, false);
 
+        //글쓰기 화면으로 넘어가는 FloationAction버튼 클릭 했을 때
+        floatingActionButton = view.findViewById(R.id.float_btn_freeWrite);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(getActivity(), CommunityInsertAcitivty.class);
+                startActivity(intent);
+            }
+        });
+        //===================================================
+        //리사이클러뷰 처리
         recyclerView = view.findViewById(R.id.recyclerView);
 
         adapter = new CommunityAdapter(bList);
@@ -50,9 +66,9 @@ public class CommunityFreeFrag extends Fragment {
         recyclerView.addItemDecoration(dividerItemDecoration);
 
         adapter.notifyDataSetChanged();
+        //=============================================
 
-
-
+        //dataService api 호출
         dataService.select.ListCall().enqueue(new Callback<ArrayList<Board>>() {
             @Override
             public void onResponse(Call<ArrayList<Board>> call, Response<ArrayList<Board>> response) {
@@ -69,10 +85,9 @@ public class CommunityFreeFrag extends Fragment {
             }
         });
         return view;
-
+        //================================================
 
     }
-
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void addItem(String title, String content, String writer){
         Board item = new Board();

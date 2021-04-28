@@ -5,7 +5,8 @@ plugins {
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
-    viewBinding.enabled=true
+    buildFeatures.viewBinding=true
+
     defaultConfig {
         applicationId "org.yju.myapplication"
         minSdkVersion 16
