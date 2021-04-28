@@ -2,6 +2,7 @@ package org.yju.myapplication;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.yju.myapplication.data.Board;
@@ -48,6 +50,7 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
         return vh;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Board item = mData.get(position);

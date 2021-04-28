@@ -2,6 +2,7 @@ package org.yju.myapplication;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,11 @@ import org.yju.myapplication.data.Board;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+@RequiresApi(api = Build.VERSION_CODES.O)
 public class CommunityFreeFrag extends Fragment {
     private View view;
     RecyclerView recyclerView = null;
@@ -46,15 +52,20 @@ public class CommunityFreeFrag extends Fragment {
         adapter.notifyDataSetChanged();
 
 
-        dataService.select.ListCall(board).enqueue(new Callback<ArrayList<Board>>() {
+
+        dataService.select.ListCall().enqueue(new Callback<ArrayList<Board>>() {
             @Override
             public void onResponse(Call<ArrayList<Board>> call, Response<ArrayList<Board>> response) {
-                Log.i("TAG", "onResponse: asdfasdf" + response.body());
+                ArrayList<Board> body = response.body();
+                Log.i("TAG", "onResponse: 성공" + body);
+                for (int i = 0; i < body.size(); i++) {
+                    addItem(body.get(i).getB_title(), body.get(i).getB_content(), body.get(i).getU_id());
+                }
             }
 
             @Override
             public void onFailure(Call<ArrayList<Board>> call, Throwable t) {
-
+                t.printStackTrace();
             }
         });
         return view;
@@ -69,5 +80,6 @@ public class CommunityFreeFrag extends Fragment {
         item.setB_content(content);
         item.setU_id(writer);
         bList.add(item);
+        // 리사이클러뷰 어뎁터로 값 넘겨주고, 새로고침 시켜줘야됨.
     }
 }

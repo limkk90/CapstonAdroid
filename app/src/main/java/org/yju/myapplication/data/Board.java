@@ -6,6 +6,7 @@ import androidx.annotation.RequiresApi;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 import lombok.Data;
 
@@ -13,15 +14,15 @@ import lombok.Data;
 @Data
 public class Board {
     private char cat_cd;
-    private LocalDateTime b_dtt;
+//    private Date b_dtt;
+    private String b_dtt;
     private String b_title;
     private String b_content;
     private int b_visite;
     private String u_id;
 
-
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-ddTHH:mm:ss");
-    LocalDateTime dateTime = LocalDateTime.parse(b_dtt.toString(), formatter);
+//    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+//    LocalDateTime dateTime = LocalDateTime.parse(b_dtt.toString(), formatter);
 
     @Override
     public String toString() {
@@ -43,12 +44,12 @@ public class Board {
         this.cat_cd = cat_cd;
     }
 
-    public LocalDateTime getB_dtt() {
-        return dateTime;
+    public String getB_dtt() {
+        return b_dtt;
     }
 
     public void setB_dtt(String b_dtt) {
-        this.b_dtt = dateTime;
+        this.b_dtt = b_dtt;
     }
 
     public String getB_title() {

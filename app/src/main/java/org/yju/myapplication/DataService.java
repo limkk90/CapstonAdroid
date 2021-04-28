@@ -23,7 +23,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public class DataService {
-    private String BASE_URL = "http://192.168.1.43:7777/"; // TODO REST API 퍼블릭 IP로 변경
+    private String BASE_URL = "http://172.26.1.20:7777/"; // TODO REST API 퍼블릭 IP로 변경
 
     Gson gson = new GsonBuilder()
             .setLenient()
@@ -38,7 +38,7 @@ public class DataService {
 
     SelectAPI select = retrofitClient.create(SelectAPI.class);
     InsertAPI insert = retrofitClient.create(InsertAPI.class);
-    public UpdateAPI update = retrofitClient.create(UpdateAPI.class);
+    UpdateAPI update = retrofitClient.create(UpdateAPI.class);
     DeleteAPI delete = retrofitClient.create(DeleteAPI.class);
 }
 
@@ -65,7 +65,7 @@ interface SelectAPI{
     Call<Integer> confirm(@Body Email email);
 
     @GET("api/allboardlist")
-    Call<ArrayList<Board>> ListCall(@Body Board board);
+    Call<ArrayList<Board>> ListCall();
 
 
 }
