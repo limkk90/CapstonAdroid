@@ -1,7 +1,9 @@
 package org.yju.myapplication;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,8 +14,16 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import org.yju.myapplication.data.Board;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 //게시글 등록하는 액티비티
 public class CommunityInsertAcitivty extends AppCompatActivity {
+    DataService dataService = new DataService();
+    Board board;
     String title, content;
     EditText cm_editTitle, cm_editContent;
     Button cm_btnInsert, cm_btnCancle, cm_btn_ImageInsert;
@@ -22,6 +32,7 @@ public class CommunityInsertAcitivty extends AppCompatActivity {
     RadioGroup cm_radioGroup;
     char cat_cd;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +67,28 @@ public class CommunityInsertAcitivty extends AppCompatActivity {
                     cat_cd = '2';
                 title = cm_editTitle.getText().toString();
                 content = cm_editContent.getText().toString();
+
+                Log.i("boardI", "onClick: "+title);
+                Log.i("boardI", "onClick: "+content);
+                Log.i("boardI", "onClick: "+cat_cd);
+                board = new Board();
+                board.setCat_cd(cat_cd);
+                board.setB_title(title);
+                board.setB_content(content);
+
+                dataService.insert.boardInsert(board).enqueue(new Callback(){
+                    @Override
+                    public void onResponse(Call call, Response response) {
+                        Log.i("CmInsert:", "성공");
+                    }
+
+                    @Override
+                    public void onFailure(Call call, Throwable t) {
+                        Log.i("CmInsert", "실패");
+                    }
+                });
+
+
             }
         });
 
