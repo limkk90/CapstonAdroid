@@ -69,7 +69,7 @@ public class CommunityFreeFrag extends Fragment {
         //=============================================
 
         //dataService api 호출
-        dataService.select.ListCall().enqueue(new Callback<ArrayList<Board>>() {
+        dataService.select.FreeBoard().enqueue(new Callback<ArrayList<Board>>() {
             @Override
             public void onResponse(Call<ArrayList<Board>> call, Response<ArrayList<Board>> response) {
                 ArrayList<Board> body = response.body();

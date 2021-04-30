@@ -57,7 +57,7 @@ public class CommunityTipFrag  extends Fragment {
 
 
 
-        dataService.select.BoardList().enqueue(new Callback<ArrayList<Board>>() {
+        dataService.select.TipBoard().enqueue(new Callback<ArrayList<Board>>() {
             @Override
             public void onResponse(Call<ArrayList<Board>> call, Response<ArrayList<Board>> response) {
                 ArrayList<Board> body = response.body();

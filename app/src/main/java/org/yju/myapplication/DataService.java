@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import lombok.Getter;
 import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -25,7 +26,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public class DataService {
-    private String BASE_URL = "http://172.26.1.47:7777/"; // TODO REST API 퍼블릭 IP로 변경
+    private String BASE_URL = "http://172.26.1.43:7777/"; // TODO REST API 퍼블릭 IP로 변경
 
     Gson gson = new GsonBuilder()
             .setLenient()
@@ -69,8 +70,11 @@ interface SelectAPI{
     @GET("api/allboardlist")
     Call<ArrayList<Board>> ListCall();
 
+    @GET("api/boardlist?cat_cd=1")
+    Call<ArrayList<Board>> TipBoard();
+
     @GET("api/boardlist?cat_cd=2")
-    Call<ArrayList<Board>> BoardList();
+    Call<ArrayList<Board>> FreeBoard();
 
     // 추가하기
 
