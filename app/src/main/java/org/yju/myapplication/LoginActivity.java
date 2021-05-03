@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,9 +21,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
-
+    private TextView txt_findId, txt_findPwd, txt_Join;
     private EditText et_id, et_pass;
-    private Button btn_login, btn_register, btn_find, btn_pwFind;
+    private Button btn_login, btn_register, btn_find, btn_pwFind, testButton;
     DataService dataService = new DataService();
     private User user = new User();
     private String TAG = "TAG";
@@ -37,36 +38,40 @@ public class LoginActivity extends AppCompatActivity {
         et_pass = findViewById(R.id.et_pass);
         btn_login = findViewById(R.id.btn_login);
         btn_register = findViewById(R.id.btn_register);
-        btn_find = findViewById(R.id.btn_find);
-        btn_pwFind = findViewById(R.id.btn_pwFind);
+//        btn_find = findViewById(R.id.btn_find);
+//        btn_pwFind = findViewById(R.id.btn_pwFind);
+        txt_findId = (TextView)findViewById(R.id.txt_findId);
+        txt_findPwd = (TextView)findViewById(R.id.txt_findPwd);
+        txt_Join = (TextView)findViewById(R.id.txt_Join);
 
 
-        // 회원가입 버튼을 클릭 시 수행
-        btn_register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        // 아이디 찾기
-        btn_find.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, FindUserActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        // 비밀번호 찾기
-        btn_pwFind.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, FindPwActivity.class);
-                startActivity(intent);
-            }
-        });
+//        // 회원가입 버튼을 클릭 시 수행
+//        txt_Join.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+//
+//        // 아이디 찾기
+//        txt_findId.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(LoginActivity.this, FindUserActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+//
+//        // 비밀번호 찾기
+//        txt_findPwd.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(LoginActivity.this, FindPwActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+//
 
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,5 +113,18 @@ public class LoginActivity extends AppCompatActivity {
 
 
     }
+    public void findId(View view) {
+        Intent intent = new Intent(LoginActivity.this, FindUserActivity.class);
+        startActivity(intent);
+    }
 
+    public void findPwd(View view) {
+        Intent intent = new Intent(LoginActivity.this, FindPwActivity.class);
+        startActivity(intent);
+    }
+
+    public void join(View view) {
+        Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+        startActivity(intent);
+    }
 }

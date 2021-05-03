@@ -35,6 +35,7 @@ public class CommunityAcitivty extends AppCompatActivity {
         setContentView(R.layout.activity_community_acitivty);
 
         bottomNavigationView = findViewById(R.id.bottomNavi);
+        bottomNavigationView.setItemIconTintList(null);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
