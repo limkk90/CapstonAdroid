@@ -83,6 +83,16 @@ public class CommunityFreeFrag extends Fragment {
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), linearLayoutManager.getOrientation());
         recyclerView.addItemDecoration(dividerItemDecoration);
 
+        adapter.setOnItemCLickListener(new CommunityAdapter.OnItemClickListener() {
+            @Override
+            public void onItemCLick(View v, int pos) {
+                Integer a = Integer.valueOf(pos);
+                Log.e("asd", a.toString());
+                adapter.getItem(pos).getB_dtt().toString();
+                Log.e("aaa", adapter.getItem(pos).getB_dtt().toString());
+            }
+        });
+
         adapter.notifyDataSetChanged();
         //=============================================
 
@@ -93,7 +103,7 @@ public class CommunityFreeFrag extends Fragment {
                 ArrayList<Board> body = response.body();
                 Log.i("TAG", "onResponse: 성공" + body);
                 for (int i = 0; i < body.size(); i++) {
-                    addItem(body.get(i).getB_title(), body.get(i).getB_content(), body.get(i).getU_id());
+                    addItem(body.get(i).getB_title(), body.get(i).getB_content(), body.get(i).getU_id(), body.get(i).getB_dtt());
                 }
             }
 
@@ -107,11 +117,13 @@ public class CommunityFreeFrag extends Fragment {
 
     }
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public void addItem(String title, String content, String writer){
+    public void addItem(String title, String content, String writer, String b_dtt){
         Board item = new Board();
+
         item.setB_title(title);
         item.setB_content(content);
         item.setU_id(writer);
+        item.setB_dtt(b_dtt);
         bList.add(item);
         adapter.notifyDataSetChanged();
 

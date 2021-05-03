@@ -19,7 +19,7 @@ import retrofit2.Response;
 public class FindUserActivity extends AppCompatActivity {
 
     private EditText et_findEm;
-    private Button btn_findEm;
+    private Button btn_findEm, btn_cancle;
     private TextView tv_findEm;
     DataService dataService = new DataService();
     User user = new User();
@@ -33,6 +33,7 @@ public class FindUserActivity extends AppCompatActivity {
         et_findEm = findViewById(R.id.et_findEm);
         btn_findEm = findViewById(R.id.btn_findEm);
         tv_findEm = findViewById(R.id.tv_findEm);
+        btn_cancle = findViewById(R.id.btn_cancle);
 
         btn_findEm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,6 +62,12 @@ public class FindUserActivity extends AppCompatActivity {
                     }
                 });
 
+            }
+        });
+        btn_cancle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
 
