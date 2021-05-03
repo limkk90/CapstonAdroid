@@ -7,8 +7,10 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -27,12 +29,22 @@ public class CommunityAcitivty extends AppCompatActivity {
     private CommunityNewsFrag cm_news;
     private CommunityNoticeFrag cm_notice;
     private CommunityTipFrag cm_tip;
+    private String u_id;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_community_acitivty);
+
+        Intent intent = getIntent();
+        u_id = intent.getStringExtra("u_id");
+        Log.i("TAG", "onCreate: 커뮤니티 엑티비티 유저아이디받기" + u_id);
+
+        cm_notice = new CommunityNoticeFrag();
+        cm_free = new CommunityFreeFrag();
+        cm_tip = new CommunityTipFrag();
+        cm_news = new CommunityNewsFrag();
 
         bottomNavigationView = findViewById(R.id.bottomNavi);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -44,9 +56,19 @@ public class CommunityAcitivty extends AppCompatActivity {
                         break;
                     case R.id.action_freeBoard:
                         setFrag(1);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("u_id", u_id);
+                        Log.i("TAG", "onCreate: 번들값찍히냐???" + bundle);
+                        cm_free.setArguments(bundle);
+                        Log.i("TAG", "onCreate: 번들 값" + bundle);
                         break;
                     case R.id.action_tip:
                         setFrag(2);
+                        Bundle bundle1 = new Bundle();
+                        bundle1.putString("u_id", u_id);
+                        Log.i("TAG", "onCreate: 번들값찍히냐???" + bundle1);
+                        cm_free.setArguments(bundle1);
+                        Log.i("TAG", "onCreate: 번들 값" + bundle1);
                         break;
                     case R.id.action_news:
                         setFrag(3);
@@ -55,10 +77,10 @@ public class CommunityAcitivty extends AppCompatActivity {
                 return true;
             }
         });
-        cm_notice = new CommunityNoticeFrag();
-        cm_free = new CommunityFreeFrag();
-        cm_tip = new CommunityTipFrag();
-        cm_news = new CommunityNewsFrag();
+
+
+
+
         setFrag(0);
 //        //네비게이션 변수====================================
 //        iv_menu = (ImageView)findViewById(R.id.iv_menu);

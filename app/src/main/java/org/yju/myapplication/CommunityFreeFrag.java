@@ -1,5 +1,6 @@
 package org.yju.myapplication;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,6 +22,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.yju.myapplication.R;
 import org.yju.myapplication.data.Board;
+import org.yju.myapplication.data.User;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -44,13 +47,28 @@ public class CommunityFreeFrag extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.community_free, container, false);
 
+        Bundle bundle = getArguments();
+        Log.i("TAG", "onCreateView: 마지막값" + bundle);
+
         //글쓰기 화면으로 넘어가는 FloationAction버튼 클릭 했을 때
         floatingActionButton = view.findViewById(R.id.float_btn_freeWrite);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent = new Intent(getActivity(), CommunityInsertAcitivty.class);
-                startActivity(intent);
+                String u_id = bundle.getString("u_id");
+                Log.i("TAG", "onClick: 마지막 번들값 재확인" + u_id);
+                assert bundle != null;
+                try {
+                    if (u_id != null) {
+                        intent = new Intent(getActivity(), CommunityInsertAcitivty.class);
+                        Log.i("u_id = ", u_id);
+                        intent.putExtra("u_id", u_id);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(getActivity(), "로그인을 해주세요", Toast.LENGTH_LONG).show();
+                    }
+                } catch (Exception e) {
+                }
             }
         });
         //===================================================
