@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import org.yju.myapplication.data.Board;
+import org.yju.myapplication.data.BoardInfo;
 import org.yju.myapplication.data.Criteria;
 import org.yju.myapplication.data.Email;
 import org.yju.myapplication.data.User;
@@ -78,7 +79,7 @@ interface SelectAPI{
     Call<ArrayList<Board>> FreeBoard();
 
     @POST("api/gboard")
-    Call<ArrayList<Board>> gBoard();
+    Call<ArrayList<Board>> gBoard(@Body BoardInfo boardInfo);
 
     // 추가하기
 
