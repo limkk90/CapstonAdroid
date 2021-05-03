@@ -9,6 +9,7 @@ import android.os.Bundle;
 import com.skt.Tmap.TMapData;
 import com.skt.Tmap.TMapView;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageView iv_menu;
     private DrawerLayout drawerLayout;
     private View drawerView;
+    private String u_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,10 @@ public class MainActivity extends AppCompatActivity {
         drawerBinding=ActivityDrawerBinding.inflate(getLayoutInflater());
         actionbarBinding=ActivityActionbarBinding.inflate(getLayoutInflater());
         setContentView(mainBinding.getRoot());
+
+
+
+
 
         //네비게이션 변수====================================
         iv_menu = (ImageView)findViewById(R.id.iv_menu);
@@ -76,6 +82,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 intent = new Intent(MainActivity.this, CommunityAcitivty.class);
+                u_id = getIntent().getStringExtra("u_id");
+                intent.putExtra("u_id", u_id);
+                Log.i("TAG", "onClick: 메인 -> 커뮤니티 id값이동" + u_id);
                 startActivity(intent);
             }
         });

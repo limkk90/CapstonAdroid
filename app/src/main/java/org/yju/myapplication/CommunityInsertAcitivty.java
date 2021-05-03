@@ -3,6 +3,7 @@ package org.yju.myapplication;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,6 +31,7 @@ public class CommunityInsertAcitivty extends AppCompatActivity {
     ImageView cm_imageView;
     RadioButton cm_radioFree, cm_radioTip;
     RadioGroup cm_radioGroup;
+    String u_id;
     char cat_cd;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -37,6 +39,10 @@ public class CommunityInsertAcitivty extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_community_insert);
+
+        Intent intent = getIntent();
+        u_id = intent.getStringExtra("u_id");
+        Log.i("TAG", "onClick: 유저아이디뜨내?123123" + u_id);
 
         //제목
         cm_editTitle = findViewById(R.id.cm_editTitle);
@@ -75,11 +81,14 @@ public class CommunityInsertAcitivty extends AppCompatActivity {
                 board.setCat_cd(cat_cd);
                 board.setB_title(title);
                 board.setB_content(content);
+                board.setU_id(u_id);
+                Log.i("TAG", "onClick: 유저아이디뜨내?" + u_id);
 
                 dataService.insert.boardInsert(board).enqueue(new Callback(){
                     @Override
                     public void onResponse(Call call, Response response) {
                         Log.i("CmInsert:", "성공");
+                        finish();
                     }
 
                     @Override
@@ -89,6 +98,13 @@ public class CommunityInsertAcitivty extends AppCompatActivity {
                 });
 
 
+            }
+        });
+
+        cm_btnCancle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
 

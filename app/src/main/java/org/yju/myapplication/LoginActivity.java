@@ -92,7 +92,7 @@ public class LoginActivity extends AppCompatActivity {
                         try {
                             if (!response.body().isEmpty()) {
                                 Log.i("TAG", "onResponse: " + response.body());
-                                Intent intent = new Intent(LoginActivity.this, UserProfileActivity.class);
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 intent.putExtra("u_id", u_id);
                                 startActivity(intent);
                             }
