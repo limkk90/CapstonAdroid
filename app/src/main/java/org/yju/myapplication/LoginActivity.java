@@ -44,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
         txt_findPwd = (TextView)findViewById(R.id.txt_findPwd);
         txt_Join = (TextView)findViewById(R.id.txt_Join);
 
-
+//     ======================변경전 코드===============
 //        // 회원가입 버튼을 클릭 시 수행
 //        txt_Join.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -71,7 +71,7 @@ public class LoginActivity extends AppCompatActivity {
 //                startActivity(intent);
 //            }
 //        });
-//
+//  =====================================================================
 
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override

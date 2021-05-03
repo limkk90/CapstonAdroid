@@ -3,10 +3,15 @@ package org.yju.myapplication;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import com.skt.Tmap.TMapData;
+import com.skt.Tmap.TMapMarkerItem;
+import com.skt.Tmap.TMapPoint;
 import com.skt.Tmap.TMapView;
 
 import android.util.Log;
@@ -21,6 +26,7 @@ import org.yju.myapplication.databinding.ActivityDrawerBinding;
 import org.yju.myapplication.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
+    Context context;
     TextView txtMyPage,txtCommunity ,txtQna, txtIntro, txtFeeInfo, txtFacilReco, txtCard, txtLogin, txtJoin;
     Intent intent;
     ActivityMainBinding mainBinding;
@@ -144,6 +150,24 @@ public class MainActivity extends AppCompatActivity {
         tmapview.setSKTMapApiKey("l7xx8ab0ebd2f81548f586a1838fdbe5bc1b");
         tmapview.setHttpsMode(true);
         linearLayoutTmap.addView(tmapview);
+
+        //===============마커 추가===============
+        context = getApplicationContext();
+        TMapMarkerItem markerItem1 = new TMapMarkerItem();
+
+        TMapPoint tMapPoint1 = new TMapPoint(37.570841, 126.985302); // SKT타워
+// 마커 아이콘
+        Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.pin_r_m_a);
+
+        markerItem1.setIcon(bitmap); // 마커 아이콘 지정
+        markerItem1.setPosition(0.5f, 1.0f); // 마커의 중심점을 중앙, 하단으로 설정
+        markerItem1.setTMapPoint( tMapPoint1 ); // 마커의 좌표 지정
+        markerItem1.setName("SKT타워"); // 마커의 타이틀 지정
+        tmapview.addMarkerItem("markerItem1", markerItem1); // 지도에 마커 추가
+
+        tmapview.setCenterPoint( 126.985302, 37.570841 );
+
+        //==================================
 
         iv_menu.setOnClickListener(new View.OnClickListener() {
             @Override
