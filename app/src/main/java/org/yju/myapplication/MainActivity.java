@@ -36,6 +36,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
+    ArrayList<Marker> mapApi;
     DataService dataService  = new DataService();
     Context context;
     TextView txtMyPage,txtCommunity ,txtQna, txtIntro, txtFeeInfo, txtFacilReco, txtCard, txtLogin, txtJoin;
@@ -178,6 +179,23 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ArrayList<Marker>> call, Response<ArrayList<Marker>> response) {
                 ArrayList<Marker> body = response.body();
+                for(int i=0; i<=body.size(); i++){
+                    TMapMarkerItem markerItem1 = new TMapMarkerItem();
+                    Log.e("Marker1", "onResponse: "+body.get(i).getStat_lat() );
+                    Log.e("Marker1", "onResponse: "+body.get(i).getStat_lng() );
+//                    TMapPoint tMapPoint1 = new TMapPoint(body.get(i).getStat_lat(), body.get(i).getStat_lat()); // SKT타워
+//                    // 마커 아이콘
+//                    Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.pin_r_m_a);
+//
+//                    markerItem1.setIcon(bitmap); // 마커 아이콘 지정
+//                    markerItem1.setPosition(0.5f, 1.0f); // 마커의 중심점을 중앙, 하단으로 설정
+//                    markerItem1.setTMapPoint( tMapPoint1 ); // 마커의 좌표 지정
+//                    markerItem1.setName("SKT타워"); // 마커의 타이틀 지정
+//                    markerItem1.setCanShowCallout(true); //풍선뷰 사용유무
+//                    markerItem1.setCalloutTitle("Hello World"); //풍선뷰 클릭 시 나올 내용
+//
+//                    tmapview.addMarkerItem("markerItem1", markerItem1); // 지도에 마커 추가
+                }
                 Log.i("Marker", "되는거냐?:"+ body);
             }
 
@@ -186,21 +204,10 @@ public class MainActivity extends AppCompatActivity {
                 Log.i("Marker", "실패ㅄ ㅋㅋ");
             }
         });
+        Log.e("Marker1", "onCreate: "+mapApi );
+
         context = getApplicationContext();
-        TMapMarkerItem markerItem1 = new TMapMarkerItem();
 
-        TMapPoint tMapPoint1 = new TMapPoint(37.570841, 126.985302); // SKT타워
-        // 마커 아이콘
-        Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.pin_r_m_a);
-
-        markerItem1.setIcon(bitmap); // 마커 아이콘 지정
-        markerItem1.setPosition(0.5f, 1.0f); // 마커의 중심점을 중앙, 하단으로 설정
-        markerItem1.setTMapPoint( tMapPoint1 ); // 마커의 좌표 지정
-        markerItem1.setName("SKT타워"); // 마커의 타이틀 지정
-        markerItem1.setCanShowCallout(true); //풍선뷰 사용유무
-        markerItem1.setCalloutTitle("Hello World"); //풍선뷰 클릭 시 나올 내용
-
-        tmapview.addMarkerItem("markerItem1", markerItem1); // 지도에 마커 추가
 
 
         tmapview.setCenterPoint( 126.985302, 37.570841 ); //지도 띄울 떄 이쪽으로 띄우는듯
