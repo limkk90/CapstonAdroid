@@ -1,5 +1,6 @@
 package org.yju.myapplication;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -9,6 +10,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Bundle;
 
 import com.skt.Tmap.TMapData;
@@ -61,16 +63,64 @@ public class MainActivity extends AppCompatActivity {
         setContentView(mainBinding.getRoot());
 
 
-        AlertDialog.Builder myAlert = new AlertDialog.Builder(MainActivity.this);
-        myAlert.setTitle("Alert");
-        myAlert.setMessage("Click OK to continue, or Cancel to stop");
-        myAlert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+//        AlertDialog.Builder myAlert = new AlertDialog.Builder(MainActivity.this);
+//        myAlert.setTitle("Alert");
+//        myAlert.setMessage("Click OK to continue, or Cancel to stop");
+//        myAlert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                Toast.makeText(MainActivity.this, "감사합니다", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//        myAlert.create().show();
+
+
+        LinearLayout linearLayoutTmap = (LinearLayout)findViewById(R.id.tmap);
+        TMapView tmapview = new TMapView(this);
+        tmapview.setSKTMapApiKey("l7xx8ab0ebd2f81548f586a1838fdbe5bc1b");
+        tmapview.setHttpsMode(true);
+        linearLayoutTmap.addView(tmapview);
+
+        //===============마커 추가======================
+
+        dataService.select.getMarker().enqueue(new Callback<ArrayList<Marker>>() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(MainActivity.this, "감사합니다", Toast.LENGTH_SHORT).show();
+            public void onResponse(Call<ArrayList<Marker>> call, Response<ArrayList<Marker>> response) {
+                ArrayList<Marker> body = response.body();
+
+                for(int i=0; i<body.size(); i++){
+                    TMapMarkerItem markerItem1 = new TMapMarkerItem();
+                    String stat_nm = body.get(i).getStat_nm();
+                    String stat_lng = body.get(i).getStat_lng();
+                    String stat_lat = body.get(i).getStat_lat();
+                    double stat_lng_d = Double.parseDouble(stat_lng);
+                    double stat_lat_d = Double.parseDouble(stat_lat);
+
+                    TMapPoint tMapPoint1 = new TMapPoint(stat_lat_d, stat_lng_d); // SKT타워
+                    // 마커 아이콘
+                    Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.pin_r_m_a);
+
+                    markerItem1.setIcon(bitmap); // 마커 아이콘 지정
+                    markerItem1.setPosition(0.5f, 1.0f); // 마커의 중심점을 중앙, 하단으로 설정
+                    markerItem1.setTMapPoint( tMapPoint1 ); // 마커의 좌표 지정
+                    markerItem1.setName("SKT타워"); // 마커의 타이틀 지정
+                    markerItem1.setCanShowCallout(true); //풍선뷰 사용유무
+                    markerItem1.setCalloutTitle(stat_nm); //풍선뷰 클릭 시 나올 내용
+                    tmapview.addMarkerItem("markerItem" + i, markerItem1); // 지도에 마커 추가
+                }
+                Log.i("Marker", "되는거냐?:"+ body);
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Marker>> call, Throwable t) {
+                Log.i("Marker", "실패ㅄ ㅋㅋ");
             }
         });
-        myAlert.create().show();
+        context = getApplicationContext();
+
+        tmapview.setCenterPoint( 126.985302, 37.570841 ); //지도 띄울 떄 이쪽으로 띄우는듯
+
 
 
 
@@ -103,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 intent = new Intent(MainActivity.this, MyPageActivity.class);
-             startActivity(intent);
+                startActivity(intent);
             }
         });
         txtCommunity.setOnClickListener(new View.OnClickListener() { //커뮤니티 이동
@@ -155,8 +205,8 @@ public class MainActivity extends AppCompatActivity {
         txtLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               intent = new Intent(MainActivity.this, LoginActivity.class);
-               startActivity(intent);
+                intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -167,51 +217,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        LinearLayout linearLayoutTmap = (LinearLayout)findViewById(R.id.tmap);
-        TMapView tmapview = new TMapView(this);
-        tmapview.setSKTMapApiKey("l7xx8ab0ebd2f81548f586a1838fdbe5bc1b");
-        tmapview.setHttpsMode(true);
-        linearLayoutTmap.addView(tmapview);
-
-        //===============마커 추가======================
-
-        dataService.select.getMarker().enqueue(new Callback<ArrayList<Marker>>() {
-            @Override
-            public void onResponse(Call<ArrayList<Marker>> call, Response<ArrayList<Marker>> response) {
-                ArrayList<Marker> body = response.body();
-                for(int i=0; i<=body.size(); i++){
-                    TMapMarkerItem markerItem1 = new TMapMarkerItem();
-                    Log.e("Marker1", "onResponse: "+body.get(i).getStat_lat() );
-                    Log.e("Marker1", "onResponse: "+body.get(i).getStat_lng() );
-//                    TMapPoint tMapPoint1 = new TMapPoint(body.get(i).getStat_lat(), body.get(i).getStat_lat()); // SKT타워
-//                    // 마커 아이콘
-//                    Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.pin_r_m_a);
-//
-//                    markerItem1.setIcon(bitmap); // 마커 아이콘 지정
-//                    markerItem1.setPosition(0.5f, 1.0f); // 마커의 중심점을 중앙, 하단으로 설정
-//                    markerItem1.setTMapPoint( tMapPoint1 ); // 마커의 좌표 지정
-//                    markerItem1.setName("SKT타워"); // 마커의 타이틀 지정
-//                    markerItem1.setCanShowCallout(true); //풍선뷰 사용유무
-//                    markerItem1.setCalloutTitle("Hello World"); //풍선뷰 클릭 시 나올 내용
-//
-//                    tmapview.addMarkerItem("markerItem1", markerItem1); // 지도에 마커 추가
-                }
-                Log.i("Marker", "되는거냐?:"+ body);
-            }
-
-            @Override
-            public void onFailure(Call<ArrayList<Marker>> call, Throwable t) {
-                Log.i("Marker", "실패ㅄ ㅋㅋ");
-            }
-        });
-        Log.e("Marker1", "onCreate: "+mapApi );
-
-        context = getApplicationContext();
-
-
-
-        tmapview.setCenterPoint( 126.985302, 37.570841 ); //지도 띄울 떄 이쪽으로 띄우는듯
-
         //============================================
 
         iv_menu.setOnClickListener(new View.OnClickListener() {
