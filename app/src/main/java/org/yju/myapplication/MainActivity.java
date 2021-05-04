@@ -24,11 +24,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
+import org.yju.myapplication.data.Marker;
 import org.yju.myapplication.databinding.ActivityActionbarBinding;
 import org.yju.myapplication.databinding.ActivityDrawerBinding;
 import org.yju.myapplication.databinding.ActivityMainBinding;
 
+import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class MainActivity extends AppCompatActivity {
+    DataService dataService  = new DataService();
     Context context;
     TextView txtMyPage,txtCommunity ,txtQna, txtIntro, txtFeeInfo, txtFacilReco, txtCard, txtLogin, txtJoin;
     Intent intent;
@@ -165,6 +173,19 @@ public class MainActivity extends AppCompatActivity {
         linearLayoutTmap.addView(tmapview);
 
         //===============마커 추가======================
+
+        dataService.select.getMarker().enqueue(new Callback<ArrayList<Marker>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Marker>> call, Response<ArrayList<Marker>> response) {
+                ArrayList<Marker> body = response.body();
+                Log.i("Marker", "되는거냐?:"+ body);
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Marker>> call, Throwable t) {
+                Log.i("Marker", "실패ㅄ ㅋㅋ");
+            }
+        });
         context = getApplicationContext();
         TMapMarkerItem markerItem1 = new TMapMarkerItem();
 

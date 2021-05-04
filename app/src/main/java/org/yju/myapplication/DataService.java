@@ -6,6 +6,7 @@ import com.google.gson.GsonBuilder;
 import org.yju.myapplication.data.Board;
 import org.yju.myapplication.data.Criteria;
 import org.yju.myapplication.data.Email;
+import org.yju.myapplication.data.Marker;
 import org.yju.myapplication.data.User;
 
 import java.lang.reflect.Member;
@@ -27,7 +28,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public class DataService {
-    private String BASE_URL = "http://192.168.1.43:7777/"; // TODO REST API 퍼블릭 IP로 변경
+    private String BASE_URL = "http://172.26.1.253:7777/"; // TODO REST API 퍼블릭 IP로 변경
 
     Gson gson = new GsonBuilder()
             .setLenient()
@@ -80,6 +81,8 @@ interface SelectAPI{
     @POST("api/gboard")
     Call<ArrayList<Board>> gBoard();
 
+    @GET("api/map/marker")
+    Call<ArrayList<Marker>> getMarker();
     // 추가하기
 
 }
