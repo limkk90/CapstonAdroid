@@ -123,7 +123,6 @@ public class CommunityFreeFrag extends Fragment {
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void addItem(String title, String content, String writer, String b_dtt){
         Board item = new Board();
-
         item.setB_title(title);
         item.setB_content(content);
         item.setU_id(writer);

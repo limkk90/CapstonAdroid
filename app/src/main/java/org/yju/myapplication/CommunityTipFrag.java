@@ -1,5 +1,6 @@
 package org.yju.myapplication;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,6 +29,7 @@ import retrofit2.Response;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class CommunityTipFrag  extends Fragment {
+    Intent intent;
     private View view;
     RecyclerView recyclerView = null;
     CommunityAdapter adapter = null;
@@ -53,6 +55,21 @@ public class CommunityTipFrag  extends Fragment {
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), linearLayoutManager.getOrientation());
         recyclerView.addItemDecoration(dividerItemDecoration);
 
+        adapter.setOnItemCLickListener(new CommunityAdapter.OnItemClickListener() {
+            @Override
+            public void onItemCLick(View v, int pos) {
+                Integer a = Integer.valueOf(pos);
+                Log.e("asd", a.toString());
+                adapter.getItem(pos).getB_dtt();
+                Log.e("aaa", adapter.getItem(pos).getB_dtt());
+                intent = new Intent(getContext(), CommunityViewActivity.class);
+                intent.putExtra("b_dtt", adapter.getItem(pos).getB_dtt());
+                startActivity(intent);
+
+            }
+        });
+
+
         adapter.notifyDataSetChanged();
 
 
@@ -63,7 +80,7 @@ public class CommunityTipFrag  extends Fragment {
                 ArrayList<Board> body = response.body();
                 Log.i("TAG", "onResponse: 성공!!" + response.body());
                 for (int i = 0; i < body.size(); i++) {
-                    addItem(body.get(i).getB_title(), body.get(i).getB_content(), body.get(i).getU_id());
+                    addItem(body.get(i).getB_title(), body.get(i).getB_content(), body.get(i).getU_id(), body.get(i).getB_dtt());
                 }
             }
 
@@ -81,11 +98,12 @@ public class CommunityTipFrag  extends Fragment {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public void addItem(String title, String content, String writer) {
+    public void addItem(String title, String content, String writer, String b_dtt) {
         Board item = new Board();
         item.setB_title(title);
         item.setB_content(content);
         item.setU_id(writer);
+        item.setB_dtt(b_dtt);
         bList.add(item);
         adapter.notifyDataSetChanged();
 
