@@ -107,7 +107,11 @@ public class CommunityFreeFrag extends Fragment {
                 ArrayList<Board> body = response.body();
                 Log.i("TAG", "onResponse: 성공" + body);
                 for (int i = 0; i < body.size(); i++) {
-                    addItem(body.get(i).getB_title(), body.get(i).getB_content(), body.get(i).getU_id(), body.get(i).getB_dtt());
+                    if(i == body.size()-1){
+                        addItem(null, null, null, null);
+                    }else{
+                        addItem(body.get(i).getB_title(), body.get(i).getB_content(), body.get(i).getU_id(), body.get(i).getB_dtt());
+                    }
                 }
             }
 
