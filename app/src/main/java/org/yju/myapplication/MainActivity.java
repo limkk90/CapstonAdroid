@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
         });
         context = getApplicationContext();
 
-        tmapview.setCenterPoint( 126.985302, 37.570841 ); //지도 띄울 떄 이쪽으로 띄우는듯
+        tmapview.setCenterPoint( 128.620935, 35.896463 ); //지도 띄울 떄 이쪽으로 띄우는듯
 
 
 

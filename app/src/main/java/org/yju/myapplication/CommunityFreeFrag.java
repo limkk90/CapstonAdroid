@@ -93,7 +93,6 @@ public class CommunityFreeFrag extends Fragment {
                 intent = new Intent(getContext(), CommunityViewActivity.class);
                 intent.putExtra("b_dtt", adapter.getItem(pos).getB_dtt());
                 startActivity(intent);
-
             }
         });
 
