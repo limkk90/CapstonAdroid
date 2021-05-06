@@ -3,8 +3,10 @@ package org.yju.myapplication;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import org.yju.myapplication.data.Board;
@@ -33,9 +35,11 @@ public class CommunityViewActivity extends AppCompatActivity {
         tv_b_title = findViewById(R.id.tv_b_title);
         tv_b_content = findViewById(R.id.tv_b_content);
 
+        Intent intent = getIntent();
+        b_dtt = intent.getExtras().getString("b_dtt");
+        Log.i("TAG", "onCreate: 게시글 볼수 있냐?" + b_dtt);
 
         boardInfo.setB_dtt(b_dtt);
-
 
         dataService.select.gBoard(boardInfo).enqueue(new Callback<ArrayList<Board>>() {
             @RequiresApi(api = Build.VERSION_CODES.O)
@@ -61,11 +65,4 @@ public class CommunityViewActivity extends AppCompatActivity {
 
     }
 
-//    private void addContentView(String b_title, String b_content) {
-//        Board board = new Board();
-//        board.setB_title(b_title);
-//        board.setB_content(b_content);
-//
-//
-//    }
 }

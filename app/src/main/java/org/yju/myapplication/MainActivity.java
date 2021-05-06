@@ -109,7 +109,6 @@ public class MainActivity extends AppCompatActivity {
                     markerItem1.setCalloutTitle(stat_nm); //풍선뷰 클릭 시 나올 내용
                     tmapview.addMarkerItem("markerItem" + i, markerItem1); // 지도에 마커 추가
                 }
-                Log.i("Marker", "되는거냐?:"+ body);
             }
 
             @Override

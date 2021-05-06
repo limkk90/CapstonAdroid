@@ -88,8 +88,12 @@ public class CommunityFreeFrag extends Fragment {
             public void onItemCLick(View v, int pos) {
                 Integer a = Integer.valueOf(pos);
                 Log.e("asd", a.toString());
-                adapter.getItem(pos).getB_dtt().toString();
-                Log.e("aaa", adapter.getItem(pos).getB_dtt().toString());
+                adapter.getItem(pos).getB_dtt();
+                Log.e("aaa", adapter.getItem(pos).getB_dtt());
+                intent = new Intent(getContext(), CommunityViewActivity.class);
+                intent.putExtra("b_dtt", adapter.getItem(pos).getB_dtt());
+                startActivity(intent);
+
             }
         });
 
