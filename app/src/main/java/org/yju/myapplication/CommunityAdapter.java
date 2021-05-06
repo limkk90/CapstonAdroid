@@ -82,15 +82,19 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
         holder.title.setText(item.getB_title());
         holder.content.setText(item.getB_content());
         holder.writer.setText(item.getU_id());
+        holder.date.setText(item.getB_dtt());
 //        holder.date.setText(item.getB_dtt().toString());
 
         holder.title.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
         holder.content.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
         holder.writer.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
+        holder.date.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
 //        holder..setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
+
         holder.title.setGravity(Gravity.CENTER);
         holder.content.setGravity(Gravity.CENTER);
         holder.writer.setGravity(Gravity.CENTER);
+        holder.date.setGravity(Gravity.CENTER);
     }
 
     @Override

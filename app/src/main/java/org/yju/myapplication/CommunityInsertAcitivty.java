@@ -74,9 +74,9 @@ public class CommunityInsertAcitivty extends AppCompatActivity {
                 title = cm_editTitle.getText().toString();
                 content = cm_editContent.getText().toString();
 
-                Log.i("boardI", "onClick: "+title);
-                Log.i("boardI", "onClick: "+content);
-                Log.i("boardI", "onClick: "+cat_cd);
+//                Log.i("boardI", "onClick: "+title);
+//                Log.i("boardI", "onClick: "+content);
+//                Log.i("boardI", "onClick: "+cat_cd);
                 board = new Board();
                 board.setCat_cd(cat_cd);
                 board.setB_title(title);
@@ -96,8 +96,6 @@ public class CommunityInsertAcitivty extends AppCompatActivity {
                         Log.i("CmInsert", "실패");
                     }
                 });
-
-
             }
         });
 

@@ -95,10 +95,37 @@ public class CommunityFreeFrag extends Fragment {
                 startActivity(intent);
             }
         });
-
-        adapter.notifyDataSetChanged();
         //=============================================
 
+        getListBoard();
+        adapter.notifyDataSetChanged();
+        return view;
+        //================================================
+
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        bList.clear();
+        getListBoard();
+        adapter.notifyDataSetChanged();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void addItem(String title, String content, String writer, String b_dtt){
+        Board item = new Board();
+        item.setB_title(title);
+        item.setB_content(content);
+        item.setU_id(writer);
+        item.setB_dtt(b_dtt);
+        bList.add(item);
+        adapter.notifyDataSetChanged();
+
+        // 리사이클러뷰 어뎁터로 값 넘겨주고, 새로고침 시켜줘야됨.
+    }
+
+    public void getListBoard(){
         //dataService api 호출
         dataService.select.FreeBoard().enqueue(new Callback<ArrayList<Board>>() {
             @Override
@@ -119,20 +146,5 @@ public class CommunityFreeFrag extends Fragment {
                 t.printStackTrace();
             }
         });
-        return view;
-        //================================================
-
-    }
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public void addItem(String title, String content, String writer, String b_dtt){
-        Board item = new Board();
-        item.setB_title(title);
-        item.setB_content(content);
-        item.setU_id(writer);
-        item.setB_dtt(b_dtt);
-        bList.add(item);
-        adapter.notifyDataSetChanged();
-
-        // 리사이클러뷰 어뎁터로 값 넘겨주고, 새로고침 시켜줘야됨.
     }
 }
