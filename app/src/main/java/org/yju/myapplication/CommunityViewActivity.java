@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import org.yju.myapplication.data.Board;
@@ -21,11 +22,12 @@ import retrofit2.Response;
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class CommunityViewActivity extends AppCompatActivity {
 
-    private TextView tv_b_title, tv_b_content;
+    private TextView tv_b_title, tv_b_content, tv_view_update, tv_view_delete;
     DataService dataService = new DataService();
     private String title, content;
     BoardInfo boardInfo = new BoardInfo();
     String b_dtt;
+    Board board = new Board();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,8 @@ public class CommunityViewActivity extends AppCompatActivity {
 
         tv_b_title = findViewById(R.id.tv_b_title);
         tv_b_content = findViewById(R.id.tv_b_content);
+        tv_view_update = findViewById(R.id.tv_view_update);
+        tv_view_delete = findViewById(R.id.tv_view_delete);
 
         Intent intent = getIntent();
         b_dtt = intent.getExtras().getString("b_dtt");
@@ -61,6 +65,29 @@ public class CommunityViewActivity extends AppCompatActivity {
 
             }
         });
+
+        // 삭제
+
+        board.setB_dtt(b_dtt);
+        Log.i("TAG", "onCreate: board b_dtt 확인" + board);
+        tv_view_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dataService.delete.removeBoard(board).enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+                        Log.i("TAG", "onResponse: 게시글 삭제 테스트" + response);
+                    }
+
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable t) {
+
+                    }
+                });
+            }
+        });
+
+
 
 
     }

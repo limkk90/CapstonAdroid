@@ -113,5 +113,8 @@ interface UpdateAPI{
 interface DeleteAPI{
     @POST("delete/{id}")
     Call<ResponseBody> deleteOne(@Path("id") long id);
+
+    @POST("api/board/make")
+    Call<Void> removeBoard(@Body Board board);
 }
 
