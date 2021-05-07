@@ -9,6 +9,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 
 public interface BoardApi {
     @GET("api/allboardlist")
@@ -28,4 +29,8 @@ public interface BoardApi {
 
     @POST("api/board/make")
     Call<Void> removeBoard(@Body Board board);
+
+    @PUT("api/board/update")
+    Call<Void> updateBoard(@Body Board board);
+
 }

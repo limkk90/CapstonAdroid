@@ -15,7 +15,7 @@
         <activity android:name=".Community.CommunityViewActivity"></activity>
         <activity android:name=".Community.CommunityInsertAcitivty" />
 =======
-        <activity android:name=".CommunityUpdateActivity"></activity>
+        <activity android:name=".Community.CommunityUpdateActivity"></activity>
         <activity android:name=".CommunityViewActivity" />
         <activity android:name=".CommunityInsertAcitivty" />
 >>>>>>> cfaf0479fa58efab41bb318dd7911160878ea288

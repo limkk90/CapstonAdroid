@@ -1,4 +1,4 @@
-package org.yju.myapplication;
+package org.yju.myapplication.Community;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +13,8 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import org.yju.myapplication.DataService;
+import org.yju.myapplication.R;
 import org.yju.myapplication.data.Board;
 
 import retrofit2.Call;
@@ -68,7 +70,7 @@ public class CommunityUpdateActivity extends AppCompatActivity {
                 board.setB_content(content);
                 board.setB_dtt(b_dtt);
 
-                dataService.update.updateBoard(board).enqueue(new Callback<Void>() {
+                dataService.boardApi.updateBoard(board).enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
                         Log.i("tag","성공");
