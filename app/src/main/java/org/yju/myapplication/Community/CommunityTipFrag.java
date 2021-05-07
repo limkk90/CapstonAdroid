@@ -60,9 +60,11 @@ public class CommunityTipFrag  extends Fragment {
                 Integer a = Integer.valueOf(pos);
                 Log.e("asd", a.toString());
                 adapter.getItem(pos).getB_dtt();
+                adapter.getItem(pos).getU_id();
                 Log.e("aaa", adapter.getItem(pos).getB_dtt());
                 intent = new Intent(getContext(), CommunityViewActivity.class);
                 intent.putExtra("b_dtt", adapter.getItem(pos).getB_dtt());
+                intent.putExtra("u_id", adapter.getItem(pos).getU_id());
                 startActivity(intent);
 
             }

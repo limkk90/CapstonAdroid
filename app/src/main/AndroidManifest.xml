@@ -11,8 +11,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
+<<<<<<< HEAD
         <activity android:name=".Community.CommunityViewActivity"></activity>
         <activity android:name=".Community.CommunityInsertAcitivty" />
+=======
+        <activity android:name=".CommunityUpdateActivity"></activity>
+        <activity android:name=".CommunityViewActivity" />
+        <activity android:name=".CommunityInsertAcitivty" />
+>>>>>>> cfaf0479fa58efab41bb318dd7911160878ea288
         <activity android:name=".FeeInfoAcitivty" />
         <activity android:name=".Fee.FeeInfoAcitivty" />
         <activity android:name=".CardActivity" />

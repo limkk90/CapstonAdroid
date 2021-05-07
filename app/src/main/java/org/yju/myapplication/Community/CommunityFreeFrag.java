@@ -39,6 +39,7 @@ public class CommunityFreeFrag extends Fragment {
     LinearLayoutManager linearLayoutManager = null;
     DataService dataService = new DataService();
     FloatingActionButton floatingActionButton;
+    String u_id;
 
     @Nullable
     @Override
@@ -53,7 +54,7 @@ public class CommunityFreeFrag extends Fragment {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String u_id = bundle.getString("u_id");
+                u_id = bundle.getString("u_id");
                 Log.i("TAG", "onClick: 마지막 번들값 재확인" + u_id);
                 assert bundle != null;
                 try {
@@ -84,12 +85,17 @@ public class CommunityFreeFrag extends Fragment {
         adapter.setOnItemCLickListener(new CommunityAdapter.OnItemClickListener() {
             @Override
             public void onItemCLick(View v, int pos) {
+                u_id = bundle.getString("u_id");
                 Integer a = Integer.valueOf(pos);
                 Log.e("asd", a.toString());
                 adapter.getItem(pos).getB_dtt();
+                adapter.getItem(pos).getU_id();
                 Log.e("aaa", adapter.getItem(pos).getB_dtt());
                 intent = new Intent(getContext(), CommunityViewActivity.class);
                 intent.putExtra("b_dtt", adapter.getItem(pos).getB_dtt());
+                intent.putExtra("b_u_id", adapter.getItem(pos).getU_id());
+                intent.putExtra("u_id", u_id);
+                Log.i("TAG", "onItemCLick: 넘어가는 유저값 찍히냐?" + u_id);
                 startActivity(intent);
             }
         });

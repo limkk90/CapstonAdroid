@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.yju.myapplication.DataService;
 import org.yju.myapplication.R;
@@ -28,7 +29,7 @@ public class CommunityViewActivity extends AppCompatActivity {
     DataService dataService = new DataService();
     private String title, content;
     BoardInfo boardInfo = new BoardInfo();
-    String b_dtt;
+    String b_dtt, b_u_id, u_id;
     Board board = new Board();
 
     @Override
@@ -41,9 +42,11 @@ public class CommunityViewActivity extends AppCompatActivity {
         tv_view_update = findViewById(R.id.tv_view_update);
         tv_view_delete = findViewById(R.id.tv_view_delete);
 
-        Intent intent = getIntent();
-        b_dtt = intent.getExtras().getString("b_dtt");
+        final Intent[] intent = {getIntent()};
+        b_dtt = intent[0].getExtras().getString("b_dtt");
+        b_u_id = intent[0].getExtras().getString("b_u_id");
         Log.i("TAG", "onCreate: 게시글 볼수 있냐?" + b_dtt);
+        Log.i("TAG", "onCreate: 유저아이디 넘어오냐?" + b_u_id);
 
         boardInfo.setB_dtt(b_dtt);
 
@@ -51,10 +54,6 @@ public class CommunityViewActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onResponse(Call<ArrayList<Board>> call, Response<ArrayList<Board>> response) {
-//                ArrayList<Board> boards = response.body();
-//                for (int i = 0; i < boards.size(); i++) {
-//                    addContentView(boards.get(i).getB_title(), boards.get(i).getB_content());
-//                }
                 title = response.body().get(0).getB_title();
                 content = response.body().get(0).getB_content();
                 tv_b_title.setText(title);
@@ -69,25 +68,61 @@ public class CommunityViewActivity extends AppCompatActivity {
         });
 
         // 삭제
+<<<<<<< HEAD:app/src/main/java/org/yju/myapplication/Community/CommunityViewActivity.java
+=======
+
+        Intent intent1 = getIntent();
+        u_id = intent1.getStringExtra("u_id");
+        Log.i("TAG", "onCreate: 제발찍히세요" + u_id);
+>>>>>>> cfaf0479fa58efab41bb318dd7911160878ea288:app/src/main/java/org/yju/myapplication/CommunityViewActivity.java
         board.setB_dtt(b_dtt);
         Log.i("TAG", "onCreate: board b_dtt 확인" + board);
+
+
         tv_view_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+<<<<<<< HEAD:app/src/main/java/org/yju/myapplication/Community/CommunityViewActivity.java
                 dataService.boardApi.removeBoard(board).enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
                         Log.i("TAG", "onResponse: 게시글 삭제 테스트" + response);
                     }
+=======
+>>>>>>> cfaf0479fa58efab41bb318dd7911160878ea288:app/src/main/java/org/yju/myapplication/CommunityViewActivity.java
 
-                    @Override
-                    public void onFailure(Call<Void> call, Throwable t) {
+                if (!b_u_id.equals(u_id)) {
+                    Toast.makeText(CommunityViewActivity.this, "삭제할 권한이 없습니다", Toast.LENGTH_SHORT).show();
+                } else {
+                    dataService.delete.removeBoard(board).enqueue(new Callback<Void>() {
+                        @Override
+                        public void onResponse(Call<Void> call, Response<Void> response) {
+                            finish();
+                        }
 
-                    }
-                });
+                        @Override
+                        public void onFailure(Call<Void> call, Throwable t) {
+
+                        }
+                    });
+                }
             }
         });
 
+        // 수정
+        tv_view_update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!b_u_id.equals(u_id)) {
+                    Toast.makeText(CommunityViewActivity.this, "수정할 권한이 없습니다", Toast.LENGTH_SHORT).show();
+                } else {
+                    Intent intent2 = new Intent(CommunityViewActivity.this, CommunityUpdateActivity.class);
+                    intent2.putExtra("b_dtt", b_dtt);
+                    intent2.putExtra("u_id", u_id);
+                    startActivity(intent2);
+                }
+            }
+        });
 
 
 

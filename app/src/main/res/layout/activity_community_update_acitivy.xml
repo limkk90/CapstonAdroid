@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Community.CommunityInsertAcitivty">
+    tools:context=".CommunityInsertAcitivty">
 
     <include
-        android:id="@+id/include2"
+        android:id="@+id/include3"
         layout="@layout/activity_actionbar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -27,7 +27,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include2" />
+        app:layout_constraintTop_toBottomOf="@+id/include3" />
 
     <EditText
         android:id="@+id/cm_ud_editContent"
@@ -50,7 +50,7 @@
         android:layout_marginStart="88dp"
         android:layout_marginLeft="88dp"
         android:layout_marginTop="48dp"
-        android:text="등록"
+        android:text="수정"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cm_imageView" />
 
