@@ -104,6 +104,8 @@ public class CommunityViewActivity extends AppCompatActivity {
                     Toast.makeText(CommunityViewActivity.this, "수정할 권한이 없습니다", Toast.LENGTH_SHORT).show();
                 } else {
                     Intent intent2 = new Intent(CommunityViewActivity.this, CommunityUpdateActivity.class);
+                    intent2.putExtra("b_dtt", b_dtt);
+                    intent2.putExtra("u_id", u_id);
                     startActivity(intent2);
                 }
             }

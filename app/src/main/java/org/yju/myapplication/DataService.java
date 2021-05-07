@@ -108,7 +108,7 @@ interface UpdateAPI{
     Call<User> update(@Body User user);
 
     @PUT("api/board/update")
-    Call<Void> updateBoard(@Body User user);
+    Call<Void> updateBoard(@Body Board board);
 
 }
 
