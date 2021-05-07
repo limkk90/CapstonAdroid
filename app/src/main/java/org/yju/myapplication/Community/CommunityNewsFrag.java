@@ -1,4 +1,4 @@
-package org.yju.myapplication;
+package org.yju.myapplication.Community;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

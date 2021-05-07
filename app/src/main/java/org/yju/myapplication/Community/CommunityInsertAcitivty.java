@@ -1,4 +1,4 @@
-package org.yju.myapplication;
+package org.yju.myapplication.Community;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +15,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import org.yju.myapplication.DataService;
+import org.yju.myapplication.R;
 import org.yju.myapplication.data.Board;
 
 import retrofit2.Call;
@@ -62,42 +64,39 @@ public class CommunityInsertAcitivty extends AppCompatActivity {
         cm_radioGroup = findViewById(R.id.cm_radioGroup);
         cm_radioFree.setChecked(true);
 
+            //등록버튼 눌렀을 때
+            cm_btnInsert.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (cm_radioFree.isChecked())
+                        cat_cd = '1';
+                    if (cm_radioTip.isChecked())
+                        cat_cd = '2';
+                    title = cm_editTitle.getText().toString();
+                    content = cm_editContent.getText().toString();
 
-        //등록버튼 눌렀을 때
-        cm_btnInsert.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(cm_radioFree.isChecked())
-                    cat_cd = '1';
-                if(cm_radioTip.isChecked())
-                    cat_cd = '2';
-                title = cm_editTitle.getText().toString();
-                content = cm_editContent.getText().toString();
+                    board = new Board();
+                    board.setCat_cd(cat_cd);
+                    board.setB_title(title);
+                    board.setB_content(content);
+                    board.setU_id(u_id);
+                    Log.i("TAG", "onClick: 유저아이디뜨내?" + u_id);
 
-//                Log.i("boardI", "onClick: "+title);
-//                Log.i("boardI", "onClick: "+content);
-//                Log.i("boardI", "onClick: "+cat_cd);
-                board = new Board();
-                board.setCat_cd(cat_cd);
-                board.setB_title(title);
-                board.setB_content(content);
-                board.setU_id(u_id);
-                Log.i("TAG", "onClick: 유저아이디뜨내?" + u_id);
+                    dataService.boardApi.boardInsert(board).enqueue(new Callback() {
+                        @Override
+                        public void onResponse(Call call, Response response) {
+                            Log.i("CmInsert:", "성공");
+                            finish();
+                        }
 
-                dataService.insert.boardInsert(board).enqueue(new Callback(){
-                    @Override
-                    public void onResponse(Call call, Response response) {
-                        Log.i("CmInsert:", "성공");
-                        finish();
-                    }
+                        @Override
+                        public void onFailure(Call call, Throwable t) {
+                            Log.i("CmInsert", "실패");
+                        }
+                    });
+                }
+            });
 
-                    @Override
-                    public void onFailure(Call call, Throwable t) {
-                        Log.i("CmInsert", "실패");
-                    }
-                });
-            }
-        });
 
         cm_btnCancle.setOnClickListener(new View.OnClickListener() {
             @Override

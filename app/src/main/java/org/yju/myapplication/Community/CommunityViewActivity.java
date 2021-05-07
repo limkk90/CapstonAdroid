@@ -1,4 +1,4 @@
-package org.yju.myapplication;
+package org.yju.myapplication.Community;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +10,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import org.yju.myapplication.DataService;
+import org.yju.myapplication.R;
 import org.yju.myapplication.data.Board;
 import org.yju.myapplication.data.BoardInfo;
 
@@ -45,7 +47,7 @@ public class CommunityViewActivity extends AppCompatActivity {
 
         boardInfo.setB_dtt(b_dtt);
 
-        dataService.select.gBoard(boardInfo).enqueue(new Callback<ArrayList<Board>>() {
+        dataService.boardApi.gBoard(boardInfo).enqueue(new Callback<ArrayList<Board>>() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onResponse(Call<ArrayList<Board>> call, Response<ArrayList<Board>> response) {
@@ -67,13 +69,12 @@ public class CommunityViewActivity extends AppCompatActivity {
         });
 
         // 삭제
-
         board.setB_dtt(b_dtt);
         Log.i("TAG", "onCreate: board b_dtt 확인" + board);
         tv_view_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dataService.delete.removeBoard(board).enqueue(new Callback<Void>() {
+                dataService.boardApi.removeBoard(board).enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
                         Log.i("TAG", "onResponse: 게시글 삭제 테스트" + response);

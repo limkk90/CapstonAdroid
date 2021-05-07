@@ -1,12 +1,10 @@
 package org.yju.myapplication;
 
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -23,9 +21,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.Toolbar;
 
+import org.yju.myapplication.Community.CommunityAcitivty;
 import org.yju.myapplication.data.Marker;
 import org.yju.myapplication.databinding.ActivityActionbarBinding;
 import org.yju.myapplication.databinding.ActivityDrawerBinding;

@@ -3,6 +3,7 @@ package org.yju.myapplication;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import org.yju.myapplication.Community.BoardApi;
 import org.yju.myapplication.data.Board;
 import org.yju.myapplication.data.BoardInfo;
 import org.yju.myapplication.data.Criteria;
@@ -46,6 +47,7 @@ public class DataService {
     InsertAPI insert = retrofitClient.create(InsertAPI.class);
     UpdateAPI update = retrofitClient.create(UpdateAPI.class);
     DeleteAPI delete = retrofitClient.create(DeleteAPI.class);
+    public BoardApi  boardApi = retrofitClient.create(BoardApi.class);
 }
 
 interface SelectAPI{
@@ -70,17 +72,6 @@ interface SelectAPI{
     @POST("api/confirm")
     Call<Integer> confirm(@Body Email email);
 
-    @GET("api/allboardlist")
-    Call<ArrayList<Board>> ListCall();
-
-    @GET("api/boardlist?cat_cd=2")
-    Call<ArrayList<Board>> TipBoard();
-
-    @GET("api/boardlist?cat_cd=1")
-    Call<ArrayList<Board>> FreeBoard();
-
-    @POST("api/gboard")
-    Call<ArrayList<Board>> gBoard(@Body BoardInfo boardInfo);
 
     @GET("api/map/marker")
     Call<ArrayList<Marker>> getMarker();
@@ -95,8 +86,7 @@ interface InsertAPI{
     @POST("api/join")
     Call<String> signup(@Body User user);
 
-    @POST("api/board/make")
-    Call<String> boardInsert(@Body Board board);
+
 }
 
 interface UpdateAPI{
@@ -106,15 +96,10 @@ interface UpdateAPI{
     @POST("api/update/{u_id}")
     Call<User> update(@Body User user);
 
-    @POST("api/board/make")
-    Call boardInsert(@Body Board board);
 }
 
 interface DeleteAPI{
     @POST("delete/{id}")
     Call<ResponseBody> deleteOne(@Path("id") long id);
-
-    @POST("api/board/make")
-    Call<Void> removeBoard(@Body Board board);
 }
 

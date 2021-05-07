@@ -1,6 +1,5 @@
-package org.yju.myapplication;
+package org.yju.myapplication.Community;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -20,11 +19,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import org.yju.myapplication.DataService;
 import org.yju.myapplication.R;
 import org.yju.myapplication.data.Board;
-import org.yju.myapplication.data.User;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -127,7 +125,7 @@ public class CommunityFreeFrag extends Fragment {
 
     public void getListBoard(){
         //dataService api 호출
-        dataService.select.FreeBoard().enqueue(new Callback<ArrayList<Board>>() {
+        dataService.boardApi.FreeBoard().enqueue(new Callback<ArrayList<Board>>() {
             @Override
             public void onResponse(Call<ArrayList<Board>> call, Response<ArrayList<Board>> response) {
                 ArrayList<Board> body = response.body();

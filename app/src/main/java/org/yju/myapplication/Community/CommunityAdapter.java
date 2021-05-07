@@ -1,7 +1,6 @@
-package org.yju.myapplication;
+package org.yju.myapplication.Community;
 
 import android.content.Context;
-import android.graphics.Typeface;
 import android.os.Build;
 import android.util.Log;
 import android.util.TypedValue;
@@ -15,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.yju.myapplication.R;
 import org.yju.myapplication.data.Board;
 
 import java.util.ArrayList;

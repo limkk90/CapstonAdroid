@@ -11,15 +11,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
-        <activity android:name=".CommunityViewActivity"></activity>
-        <activity android:name=".CommunityInsertAcitivty" />
+        <activity android:name=".Community.CommunityViewActivity"></activity>
+        <activity android:name=".Community.CommunityInsertAcitivty" />
         <activity android:name=".FeeInfoAcitivty" />
         <activity android:name=".Fee.FeeInfoAcitivty" />
         <activity android:name=".CardActivity" />
         <activity android:name=".QnaAcitivty" />
         <activity android:name=".FacilRecoActivity" />
         <activity android:name=".IntroActivity" />
-        <activity android:name=".CommunityAcitivty" />
+        <activity android:name=".Community.CommunityAcitivty" />
         <activity android:name=".MyPageActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

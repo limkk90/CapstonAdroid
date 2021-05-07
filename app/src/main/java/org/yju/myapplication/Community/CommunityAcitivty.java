@@ -1,4 +1,4 @@
-package org.yju.myapplication;
+package org.yju.myapplication.Community;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -16,6 +16,8 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import org.yju.myapplication.R;
 
 public class CommunityAcitivty extends AppCompatActivity {
     private ImageView iv_menu;

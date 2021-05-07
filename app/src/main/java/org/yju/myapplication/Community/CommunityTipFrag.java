@@ -1,4 +1,4 @@
-package org.yju.myapplication;
+package org.yju.myapplication.Community;
 
 import android.content.Intent;
 import android.os.Build;
@@ -16,12 +16,11 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.yju.myapplication.DataService;
 import org.yju.myapplication.R;
 import org.yju.myapplication.data.Board;
-import org.yju.myapplication.data.Criteria;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -74,7 +73,7 @@ public class CommunityTipFrag  extends Fragment {
 
 
 
-        dataService.select.TipBoard().enqueue(new Callback<ArrayList<Board>>() {
+        dataService.boardApi.TipBoard().enqueue(new Callback<ArrayList<Board>>() {
             @Override
             public void onResponse(Call<ArrayList<Board>> call, Response<ArrayList<Board>> response) {
                 ArrayList<Board> body = response.body();
