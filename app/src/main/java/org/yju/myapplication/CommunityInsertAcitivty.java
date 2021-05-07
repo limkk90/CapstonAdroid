@@ -13,7 +13,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
 import org.yju.myapplication.data.Board;
 
@@ -45,21 +44,21 @@ public class CommunityInsertAcitivty extends AppCompatActivity {
         Log.i("TAG", "onClick: 유저아이디뜨내?123123" + u_id);
 
         //제목
-        cm_editTitle = findViewById(R.id.cm_editTitle);
+        cm_editTitle = findViewById(R.id.cm_ud_editTitle);
         //내용
-        cm_editContent = findViewById(R.id.cm_editContent);
+        cm_editContent = findViewById(R.id.cm_ud_editContent);
         //등록버튼
-        cm_btnInsert = findViewById(R.id.cm_btnInsert);
+        cm_btnInsert = findViewById(R.id.cm_ud_btnInsert);
         //취소버튼
-        cm_btnCancle = findViewById(R.id.cm_btnCancle);
+        cm_btnCancle = findViewById(R.id.cm_ud_btnCancle);
         //첨부파일 버튼
         cm_btn_ImageInsert = findViewById(R.id.cm_btn_ImageInsert);
         //라디오 버튼
-        cm_radioFree = findViewById(R.id.cm_radioFree);
+        cm_radioFree = findViewById(R.id.cm_ud_radioFree);
         //라디오 버튼
-        cm_radioTip = findViewById(R.id.cm_radioTip);
+        cm_radioTip = findViewById(R.id.cm_ud_radioTip);
         //라디오 그룹
-        cm_radioGroup = findViewById(R.id.cm_radioGroup);
+        cm_radioGroup = findViewById(R.id.cm_ud_radioGroup);
         cm_radioFree.setChecked(true);
 
 

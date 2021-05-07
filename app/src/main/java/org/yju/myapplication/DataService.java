@@ -26,6 +26,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public class DataService {
@@ -105,6 +106,9 @@ interface UpdateAPI{
 
     @POST("api/update/{u_id}")
     Call<User> update(@Body User user);
+
+    @PUT("api/board/update")
+    Call<Void> updateBoard(@Body User user);
 
 }
 

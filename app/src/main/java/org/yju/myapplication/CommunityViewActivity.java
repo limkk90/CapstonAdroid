@@ -52,10 +52,6 @@ public class CommunityViewActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onResponse(Call<ArrayList<Board>> call, Response<ArrayList<Board>> response) {
-//                ArrayList<Board> boards = response.body();
-//                for (int i = 0; i < boards.size(); i++) {
-//                    addContentView(boards.get(i).getB_title(), boards.get(i).getB_content());
-//                }
                 title = response.body().get(0).getB_title();
                 content = response.body().get(0).getB_content();
                 tv_b_title.setText(title);
@@ -104,7 +100,12 @@ public class CommunityViewActivity extends AppCompatActivity {
         tv_view_update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if (!b_u_id.equals(u_id)) {
+                    Toast.makeText(CommunityViewActivity.this, "수정할 권한이 없습니다", Toast.LENGTH_SHORT).show();
+                } else {
+                    Intent intent2 = new Intent(CommunityViewActivity.this, CommunityUpdateActivity.class);
+                    startActivity(intent2);
+                }
             }
         });
 
