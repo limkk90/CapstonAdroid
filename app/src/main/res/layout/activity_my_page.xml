@@ -4,16 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MyPageActivity">
+    tools:context=".MyPage.MyPageActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/myPg_frame"
-        android:layout_width="0dp"
-        android:layout_height="616dp"
+        android:layout_width="411dp"
+        android:layout_height="627dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bottomNavi">
+        app:layout_constraintTop_toBottomOf="@+id/bottomNavi"
+        app:layout_constraintVertical_bias="0.0">
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -25,7 +27,9 @@
         android:id="@+id/bottomNavi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="54dp"
+        android:layout_marginTop="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:menu="@menu/mypage_menu">
 

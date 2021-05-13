@@ -68,13 +68,10 @@ public class CommunityViewActivity extends AppCompatActivity {
         });
 
         // 삭제
-<<<<<<< HEAD:app/src/main/java/org/yju/myapplication/Community/CommunityViewActivity.java
-=======
 
         Intent intent1 = getIntent();
         u_id = intent1.getStringExtra("u_id");
         Log.i("TAG", "onCreate: 제발찍히세요" + u_id);
->>>>>>> cfaf0479fa58efab41bb318dd7911160878ea288:app/src/main/java/org/yju/myapplication/CommunityViewActivity.java
         board.setB_dtt(b_dtt);
         Log.i("TAG", "onCreate: board b_dtt 확인" + board);
 
@@ -82,19 +79,10 @@ public class CommunityViewActivity extends AppCompatActivity {
         tv_view_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-<<<<<<< HEAD:app/src/main/java/org/yju/myapplication/Community/CommunityViewActivity.java
-                dataService.boardApi.removeBoard(board).enqueue(new Callback<Void>() {
-                    @Override
-                    public void onResponse(Call<Void> call, Response<Void> response) {
-                        Log.i("TAG", "onResponse: 게시글 삭제 테스트" + response);
-                    }
-=======
->>>>>>> cfaf0479fa58efab41bb318dd7911160878ea288:app/src/main/java/org/yju/myapplication/CommunityViewActivity.java
-
                 if (!b_u_id.equals(u_id)) {
                     Toast.makeText(CommunityViewActivity.this, "삭제할 권한이 없습니다", Toast.LENGTH_SHORT).show();
                 } else {
-                    dataService.delete.removeBoard(board).enqueue(new Callback<Void>() {
+                    dataService.boardApi.removeBoard(board).enqueue(new Callback<Void>() {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
                             finish();
@@ -123,8 +111,6 @@ public class CommunityViewActivity extends AppCompatActivity {
                 }
             }
         });
-
-
 
     }
 

@@ -8,11 +8,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.PointF;
 import android.os.Build;
 import android.os.Bundle;
 
 import com.skt.Tmap.TMapData;
 import com.skt.Tmap.TMapMarkerItem;
+import com.skt.Tmap.TMapPOIItem;
 import com.skt.Tmap.TMapPoint;
 import com.skt.Tmap.TMapView;
 
@@ -24,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toolbar;
 
 import org.yju.myapplication.Community.CommunityAcitivty;
+import org.yju.myapplication.MyPage.MyPageActivity;
 import org.yju.myapplication.data.Marker;
 import org.yju.myapplication.databinding.ActivityActionbarBinding;
 import org.yju.myapplication.databinding.ActivityDrawerBinding;
@@ -105,7 +108,23 @@ public class MainActivity extends AppCompatActivity {
                     markerItem1.setName("SKT타워"); // 마커의 타이틀 지정
                     markerItem1.setCanShowCallout(true); //풍선뷰 사용유무
                     markerItem1.setCalloutTitle(stat_nm); //풍선뷰 클릭 시 나올 내용
+                    markerItem1.setCalloutRightButtonImage(bitmap);
+
                     tmapview.addMarkerItem("markerItem" + i, markerItem1); // 지도에 마커 추가
+                    tmapview.setOnClickListenerCallBack(new TMapView.OnClickListenerCallback() {
+                        @Override
+                        public boolean onPressEvent(ArrayList<TMapMarkerItem> arrayList, ArrayList<TMapPOIItem> arrayList1, TMapPoint tMapPoint, PointF pointF) {
+                            intent = new Intent(MainActivity.this, ReserVationActivity.class);
+                            startActivity(intent);
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onPressUpEvent(ArrayList<TMapMarkerItem> arrayList, ArrayList<TMapPOIItem> arrayList1, TMapPoint tMapPoint, PointF pointF) {
+                            return false;
+                        }
+                    });
+
                 }
             }
 
