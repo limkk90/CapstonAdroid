@@ -68,6 +68,10 @@ public class CommunityViewActivity extends AppCompatActivity {
         });
 
         // 삭제
+<<<<<<< HEAD
+=======
+
+>>>>>>> b7b87bd8e15740845eba4aa4e084192c6e6d1e53
 
         Intent intent1 = getIntent();
         u_id = intent1.getStringExtra("u_id");
