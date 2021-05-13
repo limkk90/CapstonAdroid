@@ -6,7 +6,6 @@ android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
     buildFeatures.viewBinding=true
-
     defaultConfig {
         applicationId "org.yju.myapplication"
         minSdkVersion 16

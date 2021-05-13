@@ -2,24 +2,24 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/action_notice"
+        android:id="@+id/mp_userInfo"
         android:iconTint="#000000"
         android:title="정보수정"
         android:visible="true" />
     <item
-        android:id="@+id/action_freeBoard"
+        android:id="@+id/mp_useInfo"
         android:enabled="true"
         android:iconTint="#000000"
         android:title="이용내역"
         android:visible="true" />
     <item
-        android:id="@+id/action_tip"
+        android:id="@+id/mp_card"
         android:enabled="true"
         android:iconTint="#000000"
         android:title="회원카드"
         android:visible="true" />
     <item
-        android:id="@+id/action_news"
+        android:id="@+id/mp_set"
         android:enabled="true"
         android:iconTint="#000000"
         android:title="환경설정"

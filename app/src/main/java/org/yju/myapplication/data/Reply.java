@@ -1,7 +1,11 @@
 package org.yju.myapplication.data;
+<<<<<<< HEAD
 
 import lombok.Data;
 
+=======
+import lombok.Data;
+>>>>>>> 72ab6c02ca34c291f9c2f668ccf01a610ae17ada
 import java.time.LocalDateTime;
 
 @Data
