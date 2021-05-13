@@ -4,6 +4,7 @@ import org.yju.myapplication.data.Board;
 import org.yju.myapplication.data.BoardInfo;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -22,7 +23,7 @@ public interface BoardApi {
     Call<ArrayList<Board>> FreeBoard();
 
     @POST("api/gboard")
-    Call<ArrayList<Board>> gBoard(@Body BoardInfo boardInfo);
+    Call<List<Object>> gBoard(@Body BoardInfo boardInfo);
 
     @POST("api/board/make")
     Call<String> boardInsert(@Body Board board);
