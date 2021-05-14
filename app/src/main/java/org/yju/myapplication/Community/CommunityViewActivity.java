@@ -70,14 +70,6 @@ public class CommunityViewActivity extends AppCompatActivity {
         });
 
         // 삭제
-<<<<<<< HEAD
-=======
-
-<<<<<<< HEAD
-=======
->>>>>>> b7b87bd8e15740845eba4aa4e084192c6e6d1e53
-
->>>>>>> 72ab6c02ca34c291f9c2f668ccf01a610ae17ada
         Intent intent1 = getIntent();
         u_id = intent1.getStringExtra("u_id");
         Log.i("TAG", "onCreate: 제발찍히세요" + u_id);

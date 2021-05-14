@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,6 +16,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.yju.myapplication.DataService;
 import org.yju.myapplication.R;
@@ -35,14 +38,39 @@ public class CommunityTipFrag  extends Fragment {
     ArrayList<Board> bList = new ArrayList<Board>();
     LinearLayoutManager linearLayoutManager = null;
     DataService dataService = new DataService();
-    //    Board board = new Board();
-//    Criteria criteria = new Criteria();
-//    private char cat_cd = '2';
+    FloatingActionButton floatingActionButton;
+    String u_id;
+
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.community_tip, container, false);
+
+        Bundle bundle1 = getArguments();
+        Log.i("TAG", "onCreateView: 팁게시판 번들값" + bundle1);
+
+        //글쓰기 화면으로 넘어가는 FloationAction버튼 클릭 했을 때
+        floatingActionButton = view.findViewById(R.id.float_btn_freeWrite2);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                u_id = bundle1.getString("u_id");
+                Log.i("TAG", "onClick: 마지막 번들값 재확인" + u_id);
+                assert bundle1 != null;
+                try {
+                    if (u_id != null) {
+                        intent = new Intent(getActivity(), CommunityInsertAcitivty.class);
+                        Log.i("u_id = ", u_id);
+                        intent.putExtra("u_id", u_id);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(getActivity(), "로그인을 해주세요", Toast.LENGTH_LONG).show();
+                    }
+                } catch (Exception e) {
+                }
+            }
+        });
 
         recyclerView = view.findViewById(R.id.recyclerView);
 
@@ -57,6 +85,7 @@ public class CommunityTipFrag  extends Fragment {
         adapter.setOnItemCLickListener(new CommunityAdapter.OnItemClickListener() {
             @Override
             public void onItemCLick(View v, int pos) {
+                u_id = bundle1.getString("u_id");
                 Integer a = Integer.valueOf(pos);
                 Log.e("asd", a.toString());
                 adapter.getItem(pos).getB_dtt();
@@ -64,6 +93,7 @@ public class CommunityTipFrag  extends Fragment {
                 Log.e("aaa", adapter.getItem(pos).getB_dtt());
                 intent = new Intent(getContext(), CommunityViewActivity.class);
                 intent.putExtra("b_dtt", adapter.getItem(pos).getB_dtt());
+                intent.putExtra("b_u_id", adapter.getItem(pos).getU_id());
                 intent.putExtra("u_id", adapter.getItem(pos).getU_id());
                 startActivity(intent);
 
@@ -71,32 +101,22 @@ public class CommunityTipFrag  extends Fragment {
         });
 
 
+        getListBoard();
         adapter.notifyDataSetChanged();
-
-
-
-        dataService.boardApi.TipBoard().enqueue(new Callback<ArrayList<Board>>() {
-            @Override
-            public void onResponse(Call<ArrayList<Board>> call, Response<ArrayList<Board>> response) {
-                ArrayList<Board> body = response.body();
-                Log.i("TAG", "onResponse: 성공!!" + response.body());
-                for (int i = 0; i < body.size(); i++) {
-                    addItem(body.get(i).getB_title(), body.get(i).getB_content(), body.get(i).getU_id(), body.get(i).getB_dtt());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ArrayList<Board>> call, Throwable t) {
-                t.printStackTrace();
-
-            }
-        });
-
-
         return view;
 
-
     }
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        bList.clear();
+        getListBoard();
+        adapter.notifyDataSetChanged();
+    }
+
+
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void addItem(String title, String content, String writer, String b_dtt) {
@@ -108,5 +128,28 @@ public class CommunityTipFrag  extends Fragment {
         bList.add(item);
         adapter.notifyDataSetChanged();
 
+    }
+
+    public void getListBoard(){
+        //dataService api 호출
+        dataService.boardApi.TipBoard().enqueue(new Callback<ArrayList<Board>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Board>> call, Response<ArrayList<Board>> response) {
+                ArrayList<Board> body = response.body();
+                Log.i("TAG", "onResponse: 성공" + body);
+                for (int i = 0; i < body.size(); i++) {
+                    if(i == body.size()-1){
+                        addItem(null, null, null, null);
+                    }else{
+                        addItem(body.get(i).getB_title(), body.get(i).getB_content(), body.get(i).getU_id(), body.get(i).getB_dtt());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Board>> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
     }
 }

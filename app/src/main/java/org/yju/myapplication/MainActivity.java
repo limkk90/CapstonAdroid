@@ -169,6 +169,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 intent = new Intent(MainActivity.this, MyPageActivity.class);
+                u_id = getIntent().getStringExtra("u_id");
+                intent.putExtra("u_id", u_id);
+                Log.i("TAG", "onClick: 메인 -> 마이페이지 id값이동" + u_id);
                 startActivity(intent);
             }
         });

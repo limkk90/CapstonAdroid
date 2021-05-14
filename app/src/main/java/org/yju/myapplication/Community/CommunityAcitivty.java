@@ -69,9 +69,9 @@ public class CommunityAcitivty extends AppCompatActivity {
                         setFrag(2);
                         Bundle bundle1 = new Bundle();
                         bundle1.putString("u_id", u_id);
-                        Log.i("TAG", "onCreate: 번들값찍히냐???" + bundle1);
-                        cm_free.setArguments(bundle1);
-                        Log.i("TAG", "onCreate: 번들 값" + bundle1);
+                        Log.i("TAG", "onCreate: 번들번들" + bundle1);
+                        cm_tip.setArguments(bundle1);
+                        Log.i("TAG", "onCreate: 번들번들 값" + bundle1);
                         break;
                     case R.id.action_news:
                         setFrag(3);
