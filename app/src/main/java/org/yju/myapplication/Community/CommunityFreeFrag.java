@@ -101,7 +101,6 @@ public class CommunityFreeFrag extends Fragment {
         });
         //=============================================
 
-        getListBoard();
         adapter.notifyDataSetChanged();
         return view;
         //================================================
