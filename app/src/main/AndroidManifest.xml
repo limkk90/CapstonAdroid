@@ -11,12 +11,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
-
+<<<<<<< HEAD
         <activity android:name=".ReserVationActivity"></activity>
         <activity android:name=".Community.CommunityViewActivity" />
         <activity android:name=".Community.CommunityInsertAcitivty" />
         <activity android:name=".Community.CommunityUpdateActivity" />
-
+        <activity android:name=".CommunityViewActivity" />
+        <activity android:name=".CommunityInsertAcitivty" />
+=======
+        <activity android:name=".Community.CommunityViewActivity"></activity>
+        <activity android:name=".Community.CommunityInsertAcitivty" />
+        <activity android:name=".Community.CommunityUpdateActivity"></activity>
+>>>>>>> b7b87bd8e15740845eba4aa4e084192c6e6d1e53
         <activity android:name=".FeeInfoAcitivty" />
         <activity android:name=".CardActivity" />
         <activity android:name=".QnaAcitivty" />
