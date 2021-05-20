@@ -2,6 +2,9 @@ package org.yju.myapplication.Community;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Build;
@@ -15,8 +18,11 @@ import org.yju.myapplication.DataService;
 import org.yju.myapplication.R;
 import org.yju.myapplication.data.Board;
 import org.yju.myapplication.data.BoardInfo;
+import org.yju.myapplication.data.Reply;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -31,6 +37,10 @@ public class CommunityViewActivity extends AppCompatActivity {
     BoardInfo boardInfo = new BoardInfo();
     String b_dtt, b_u_id, u_id;
     Board board = new Board();
+    RecyclerView recyclerView = null;
+    ReplyAdapter replyAdapter = null;
+    ArrayList<Reply> rList = new ArrayList<>();
+    LinearLayoutManager linearLayoutManager = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,33 +55,38 @@ public class CommunityViewActivity extends AppCompatActivity {
         final Intent[] intent = {getIntent()};
         b_dtt = intent[0].getExtras().getString("b_dtt");
         b_u_id = intent[0].getExtras().getString("b_u_id");
-        Log.i("TAG", "onCreate: 게시글 볼수 있냐?" + b_dtt);
-        Log.i("TAG", "onCreate: 유저아이디 넘어오냐?" + b_u_id);
-
         boardInfo.setB_dtt(b_dtt);
 
-        dataService.boardApi.gBoard(boardInfo).enqueue(new Callback<ArrayList<Board>>() {
+        dataService.boardApi.gBoard(boardInfo).enqueue(new Callback<List<Object>>() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
-            public void onResponse(Call<ArrayList<Board>> call, Response<ArrayList<Board>> response) {
-                title = response.body().get(0).getB_title();
-                content = response.body().get(0).getB_content();
+            public void onResponse(Call<List<Object>> call, Response<List<Object>> response) {
+                title = (String) ((Map) response.body().get(0)).get("b_title");
+                content = (String) ((Map) response.body().get(0)).get("b_content");
                 tv_b_title.setText(title);
                 tv_b_content.setText(content);
-
             }
-
             @Override
-            public void onFailure(Call<ArrayList<Board>> call, Throwable t) {
-
+            public void onFailure(Call<List<Object>> call, Throwable t) {
             }
         });
+
+        //댓글 라사이클러뷰 처리
+        recyclerView = findViewById(R.id.reply_RecyclerView);
+        replyAdapter = new ReplyAdapter(rList);
+        recyclerView.setAdapter(replyAdapter);
+        linearLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(linearLayoutManager);
+
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), linearLayoutManager.getOrientation());
+        recyclerView.addItemDecoration(dividerItemDecoration);
+        getListReply();
+        replyAdapter.notifyDataSetChanged();
 
         // 삭제
 
         Intent intent1 = getIntent();
         u_id = intent1.getStringExtra("u_id");
-        Log.i("TAG", "onCreate: 제발찍히세요" + u_id);
         board.setB_dtt(b_dtt);
         Log.i("TAG", "onCreate: board b_dtt 확인" + board);
 
@@ -112,6 +127,32 @@ public class CommunityViewActivity extends AppCompatActivity {
             }
         });
 
+
+    }
+
+
+    public void getListReply(){
+        dataService.boardApi.gBoard(boardInfo).enqueue(new Callback<List<Object>>() {
+            @Override
+            public void onResponse(Call<List<Object>> call, Response<List<Object>> response) {
+                ArrayList<Object> body = (ArrayList<Object>) response.body();
+                Log.i("이런시발", "onResponse: "+ body.toString());
+            }
+
+            @Override
+            public void onFailure(Call<List<Object>> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void addItem(String writer, String content, String b_dtt){
+        Reply item = new Reply();
+        item.setR_writer(writer);
+        item.setR_content(content);
+        item.setR_dtt(b_dtt);
+        rList.add(item);
+        replyAdapter.notifyDataSetChanged();
     }
 
 }

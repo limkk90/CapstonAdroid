@@ -1,5 +1,9 @@
 package org.yju.myapplication.data;
+
 import lombok.Data;
+
+import lombok.Data;
+
 import java.time.LocalDateTime;
 
 @Data

@@ -14,6 +14,7 @@ import android.os.Bundle;
 
 import com.skt.Tmap.TMapData;
 import com.skt.Tmap.TMapMarkerItem;
+import com.skt.Tmap.TMapMarkerItem2;
 import com.skt.Tmap.TMapPOIItem;
 import com.skt.Tmap.TMapPoint;
 import com.skt.Tmap.TMapView;
@@ -91,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
                 ArrayList<Marker> body = response.body();
 
                 for(int i=0; i<body.size(); i++){
+                    TMapMarkerItem2 tMapMarkerItem2 = new TMapMarkerItem2();
                     TMapMarkerItem markerItem1 = new TMapMarkerItem();
                     String stat_nm = body.get(i).getStat_nm();
                     String stat_lng = body.get(i).getStat_lng();
@@ -101,30 +103,48 @@ public class MainActivity extends AppCompatActivity {
                     TMapPoint tMapPoint1 = new TMapPoint(stat_lat_d, stat_lng_d); // SKT타워
                     // 마커 아이콘
                     Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.pin_r_m_a);
+                    Bitmap bitmap1 = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_launcher_foreground);
 
                     markerItem1.setIcon(bitmap); // 마커 아이콘 지정
                     markerItem1.setPosition(0.5f, 1.0f); // 마커의 중심점을 중앙, 하단으로 설정
                     markerItem1.setTMapPoint( tMapPoint1 ); // 마커의 좌표 지정
                     markerItem1.setName("SKT타워"); // 마커의 타이틀 지정
                     markerItem1.setCanShowCallout(true); //풍선뷰 사용유무
-                    markerItem1.setCalloutTitle(stat_nm); //풍선뷰 클릭 시 나올 내용
-                    markerItem1.setCalloutRightButtonImage(bitmap);
+//                    markerItem1.setCalloutTitle(stat_nm); //풍선뷰 클릭 시 나올 내용
+                    markerItem1.setCalloutRightButtonImage(bitmap1);
+
 
                     tmapview.addMarkerItem("markerItem" + i, markerItem1); // 지도에 마커 추가
-                    tmapview.setOnClickListenerCallBack(new TMapView.OnClickListenerCallback() {
-                        @Override
-                        public boolean onPressEvent(ArrayList<TMapMarkerItem> arrayList, ArrayList<TMapPOIItem> arrayList1, TMapPoint tMapPoint, PointF pointF) {
-                            intent = new Intent(MainActivity.this, ReserVationActivity.class);
-                            startActivity(intent);
-                            return false;
-                        }
 
-                        @Override
-                        public boolean onPressUpEvent(ArrayList<TMapMarkerItem> arrayList, ArrayList<TMapPOIItem> arrayList1, TMapPoint tMapPoint, PointF pointF) {
-                            return false;
-                        }
-                    });
+                    //    tmapview.setOnCalloutRightButtonClickListener(new TMapView.OnCalloutRightButtonClickCallback() {
+//                        @Override
+//                        public void onCalloutRightButton(TMapMarkerItem tMapMarkerItem) {
+////                            tMapMarkerItem.setCalloutRightButtonImage(bitmap);
+////                            tMapMarkerItem.setCalloutLeftImage(bitmap);
+//                            intent = new Intent(MainActivity.this, ReserVationActivity.class);
+//                            startActivity(intent);
+//                        }
+//                    });
 
+//                    tmapview.setOnClickListenerCallBack(new TMapView.OnClickListenerCallback() {
+//                        @Override
+//                        public boolean onPressEvent(ArrayList<TMapMarkerItem> arrayList, ArrayList<TMapPOIItem> arrayList1, TMapPoint tMapPoint, PointF pointF) {
+//                            if(arrayList.size() > 0 || arrayList.isEmpty()){
+//                                intent = new Intent(MainActivity.this, ReserVationActivity.class);
+//                                startActivity(intent);
+//                            }
+//                            Log.i("setOnClick1", "onPressUpEvent: " + arrayList);
+//                            Log.i("setOnClick2", "onPressUpEvent: " + arrayList1);
+//                            Log.i("setOnClick3", "onPressUpEvent: " + tMapPoint);
+//                            Log.i("setOnClick4", "onPressUpEvent: " + pointF);
+//                            return false;
+//                        }
+//
+//                        @Override
+//                        public boolean onPressUpEvent(ArrayList<TMapMarkerItem> arrayList, ArrayList<TMapPOIItem> arrayList1, TMapPoint tMapPoint, PointF pointF) {
+//                            return false;
+//                        }
+//                    });
                 }
             }
 
@@ -133,12 +153,9 @@ public class MainActivity extends AppCompatActivity {
                 Log.i("Marker", "실패ㅄ ㅋㅋ");
             }
         });
+
         context = getApplicationContext();
-
         tmapview.setCenterPoint( 128.620935, 35.896463 ); //지도 띄울 떄 이쪽으로 띄우는듯
-
-
-
 
         //네비게이션 변수====================================
         iv_menu = (ImageView)findViewById(R.id.iv_menu);
