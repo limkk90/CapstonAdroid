@@ -12,7 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
 
-        <activity android:name=".ReserVationActivity"></activity>
+        <activity android:name=".ReserVationActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".Community.CommunityViewActivity" />
         <activity android:name=".Community.CommunityInsertAcitivty" />
         <activity android:name=".Community.CommunityUpdateActivity" />
@@ -24,11 +30,7 @@
         <activity android:name=".Community.CommunityAcitivty" />
         <activity android:name=".MyPage.MyPageActivity" />
         <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".UserProfileActivity" />
         <activity android:name=".UpdatePwActivity" />
