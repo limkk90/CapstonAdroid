@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.PointF;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -103,17 +104,17 @@ public class MainActivity extends AppCompatActivity {
                     TMapPoint tMapPoint1 = new TMapPoint(stat_lat_d, stat_lng_d); // SKT타워
                     // 마커 아이콘
                     Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.pin_r_m_a);
-                    Bitmap bitmap1 = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_launcher_foreground);
 
                     markerItem1.setIcon(bitmap); // 마커 아이콘 지정
                     markerItem1.setPosition(0.5f, 1.0f); // 마커의 중심점을 중앙, 하단으로 설정
                     markerItem1.setTMapPoint( tMapPoint1 ); // 마커의 좌표 지정
                     markerItem1.setName("SKT타워"); // 마커의 타이틀 지정
                     markerItem1.setCanShowCallout(true); //풍선뷰 사용유무
-//                    markerItem1.setCalloutTitle(stat_nm); //풍선뷰 클릭 시 나올 내용
-                    markerItem1.setCalloutRightButtonImage(bitmap1);
-
-
+                    if(markerItem1.getCanShowCallout()){
+                        markerItem1.setCalloutTitle(stat_nm); //풍선뷰 클릭 시 나올 내용
+                        Bitmap bitmapImage = createmarkerIcon(R.drawable.reservation);
+                        markerItem1.setCalloutRightButtonImage(bitmapImage);
+                    }
                     tmapview.addMarkerItem("markerItem" + i, markerItem1); // 지도에 마커 추가
 
                     //    tmapview.setOnCalloutRightButtonClickListener(new TMapView.OnCalloutRightButtonClickCallback() {
@@ -260,8 +261,29 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private Bitmap createmarkerIcon(int image){
+        Log.i("CreateMarkerIcon1", "createmarkerIcon: " + image);
+//        BitmapFactory.Options options = new BitmapFactory.Options();
+//        options.inJustDecodeBounds = true;
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), image);
+        Log.i("CreateMarkerIcon2", "createmarkerIcon: " +bitmap);
+        bitmap = Bitmap.createScaledBitmap(bitmap, 100, 100 ,false);
+        return bitmap;
+    }
 
-
-
-
+//    public static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight){
+//        final int height = options.outHeight;
+//        final int width = options.outWidth;
+//        int inSampleSize = 1;
+//
+//        if(height > reqHeight || width > reqWidth){
+//            final int halfHeight = height/2;
+//            final int halfWidth = width/2;
+//
+//            while((halfHeight/inSampleSize) >= reqHeight && (halfWidth/inSampleSize) >= reqWidth){
+//                inSampleSize *= 2;
+//            }
+//        }
+//        return inSampleSize;
+//    }
 }
