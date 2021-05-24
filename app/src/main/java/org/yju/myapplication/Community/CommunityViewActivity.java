@@ -56,18 +56,31 @@ public class CommunityViewActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onResponse(Call<List<Object>> call, Response<List<Object>> response) {
-                title = (String) ((Map) response.body().get(0)).get("b_title");
-                content = (String) ((Map) response.body().get(0)).get("b_content");
+                title = (String)((Map) response.body().get(0)).get("b_title");
+                content = (String)((Map) response.body().get(0)).get("b_content");
                 tv_b_title.setText(title);
                 tv_b_content.setText(content);
+
             }
+
             @Override
             public void onFailure(Call<List<Object>> call, Throwable t) {
+
             }
         });
 
         // 삭제
+<<<<<<<<< Temporary merge branch 1
+<<<<<<< HEAD
+=======
 
+<<<<<<< HEAD
+=======
+>>>>>>> b7b87bd8e15740845eba4aa4e084192c6e6d1e53
+=========
+>>>>>>>>> Temporary merge branch 2
+
+>>>>>>> 72ab6c02ca34c291f9c2f668ccf01a610ae17ada
         Intent intent1 = getIntent();
         u_id = intent1.getStringExtra("u_id");
         Log.i("TAG", "onCreate: 제발찍히세요" + u_id);
