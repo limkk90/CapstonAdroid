@@ -4,34 +4,27 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import org.yju.myapplication.Community.BoardApi;
-import org.yju.myapplication.data.Board;
-import org.yju.myapplication.data.BoardInfo;
-import org.yju.myapplication.data.Criteria;
 import org.yju.myapplication.data.Email;
 import org.yju.myapplication.data.Marker;
 import org.yju.myapplication.data.User;
 
 import java.lang.reflect.Member;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import lombok.Getter;
 import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
-import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public class DataService {
-    private String BASE_URL = "http://172.26.2.80:7777/"; // TODO REST API 퍼블릭 IP로 변경
+    private String BASE_URL = "http://172.26.1.193:7777/"; // TODO REST API 퍼블릭 IP로 변경
 
     Gson gson = new GsonBuilder()
             .setLenient()

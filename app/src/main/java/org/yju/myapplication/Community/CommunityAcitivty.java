@@ -56,6 +56,11 @@ public class CommunityAcitivty extends AppCompatActivity {
                 switch (menuItem.getItemId()){
                     case R.id.action_notice:
                         setFrag(0);
+                        Bundle bundle2 = new Bundle();
+                        bundle2.putString("u_id", u_id);
+                        Log.i("TAG", "onCreate: 번들값찍히냐???" + bundle2);
+                        cm_notice.setArguments(bundle2);
+                        Log.i("TAG", "onCreate: 번들 값" + bundle2);
                         break;
                     case R.id.action_freeBoard:
                         setFrag(1);
@@ -75,6 +80,11 @@ public class CommunityAcitivty extends AppCompatActivity {
                         break;
                     case R.id.action_news:
                         setFrag(3);
+                        Bundle bundle3 = new Bundle();
+                        bundle3.putString("u_id", u_id);
+                        Log.i("TAG", "onCreate: 번들값찍히냐???" + bundle3);
+                        cm_news.setArguments(bundle3);
+                        Log.i("TAG", "onCreate: 번들 값" + bundle3);
                         break;
                 }
                 return true;

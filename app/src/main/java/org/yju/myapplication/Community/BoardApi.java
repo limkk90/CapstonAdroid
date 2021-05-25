@@ -1,36 +1,44 @@
 package org.yju.myapplication.Community;
 
 import org.yju.myapplication.data.Board;
-import org.yju.myapplication.data.BoardInfo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Path;
 
 public interface BoardApi {
+    // 게시글전체리스트
     @GET("api/allboardlist")
     Call<ArrayList<Board>> ListCall();
 
+    // 팁게시판
     @GET("api/boardlist?cat_cd=2")
     Call<ArrayList<Board>> TipBoard();
 
+    // 자유게시판
     @GET("api/boardlist?cat_cd=1")
     Call<ArrayList<Board>> FreeBoard();
 
-    @POST("api/gboard")
-    Call<List<Object>> gBoard(@Body BoardInfo boardInfo);
+    // 글조회
+    @POST("api/board/{b_no}")
+    Call<Map<String,Object>> gBoard(@Path("b_no") String b_no);
 
+    // 글작성
     @POST("api/board/make")
     Call<String> boardInsert(@Body Board board);
 
-    @POST("api/board/make")
+    // 글삭제
+    @POST("api/board/remove")
     Call<Void> removeBoard(@Body Board board);
 
+    // 글수정
     @PUT("api/board/update")
     Call<Void> updateBoard(@Body Board board);
 

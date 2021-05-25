@@ -11,12 +11,16 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+
+import org.json.JSONObject;
 import org.yju.myapplication.DataService;
 import org.yju.myapplication.R;
 import org.yju.myapplication.data.Board;
-import org.yju.myapplication.data.BoardInfo;
 
-import java.util.ArrayList;
+import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
 
@@ -29,9 +33,10 @@ public class CommunityViewActivity extends AppCompatActivity {
 
     private TextView tv_b_title, tv_b_content, tv_view_update, tv_view_delete;
     DataService dataService = new DataService();
-    private String title, content;
-    BoardInfo boardInfo = new BoardInfo();
-    String b_dtt, b_u_id, u_id;
+    private String title;
+    private String content;
+    String b_no;
+    String b_u_id, u_id;
     Board board = new Board();
 
     @Override
@@ -45,46 +50,41 @@ public class CommunityViewActivity extends AppCompatActivity {
         tv_view_delete = findViewById(R.id.tv_view_delete);
 
         final Intent[] intent = {getIntent()};
-        b_dtt = intent[0].getExtras().getString("b_dtt");
+        b_no = (intent[0].getExtras().getString("b_no"));
         b_u_id = intent[0].getExtras().getString("b_u_id");
-        Log.i("TAG", "onCreate: 게시글 볼수 있냐?" + b_dtt);
         Log.i("TAG", "onCreate: 유저아이디 넘어오냐?" + b_u_id);
 
-        boardInfo.setB_dtt(b_dtt);
 
-        dataService.boardApi.gBoard(boardInfo).enqueue(new Callback<List<Object>>() {
+
+        dataService.boardApi.gBoard(b_no).enqueue(new Callback<Map<String,Object>>() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
-            public void onResponse(Call<List<Object>> call, Response<List<Object>> response) {
-                title = (String)((Map) response.body().get(0)).get("b_title");
-                content = (String)((Map) response.body().get(0)).get("b_content");
+            public void onResponse(Call<Map<String,Object>> call, Response<Map<String,Object>> response) {
+                Board board = new Board();
+                board = board.ObjToBoard(response.body().get("board"));
+
+                Log.i("TAG", "onResponse: " + board);
+                Log.i("TAG", "onResponse: " + response.body().get("replyList"));
+
+                title =  board.getB_title();
+                content = board.getB_title();
                 tv_b_title.setText(title);
                 tv_b_content.setText(content);
 
             }
 
             @Override
-            public void onFailure(Call<List<Object>> call, Throwable t) {
+            public void onFailure(Call<Map<String,Object>> call, Throwable t) {
 
             }
         });
 
         // 삭제
-<<<<<<<<< Temporary merge branch 1
-<<<<<<< HEAD
-=======
 
-<<<<<<< HEAD
-=======
->>>>>>> b7b87bd8e15740845eba4aa4e084192c6e6d1e53
-=========
->>>>>>>>> Temporary merge branch 2
-
->>>>>>> 72ab6c02ca34c291f9c2f668ccf01a610ae17ada
         Intent intent1 = getIntent();
         u_id = intent1.getStringExtra("u_id");
         Log.i("TAG", "onCreate: 제발찍히세요" + u_id);
-        board.setB_dtt(b_dtt);
+        board.setB_no(b_no);
         Log.i("TAG", "onCreate: board b_dtt 확인" + board);
 
 
@@ -117,7 +117,7 @@ public class CommunityViewActivity extends AppCompatActivity {
                     Toast.makeText(CommunityViewActivity.this, "수정할 권한이 없습니다", Toast.LENGTH_SHORT).show();
                 } else {
                     Intent intent2 = new Intent(CommunityViewActivity.this, CommunityUpdateActivity.class);
-                    intent2.putExtra("b_dtt", b_dtt);
+                    intent2.putExtra("b_no", b_no);
                     intent2.putExtra("u_id", u_id);
                     startActivity(intent2);
                 }

@@ -1,19 +1,20 @@
 package org.yju.myapplication.data;
-<<<<<<< HEAD
+
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.util.List;
+import java.util.Map;
 
 import lombok.Data;
 
-=======
-import lombok.Data;
->>>>>>> 72ab6c02ca34c291f9c2f668ccf01a610ae17ada
-import java.time.LocalDateTime;
 
 @Data
 public class Reply {
     private String r_dtt; // 댓글번호
     private String r_content; // 내용
     private String r_writer; // 작성자
-    private String b_no; // 글번호
+    private int b_no; // 글번호
 
     @Override
     public String toString() {
@@ -21,7 +22,7 @@ public class Reply {
                 "r_dtt='" + r_dtt + '\'' +
                 ", r_content='" + r_content + '\'' +
                 ", r_writer='" + r_writer + '\'' +
-                ", b_no='" + b_no + '\'' +
+                ", b_no=" + b_no +
                 '}';
     }
 
@@ -49,11 +50,22 @@ public class Reply {
         this.r_writer = r_writer;
     }
 
-    public String getB_no() {
+    public int getB_no() {
         return b_no;
     }
 
-    public void setB_no(String b_no) {
+    public void setB_no(int b_no) {
         this.b_no = b_no;
+    }
+
+    // body내부의 board 받아서 Board 도메인 리턴
+    public Reply ObjToReplyList(Object o) {
+        List<Reply> Replylist = null;
+
+        ObjectMapper mapper = new ObjectMapper();
+        Map result = mapper.convertValue(o, Map.class);
+
+//        return replylist;
+        return null;
     }
 }

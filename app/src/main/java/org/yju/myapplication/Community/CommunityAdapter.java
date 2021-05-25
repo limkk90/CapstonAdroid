@@ -35,7 +35,6 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
     //리스너 객체 참조를 저장하는 변수
     CommunityAdapter(ArrayList<Board> list){
         mData = list;
-        Log.i("왜", mData.toString());
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{

@@ -28,7 +28,7 @@ public class CommunityUpdateActivity extends AppCompatActivity {
     private RadioButton cm_ud_radioFree, cm_ud_radioTip;
     private RadioGroup cm_ud_radioGroup;
     private char cat_cd;
-    private String title, content, b_dtt, u_id;
+    private String title, content, b_no, u_id;
     Board board;
     Intent intent;
     DataService dataService = new DataService();
@@ -39,9 +39,9 @@ public class CommunityUpdateActivity extends AppCompatActivity {
         setContentView(R.layout.activity_community_update_acitivy);
 
         intent = getIntent();
-        b_dtt = intent.getStringExtra("b_dtt");
+        b_no = intent.getStringExtra("b_no");
         u_id = intent.getStringExtra("u_id");
-        Log.i("TAG", "onCreate: 게시글번호 수정으로넘어오냐??" + b_dtt);
+        Log.i("TAG", "onCreate: 게시글번호 수정으로넘어오냐??" + b_no);
         Log.i("TAG", "onCreate: 유저아이디 수정으로넘어오냐??" + u_id);
 
         cm_ud_editTitle = findViewById(R.id.cm_ud_editTitle);
@@ -68,7 +68,7 @@ public class CommunityUpdateActivity extends AppCompatActivity {
                 board.setCat_cd(cat_cd);
                 board.setB_title(title);
                 board.setB_content(content);
-                board.setB_dtt(b_dtt);
+                board.setB_dtt(b_no);
 
                 dataService.boardApi.updateBoard(board).enqueue(new Callback<Void>() {
                     @Override

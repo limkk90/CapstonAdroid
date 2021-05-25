@@ -88,11 +88,11 @@ public class CommunityFreeFrag extends Fragment {
                 u_id = bundle.getString("u_id");
                 Integer a = Integer.valueOf(pos);
                 Log.e("asd", a.toString());
-                adapter.getItem(pos).getB_dtt();
+                adapter.getItem(pos).getB_no();
                 adapter.getItem(pos).getU_id();
-                Log.e("aaa", adapter.getItem(pos).getB_dtt());
+                Log.e("aaa", adapter.getItem(pos).getB_no());
                 intent = new Intent(getContext(), CommunityViewActivity.class);
-                intent.putExtra("b_dtt", adapter.getItem(pos).getB_dtt());
+                intent.putExtra("b_no", adapter.getItem(pos).getB_no());
                 intent.putExtra("b_u_id", adapter.getItem(pos).getU_id());
                 intent.putExtra("u_id", u_id);
                 Log.i("TAG", "onItemCLick: 넘어가는 유저값 찍히냐?" + u_id);
@@ -116,12 +116,12 @@ public class CommunityFreeFrag extends Fragment {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public void addItem(String title, String content, String writer, String b_dtt){
+    public void addItem(String title, String content, String writer, String b_no){
         Board item = new Board();
         item.setB_title(title);
         item.setB_content(content);
         item.setU_id(writer);
-        item.setB_dtt(b_dtt);
+        item.setB_no(b_no);
         bList.add(item);
         adapter.notifyDataSetChanged();
 
@@ -139,7 +139,7 @@ public class CommunityFreeFrag extends Fragment {
                     if(i == body.size()-1){
                         addItem(null, null, null, null);
                     }else{
-                        addItem(body.get(i).getB_title(), body.get(i).getB_content(), body.get(i).getU_id(), body.get(i).getB_dtt());
+                        addItem(body.get(i).getB_title(), body.get(i).getB_content(), body.get(i).getU_id(), body.get(i).getB_no());
                     }
                 }
             }
