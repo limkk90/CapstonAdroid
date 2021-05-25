@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class Marker {
+    private String stat_id;
     private String stat_lng;
     private String stat_lat;
     private String stat_nm;
@@ -32,10 +33,19 @@ public class Marker {
         this.stat_nm = stat_nm;
     }
 
+    public String getStat_id() {
+        return stat_id;
+    }
+
+    public void setStat_id(String stat_id) {
+        this.stat_id = stat_id;
+    }
+
     @Override
     public String toString() {
         return "Marker{" +
-                "stat_lng='" + stat_lng + '\'' +
+                "stat_id='" + stat_id + '\'' +
+                ", stat_lng='" + stat_lng + '\'' +
                 ", stat_lat='" + stat_lat + '\'' +
                 ", stat_nm='" + stat_nm + '\'' +
                 '}';

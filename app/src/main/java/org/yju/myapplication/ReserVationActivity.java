@@ -2,7 +2,9 @@ package org.yju.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -14,6 +16,7 @@ import lombok.val;
 import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
 
 public class ReserVationActivity extends AppCompatActivity {
+    Intent intent;
     Spinner spinnerStartH, spinnerStartM, spinnerEndH, spinnerEndM;
     String hour[] = {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17",
                      "18", "19", "20", "21", "22", "23"};
@@ -26,6 +29,8 @@ public class ReserVationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reser_vation);
+        intent = getIntent();
+        Log.i("Reversation1", "onCreate: " + intent.getStringExtra("statId").substring(10));
 
         spinnerStartH = findViewById(R.id.startSpinnerKara);
         spinnerStartM = findViewById(R.id.startSpinnerMade);
