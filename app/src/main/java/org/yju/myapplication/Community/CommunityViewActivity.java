@@ -3,6 +3,9 @@ package org.yju.myapplication.Community;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Build;
@@ -24,6 +27,7 @@ import org.yju.myapplication.data.Board;
 import org.yju.myapplication.data.Reply;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -41,6 +45,10 @@ public class CommunityViewActivity extends AppCompatActivity {
     private String content;
     private String b_no, b_u_id, u_id;
     Board board = new Board();
+    RecyclerView recyclerView = null;
+    ReplyAdapter replyAdapter = null;
+    ArrayList<Reply> rList = new ArrayList<>();
+    LinearLayoutManager linearLayoutManager = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +64,15 @@ public class CommunityViewActivity extends AppCompatActivity {
         b_no = (intent[0].getExtras().getString("b_no"));
         b_u_id = intent[0].getExtras().getString("b_u_id");
         Log.i("TAG", "onCreate: 유저아이디 넘어오냐?" + b_u_id);
+
+        recyclerView = findViewById(R.id.reply_RecyclerView);
+        replyAdapter = new ReplyAdapter(rList);
+        recyclerView.setAdapter(replyAdapter);
+        linearLayoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(linearLayoutManager);
+
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), linearLayoutManager.getOrientation());
+        recyclerView.addItemDecoration(dividerItemDecoration);
 
 
 
@@ -117,8 +134,22 @@ public class CommunityViewActivity extends AppCompatActivity {
                 Board board = new Board();
                 board = board.ObjToBoard(response.body().get("board"));
 
-                Log.i("TAG", "onResponse: " + board);
+                Object o = response.body().get("replyList");
+                ObjectMapper mapper = new ObjectMapper();
+                ArrayList replylist = mapper.convertValue(o, ArrayList.class);
 
+                Log.i("boardView", "onResponse: " + board);
+                Log.i("boardView", "onResponse: " + replylist.get(0));
+
+                Reply reply = new Reply();
+                for(int i=0; i<replylist.size(); i++){
+                    reply = reply.ObjToReply(replylist.get(i));
+                    Log.i("SuccessboardView", "onResponse: "+ reply.getR_content());
+                    Log.i("SuccessboardView", "onResponse: "+ reply.getR_writer());
+                    Log.i("SuccessboardView", "onResponse: "+ reply.getR_dtt());
+
+                    addItem(reply.getR_content(), reply.getR_writer(), reply.getR_dtt());
+                }
 
                 title =  board.getB_title();
                 content = board.getB_content();
@@ -132,5 +163,22 @@ public class CommunityViewActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+//        rList.clear();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void addItem(String content, String writer, String regDate){
+        Reply item = new Reply();
+        item.setR_content(content);
+        item.setR_writer(writer);
+        item.setR_dtt(regDate);
+        rList.add(item);
+        replyAdapter.notifyDataSetChanged();
+        // 리사이클러뷰 어뎁터로 값 넘겨주고, 새로고침 시켜줘야됨.
     }
 }

@@ -26,7 +26,6 @@ public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.ViewHolder>{
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView rep_writer, rep_content, rep_regDate, rep_modify, rep_delete;
 
-
         ViewHolder(View itemView){
             super(itemView);
 
