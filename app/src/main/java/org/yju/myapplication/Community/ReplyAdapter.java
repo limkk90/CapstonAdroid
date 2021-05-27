@@ -35,8 +35,6 @@ public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.ViewHolder>{
             rep_regDate = itemView.findViewById(R.id.reply_regDate);
             rep_modify = itemView.findViewById(R.id.reply_modify);
             rep_delete = itemView.findViewById(R.id.reply_delete);
-
-
         }
     }
 
@@ -73,9 +71,7 @@ public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.ViewHolder>{
         holder.rep_modify.setGravity(Gravity.CENTER);
         holder.rep_delete.setGravity(Gravity.CENTER);
 
-
     }
-
     @Override
     public int getItemCount() {
         return data.size();

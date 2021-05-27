@@ -1,6 +1,8 @@
 package org.yju.myapplication.data;
 
 
+import android.util.Log;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.List;
@@ -26,23 +28,28 @@ public class Reply {
                 '}';
     }
 
-    public String getR_dtt() {
+    public String getR_dtt()
+    {
         return r_dtt;
     }
 
-    public void setR_dtt(String r_dtt) {
+    public void setR_dtt(String r_dtt)
+    {
         this.r_dtt = r_dtt;
     }
 
-    public String getR_content() {
+    public String getR_content()
+    {
         return r_content;
     }
 
-    public void setR_content(String r_content) {
+    public void setR_content(String r_content)
+    {
         this.r_content = r_content;
     }
 
-    public String getR_writer() {
+    public String getR_writer()
+    {
         return r_writer;
     }
 
@@ -50,7 +57,8 @@ public class Reply {
         this.r_writer = r_writer;
     }
 
-    public int getB_no() {
+    public int getB_no()
+    {
         return b_no;
     }
 
@@ -64,8 +72,18 @@ public class Reply {
 
         ObjectMapper mapper = new ObjectMapper();
         Map result = mapper.convertValue(o, Map.class);
+        Log.i("ObjToReplyList", "ObjToReplyList: " + result);
 
-//        return replylist;
-        return null;
+        Reply reply = new Reply();
+        Log.i("ObjToReplyList1", "ObjToReplyList: " + result.get("r_content").toString());
+        Log.i("ObjToReplyList1", "ObjToReplyList: " + result.get("r_writer").toString());
+        Log.i("ObjToReplyList1", "ObjToReplyList: " + result.get("date").toString());
+
+        reply.setR_content(result.get("r_content").toString());
+        reply.setR_writer(result.get("r_writer").toString());
+        reply.setR_dtt(result.get("date").toString());
+        Log.i("ObjToReplyList2", "ObjToReplyList: " + reply.toString());
+
+        return reply;
     }
 }
