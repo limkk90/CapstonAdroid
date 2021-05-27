@@ -30,7 +30,7 @@ public class CommunityUpdateActivity extends AppCompatActivity {
     private char cat_cd;
     private String title, content, b_no, u_id;
     Board board;
-    Intent intent;
+    private Intent intent;
     DataService dataService = new DataService();
 
     @Override
@@ -68,7 +68,7 @@ public class CommunityUpdateActivity extends AppCompatActivity {
                 board.setCat_cd(cat_cd);
                 board.setB_title(title);
                 board.setB_content(content);
-                board.setB_dtt(b_no);
+                board.setB_no(b_no);
 
                 dataService.boardApi.updateBoard(board).enqueue(new Callback<Void>() {
                     @Override
@@ -88,5 +88,13 @@ public class CommunityUpdateActivity extends AppCompatActivity {
 
         });
 
-    }
-}
+        // 취소버튼 클릭시시
+        cm_ud_btnCancle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent();
+                intent1.putExtra("u_id", u_id);
+                finish();
+            }
+        });
+    }}

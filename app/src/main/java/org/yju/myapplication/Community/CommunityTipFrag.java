@@ -101,8 +101,6 @@ public class CommunityTipFrag  extends Fragment {
         });
 
 
-        getListBoard();
-        adapter.notifyDataSetChanged();
         return view;
 
     }
@@ -138,12 +136,10 @@ public class CommunityTipFrag  extends Fragment {
                 ArrayList<Board> body = response.body();
                 Log.i("TAG", "onResponse: 성공" + body);
                 for (int i = 0; i < body.size(); i++) {
-                    if(i == body.size()-1){
-                        addItem(null, null, null, null);
-                    }else{
-                        addItem(body.get(i).getB_title(), body.get(i).getB_content(), body.get(i).getU_id(), body.get(i).getB_no());
-                    }
+                    addItem(body.get(i).getB_title(), body.get(i).getB_content(), body.get(i).getU_id(), body.get(i).getB_no());
                 }
+                addItem(null, null, null, null);
+
             }
 
             @Override

@@ -1,71 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Community.CommunityViewActivity">
+    android:layout_height="match_parent">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/tv_b_content"
-                android:layout_width="189dp"
-                android:layout_height="133dp"
-                android:layout_marginTop="10dp"
-                android:hint="내용"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_b_title" />
-
-            <TextView
-                android:id="@+id/tv_view_update"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="164dp"
-                android:layout_marginLeft="164dp"
-                android:layout_marginTop="36dp"
-                android:text="수정"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_b_content" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/reply_RecyclerView"
-                android:layout_width="0dp"
-                android:layout_height="445dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_view_update" />
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/tv_b_title"
-                android:layout_width="184dp"
+                android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginTop="48dp"
+                android:gravity="center"
+                android:padding="10dp"
                 android:text="제목"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/tv_view_delete"
+                android:id="@+id/tv_b_content"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:padding="10dp"
+                android:text="내용"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="@+id/tv_b_title"
+                app:layout_constraintStart_toStartOf="@+id/tv_b_title"
+                app:layout_constraintTop_toBottomOf="@+id/tv_b_title" />
+
+
+            <LinearLayout
+                android:id="@+id/linearLayout6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="36dp"
-                android:layout_marginLeft="36dp"
-                android:layout_marginTop="36dp"
-                android:text="삭제"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.358"
-                app:layout_constraintStart_toEndOf="@+id/tv_view_update"
-                app:layout_constraintTop_toBottomOf="@+id/tv_b_content" />
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="@+id/tv_b_content"
+                app:layout_constraintTop_toBottomOf="@+id/tv_b_content">
+
+                <Button
+                    android:id="@+id/tv_view_update"
+                    android:layout_width="70dp"
+                    android:layout_height="50dp"
+                    android:layout_marginRight="5dp"
+                    android:text="수정" />
+
+                <Button
+                    android:id="@+id/tv_view_delete"
+                    android:layout_width="70dp"
+                    android:layout_height="50dp"
+                    android:text="삭제" />
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/reply_RecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintEnd_toEndOf="@+id/tv_b_content"
+                app:layout_constraintStart_toStartOf="@+id/tv_b_content"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout6" />
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

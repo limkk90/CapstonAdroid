@@ -33,10 +33,10 @@ import retrofit2.Response;
 public class CommunityFreeFrag extends Fragment {
     Intent intent;
     private View view;
-    RecyclerView recyclerView = null; //리스트 리사이클러
-    CommunityAdapter adapter = null;  //어댑터
-    ArrayList<Board> bList = new ArrayList<Board>(); //데이터 넣을 리스트
-    LinearLayoutManager linearLayoutManager = null; //레이아웃 매니저
+    RecyclerView recyclerView = null;
+    CommunityAdapter adapter = null;
+    ArrayList<Board> bList = new ArrayList<Board>();
+    LinearLayoutManager linearLayoutManager = null;
     DataService dataService = new DataService();
     FloatingActionButton floatingActionButton;
     String u_id;
@@ -115,35 +115,6 @@ public class CommunityFreeFrag extends Fragment {
         adapter.notifyDataSetChanged();
     }
 
-
-
-    public void getListBoard(){
-        //dataService api 호출
-        dataService.boardApi.FreeBoard().enqueue(new Callback<ArrayList<Board>>() {
-            @Override
-            public void onResponse(Call<ArrayList<Board>> call, Response<ArrayList<Board>> response) {
-                ArrayList<Board> body = response.body();
-                Log.i("TAG", "onResponse: 성공" + body);
-                for (int i = 0; i < body.size(); i++) {
-                    if(i == body.size()-1){
-                        addItem(null, null, null, null);
-                    }else{
-                        Log.i("boarList", "onResponse: " + body.get(i).getB_title());
-                        Log.i("boarList", "onResponse: " + body.get(i).getB_content());
-                        Log.i("boarList", "onResponse: " + body.get(i).getU_id());
-                        Log.i("boarList", "onResponse: " + body.get(i).getB_no());
-                        addItem(body.get(i).getB_title(), body.get(i).getB_content(), body.get(i).getU_id(), body.get(i).getB_no());
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ArrayList<Board>> call, Throwable t) {
-                t.printStackTrace();
-            }
-        });
-    }
-
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void addItem(String title, String content, String writer, String b_no){
         Board item = new Board();
@@ -153,6 +124,28 @@ public class CommunityFreeFrag extends Fragment {
         item.setB_no(b_no);
         bList.add(item);
         adapter.notifyDataSetChanged();
+
         // 리사이클러뷰 어뎁터로 값 넘겨주고, 새로고침 시켜줘야됨.
+    }
+
+    public void getListBoard(){
+        //dataService api 호출
+        dataService.boardApi.FreeBoard().enqueue(new Callback<ArrayList<Board>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Board>> call, Response<ArrayList<Board>> response) {
+                ArrayList<Board> body = response.body();
+                Log.i("TAG", "onResponse: 성공" + body);
+                for (int i = 0; i < body.size(); i++) {
+                    addItem(body.get(i).getB_title(), body.get(i).getB_content(), body.get(i).getU_id(), body.get(i).getB_no());
+                }
+                addItem(null, null, null, null);
+
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Board>> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
     }
 }

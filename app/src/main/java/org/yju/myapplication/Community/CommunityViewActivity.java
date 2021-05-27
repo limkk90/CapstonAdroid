@@ -1,16 +1,15 @@
+
 package org.yju.myapplication.Community;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,12 +23,9 @@ import org.yju.myapplication.R;
 import org.yju.myapplication.data.Board;
 import org.yju.myapplication.data.Reply;
 
-import java.lang.reflect.Array;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -38,18 +34,13 @@ import retrofit2.Response;
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class CommunityViewActivity extends AppCompatActivity {
 
-    private TextView tv_b_title, tv_b_content, tv_view_update, tv_view_delete;
+    private TextView tv_b_title, tv_b_content;
+    private Button tv_view_update, tv_view_delete;
     DataService dataService = new DataService();
     private String title;
     private String content;
-    String b_no;
-    String b_u_id, u_id;
+    private String b_no, b_u_id, u_id;
     Board board = new Board();
-    RecyclerView recyclerView = null;
-    ReplyAdapter replyAdapter = null;
-    ArrayList<Reply> rList = new ArrayList<>();
-    LinearLayoutManager linearLayoutManager = null;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,57 +57,16 @@ public class CommunityViewActivity extends AppCompatActivity {
         b_u_id = intent[0].getExtras().getString("b_u_id");
         Log.i("TAG", "onCreate: 유저아이디 넘어오냐?" + b_u_id);
 
-        recyclerView = findViewById(R.id.reply_RecyclerView);
-        replyAdapter = new ReplyAdapter(rList);
-        recyclerView.setAdapter(replyAdapter);
-        linearLayoutManager = new LinearLayoutManager(getApplicationContext());
-        recyclerView.setLayoutManager(linearLayoutManager);
 
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), linearLayoutManager.getOrientation());
-        recyclerView.addItemDecoration(dividerItemDecoration);
-
-        dataService.boardApi.gBoard(b_no).enqueue(new Callback<Map<String,Object>>() {
-            @RequiresApi(api = Build.VERSION_CODES.O)
-            @Override
-            public void onResponse(Call<Map<String,Object>> call, Response<Map<String,Object>> response) {
-                Board board = new Board();
-                board = board.ObjToBoard(response.body().get("board"));
-
-                Object o = response.body().get("replyList");
-                ObjectMapper mapper = new ObjectMapper();
-                ArrayList replylist = mapper.convertValue(o, ArrayList.class);
-
-                Log.i("boardView", "onResponse: " + board);
-                Log.i("boardView", "onResponse: " + replylist.get(0));
-
-                Reply reply = new Reply();
-                for(int i=0; i<replylist.size(); i++){
-                    reply = reply.ObjToReplyList(replylist.get(i));
-                    Log.i("SuccessboardView", "onResponse: "+ reply.getR_content());
-                    Log.i("SuccessboardView", "onResponse: "+ reply.getR_writer());
-                    Log.i("SuccessboardView", "onResponse: "+ reply.getR_dtt());
-
-                    addItem(reply.getR_content(), reply.getR_writer(), reply.getR_dtt());
-                }
-
-
-
-                title =  board.getB_title();
-                content = board.getB_title();
-                tv_b_title.setText(title);
-                tv_b_content.setText(content);
-            }
-            @Override
-            public void onFailure(Call<Map<String,Object>> call, Throwable t) {
-            }
-        });
 
         // 삭제
+
         Intent intent1 = getIntent();
         u_id = intent1.getStringExtra("u_id");
         Log.i("TAG", "onCreate: 제발찍히세요" + u_id);
         board.setB_no(b_no);
         Log.i("TAG", "onCreate: board b_dtt 확인" + board);
+
 
         tv_view_delete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -157,19 +107,30 @@ public class CommunityViewActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-//        rList.clear();
-    }
+    protected void onResume() {
+        super.onResume();
+        // 글 조회
+        dataService.boardApi.gBoard(b_no).enqueue(new Callback<Map<String,Object>>() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onResponse(Call<Map<String,Object>> call, Response<Map<String,Object>> response) {
+                Board board = new Board();
+                board = board.ObjToBoard(response.body().get("board"));
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public void addItem(String content, String writer, String regDate){
-        Reply item = new Reply();
-        item.setR_content(content);
-        item.setR_writer(writer);
-        item.setR_dtt(regDate);
-        rList.add(item);
-        replyAdapter.notifyDataSetChanged();
-        // 리사이클러뷰 어뎁터로 값 넘겨주고, 새로고침 시켜줘야됨.
+                Log.i("TAG", "onResponse: " + board);
+
+
+                title =  board.getB_title();
+                content = board.getB_content();
+                tv_b_title.setText(title);
+                tv_b_content.setText(content);
+
+            }
+
+            @Override
+            public void onFailure(Call<Map<String,Object>> call, Throwable t) {
+
+            }
+        });
     }
 }

@@ -1,5 +1,9 @@
 package org.yju.myapplication.Community;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+
+import org.json.JSONArray;
 import org.yju.myapplication.data.Board;
 
 import java.util.ArrayList;
@@ -28,7 +32,7 @@ public interface BoardApi {
 
     // 글조회
     @POST("api/board/{b_no}")
-    Call<Map<String,Object>> gBoard(@Path("b_no") String b_no);
+    Call<Map<String, Object>> gBoard(@Path("b_no") String b_no);
 
     // 글작성
     @POST("api/board/make")
@@ -42,4 +46,11 @@ public interface BoardApi {
     @PUT("api/board/update")
     Call<Void> updateBoard(@Body Board board);
 
+    // 공지사항
+    @GET("api/main/notify")
+    Call<ArrayList<Board>> BoardNotify();
+
+    // 뉴스
+    @GET("api/main/news")
+    Call<JsonArray> news();
 }
