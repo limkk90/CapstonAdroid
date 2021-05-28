@@ -49,6 +49,7 @@ public class CommunityViewActivity extends AppCompatActivity {
     ReplyAdapter replyAdapter = null;
     ArrayList<Reply> rList = new ArrayList<>();
     LinearLayoutManager linearLayoutManager = null;
+    TextView reply_delete;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +60,7 @@ public class CommunityViewActivity extends AppCompatActivity {
         tv_b_content = findViewById(R.id.tv_b_content);
         tv_view_update = findViewById(R.id.tv_view_update);
         tv_view_delete = findViewById(R.id.tv_view_delete);
+
 
         final Intent[] intent = {getIntent()};
         b_no = (intent[0].getExtras().getString("b_no"));
@@ -74,16 +76,21 @@ public class CommunityViewActivity extends AppCompatActivity {
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), linearLayoutManager.getOrientation());
         recyclerView.addItemDecoration(dividerItemDecoration);
 
+        replyAdapter.setOnItemClickListener(new ReplyAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View v, int pos) {
+                Reply reply = replyAdapter.getItem(pos);
+                Log.i("ReplyAdapterEvent", "onItemClick: " + reply);
 
+            }
+        });
 
-        // 삭제
-
+        // 게시글 삭제
         Intent intent1 = getIntent();
         u_id = intent1.getStringExtra("u_id");
         Log.i("TAG", "onCreate: 제발찍히세요" + u_id);
         board.setB_no(b_no);
         Log.i("TAG", "onCreate: board b_dtt 확인" + board);
-
 
         tv_view_delete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,7 +113,7 @@ public class CommunityViewActivity extends AppCompatActivity {
             }
         });
 
-        // 수정
+        // 게시글 수정
         tv_view_update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -120,6 +127,7 @@ public class CommunityViewActivity extends AppCompatActivity {
                 }
             }
         });
+
 
     }
 
@@ -168,7 +176,29 @@ public class CommunityViewActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        reply_delete = findViewById(R.id.reply_delete);
 //        rList.clear();
+        //        댓글 삭제
+//        reply_delete.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (!b_u_id.equals(u_id)) {
+//                    Toast.makeText(CommunityViewActivity.this, "삭제할 권한이 없습니다", Toast.LENGTH_SHORT).show();
+//                } else {
+//                    dataService.boardApi.replyDelete().enqueue(new Callback<Void>() {
+//                        @Override
+//                        public void onResponse(Call<Void> call, Response<Void> response) {
+//                            finish();
+//                        }
+//
+//                        @Override
+//                        public void onFailure(Call<Void> call, Throwable t) {
+//
+//                        }
+//                    });
+//                }
+//            }
+//        });
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)

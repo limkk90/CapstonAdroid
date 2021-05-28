@@ -12,6 +12,7 @@ import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
@@ -53,4 +54,7 @@ public interface BoardApi {
     // 뉴스
     @GET("api/main/news")
     Call<JsonArray> news();
+    //댓글 삭제
+    @DELETE("api/reply")
+    Call<Void> replyDelete();
 }

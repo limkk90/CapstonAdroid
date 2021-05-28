@@ -20,6 +20,16 @@ import java.util.ArrayList;
 public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.ViewHolder>{
     private ArrayList<Reply> data = null;
 
+    public interface OnItemClickListener{
+        void onItemClick(View v, int pos);
+    }
+
+    private OnItemClickListener listener = null;
+
+    public void setOnItemClickListener(OnItemClickListener listener){
+        this.listener = listener;
+    }
+
     ReplyAdapter(ArrayList<Reply> list){
         data = list;
     }
@@ -34,6 +44,19 @@ public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.ViewHolder>{
             rep_regDate = itemView.findViewById(R.id.reply_regDate);
             rep_modify = itemView.findViewById(R.id.reply_modify);
             rep_delete = itemView.findViewById(R.id.reply_delete);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int pos = getAdapterPosition();
+                    Integer posStr = Integer.valueOf(pos);
+                    if(pos != RecyclerView.NO_POSITION){
+                        if(listener != null){
+                            listener.onItemClick(v, pos);
+                        }
+                    }
+                }
+            });
         }
     }
 
@@ -74,5 +97,9 @@ public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.ViewHolder>{
     @Override
     public int getItemCount() {
         return data.size();
+    }
+
+    public Reply getItem(int position){
+        return  data.get(position);
     }
 }

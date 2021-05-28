@@ -63,8 +63,6 @@ public class Reply {
 
     // body내부의 board 받아서 Board 도메인 리턴
     public Reply ObjToReply(Object o) {
-
-
         ObjectMapper mapper = new ObjectMapper();
         Map result = mapper.convertValue(o, Map.class);
 
