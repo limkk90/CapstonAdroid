@@ -42,7 +42,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements TMapView.OnCalloutMarker2ClickCallback {
+    TMapView tmapview;
     String id;
     TMapMarkerItem markerItem1;
     ArrayList<Marker> mapApi;
@@ -60,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private View drawerView;
     private String u_id;
+    TMapMarkerItem2 tMapMarkerItem2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,84 +83,17 @@ public class MainActivity extends AppCompatActivity {
 
 
         LinearLayout linearLayoutTmap = (LinearLayout)findViewById(R.id.tmap);
-        TMapView tmapview = new TMapView(this);
+        tmapview = new TMapView(this);
         tmapview.setSKTMapApiKey("l7xx8ab0ebd2f81548f586a1838fdbe5bc1b");
         tmapview.setHttpsMode(true);
         linearLayoutTmap.addView(tmapview);
-
-        TMapTapi tMapTapi = new TMapTapi(this);
-        tMapTapi.invokeRoute("T타워", 126.984098f, 37.566385f);
+        tmapview.setCenterPoint( 128.620935, 35.896463 ); //지도 띄울 떄 이쪽으로 띄우는듯
 //        ===============마커 추가======================
 
-        dataService.select.getMarker().enqueue(new Callback<ArrayList<Marker>>() {
-            @RequiresApi(api = Build.VERSION_CODES.N)
-            @Override
-            public void onResponse(Call<ArrayList<Marker>> call, Response<ArrayList<Marker>> response) {
-                ArrayList<Marker> body = response.body();
-                for(int i=0; i<body.size(); i++){
-//                    TMapMarkerItem2 tMapMarkerItem2 = new TMapMarkerItem2();
-                    markerItem1 = new TMapMarkerItem();
-                    id = body.get(i).getStat_id();
-                    Log.i("Reeservation", "onResponse: " + id);
-                    String stat_nm = body.get(i).getStat_nm();
-                    String stat_lng = body.get(i).getStat_lng();
-                    String stat_lat = body.get(i).getStat_lat();
-                    double stat_lng_d = Double.parseDouble(stat_lng);
-                    double stat_lat_d = Double.parseDouble(stat_lat);
 
-                    TMapPoint tMapPoint1 = new TMapPoint(stat_lat_d, stat_lng_d); // SKT타워
-                    // 마커 아이콘
-                    Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.pin_r_m_a);
 
-                    markerItem1.setIcon(bitmap); // 마커 아이콘 지정
-                    markerItem1.setPosition(0.5f, 1.0f); // 마커의 중심점을 중앙, 하단으로 설정
-                    markerItem1.setTMapPoint( tMapPoint1 ); // 마커의 좌표 지정
-                    markerItem1.setName("SKT타워"); // 마커의 타이틀 지정
-                    markerItem1.setCanShowCallout(true); //풍선뷰 사용유무
-                    markerItem1.setID(id);
-                    Log.i("Reeservation1", "onResponse: " + markerItem1.getID());
-                    if(markerItem1.getCanShowCallout()){
-                        markerItem1.setCalloutTitle(stat_nm); //풍선뷰 클릭 시 나올 내용
-                        Bitmap bitmapImage = createmarkerIcon(R.drawable.reservation);
-                        markerItem1.setCalloutRightButtonImage(bitmapImage);
-                    }
-                    tmapview.setOnLongClickListenerCallback(new TMapView.OnLongClickListenerCallback() {
-                        @Override
-                        public void onLongPressEvent(ArrayList<TMapMarkerItem> arrayList, ArrayList<TMapPOIItem> arrayList1, TMapPoint tMapPoint) {
-                            float a = markerItem1.getPositionX();
-                            float b = markerItem1.getPositionY();
-                            Log.i("house", "onClick: " + a);
-                            Log.i("house", "onClick: " + b);
-                        }
-                    });
-
-                    tmapview.setOnCalloutRightButtonClickListener(new TMapView.OnCalloutRightButtonClickCallback() {
-                        @Override
-                        public void onCalloutRightButton(TMapMarkerItem tMapMarkerItem) {
-                            Log.i("onCall", "onCalloutRightButton: "+markerItem1.getID().getClass());
-                            Log.i("onCall", "onCalloutRightButton: "+id);
-//                        Log.i("onCall", "onCalloutRightButton: " + markerItem1.getTMapPoint());
-//                        Log.i("onCall", "onCalloutRightButton: " + markerItem1.getID());
-//                        intent = new Intent(MainActivity.this, ReserVationActivity.class);
-//                        intent.putExtra("statId", markerItem1.getID());
-//                        startActivity(intent);
-                        }
-                    });
-                    tmapview.addMarkerItem("markerItem" + i, markerItem1); // 지도에 마커 추가
-
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call<ArrayList<Marker>> call, Throwable t) {
-                Log.i("Marker", "실패 ㅋㅋ");
-            }
-        });
-
+        //=======================================
         context = getApplicationContext();
-        tmapview.setCenterPoint( 128.620935, 35.896463 ); //지도 띄울 떄 이쪽으로 띄우는듯
-
         //네비게이션 변수====================================
         iv_menu = (ImageView)findViewById(R.id.iv_menu);
         drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
@@ -265,6 +200,10 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    public void addEvent(TMapView tMapView, String id){
+
+    }
+
     private Bitmap createmarkerIcon(int image){
         Log.i("CreateMarkerIcon1", "createmarkerIcon: " + image);
 //        BitmapFactory.Options options = new BitmapFactory.Options();
@@ -276,23 +215,74 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
+    protected void onStart() {
+        super.onStart();
+        Log.i("onStart", "onStart: " + "제발");
     }
 
-    //    public static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight){
-//        final int height = options.outHeight;
-//        final int width = options.outWidth;
-//        int inSampleSize = 1;
-//
-//        if(height > reqHeight || width > reqWidth){
-//            final int halfHeight = height/2;
-//            final int halfWidth = width/2;
-//
-//            while((halfHeight/inSampleSize) >= reqHeight && (halfWidth/inSampleSize) >= reqWidth){
-//                inSampleSize *= 2;
-//            }
-//        }
-//        return inSampleSize;
-//    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        dataService.select.getMarker().enqueue(new Callback<ArrayList<Marker>>() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onResponse(Call<ArrayList<Marker>> call, Response<ArrayList<Marker>> response) {
+                ArrayList<Marker> body = response.body();
+                for(int i=0; i<body.size(); i++){
+//                    tMapMarkerItem2  = new TMapMarkerItem2();
+                    markerItem1 = new TMapMarkerItem();
+                    id = body.get(i).getStat_id();
+                    Log.i("Reeservation", "onResponse: " + id);
+                    String stat_nm = body.get(i).getStat_nm();
+                    String stat_lng = body.get(i).getStat_lng();
+                    String stat_lat = body.get(i).getStat_lat();
+                    double stat_lng_d = Double.parseDouble(stat_lng);
+                    double stat_lat_d = Double.parseDouble(stat_lat);
+
+                    TMapPoint tMapPoint1 = new TMapPoint(stat_lat_d, stat_lng_d); // SKT타워
+                    // 마커 아이콘
+                    Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.pin_r_m_a);
+
+                    markerItem1.setIcon(bitmap); // 마커 아이콘 지정
+                    markerItem1.setPosition(0.5f, 1.0f); // 마커의 중심점을 중앙, 하단으로 설정
+                    markerItem1.setTMapPoint( tMapPoint1 ); // 마커의 좌표 지정
+                    markerItem1.setName("SKT타워"); // 마커의 타이틀 지정
+                    markerItem1.setCanShowCallout(true); //풍선뷰 사용유무
+                    Log.i("Reeservation1", "onResponse: " + markerItem1.getID());
+                    if(markerItem1.getCanShowCallout()){
+                        markerItem1.setCalloutTitle(stat_nm); //풍선뷰 클릭 시 나올 내용
+                        Bitmap bitmapImage = createmarkerIcon(R.drawable.reservation);
+                        markerItem1.setCalloutRightButtonImage(bitmapImage);
+                    }
+//                    addEvent(tmapview, id);
+                    tmapview.setOnCalloutRightButtonClickListener(new TMapView.OnCalloutRightButtonClickCallback() {
+                        @Override
+                        public void onCalloutRightButton(TMapMarkerItem tMapMarkerItem) {
+                            Log.i("onCall", "onCalloutRightButton: "+markerItem1.getID());
+//                        Log.i("onCall", "onCalloutRightButton: " + markerItem1.getTMapPoint());
+//                        Log.i("onCall", "onCalloutRightButton: " + markerItem1.getID());
+//                        intent = new Intent(MainActivity.this, ReserVationActivity.class);
+//                        intent.putExtra("statId", markerItem1.getID());
+//                        startActivity(intent);
+                        }
+                    });
+                    tmapview.addMarkerItem("markerItem" + id, markerItem1); // 지도에 마커 추가
+                }
+            }
+            @Override
+            public void onFailure(Call<ArrayList<Marker>> call, Throwable t) {
+                Log.i("Marker", "실패 ㅋㅋ");
+            }
+        });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
+    public void onCalloutMarker2ClickEvent(String s, TMapMarkerItem2 tMapMarkerItem2) {
+
+    }
 }
