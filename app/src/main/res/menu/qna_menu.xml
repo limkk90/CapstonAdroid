@@ -8,11 +8,11 @@
     <item
         android:id="@+id/qna_oneQNA"
         android:iconTint="#000000"
-        android:title="FAQ"
+        android:title="1:1문의"
         android:visible="true" />
     <item
         android:id="@+id/qna_"
         android:iconTint="#000000"
-        android:title="FAQ"
+        android:title="문의내역"
         android:visible="true" />
 </menu>
