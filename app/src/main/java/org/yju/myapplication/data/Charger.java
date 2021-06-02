@@ -3,6 +3,6 @@ package org.yju.myapplication.data;
 import lombok.Data;
 
 @Data
-public class Station {
+public class Charger {
 
 }

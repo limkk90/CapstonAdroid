@@ -1,6 +1,4 @@
-package org.yju.myapplication;
-
-import androidx.appcompat.app.AppCompatActivity;
+package org.yju.myapplication.Reservation;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,9 +9,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import lombok.val;
+import androidx.appcompat.app.AppCompatActivity;
 
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
+import org.yju.myapplication.R;
 
 public class ReserVationActivity extends AppCompatActivity {
     Intent intent;
@@ -35,6 +33,8 @@ public class ReserVationActivity extends AppCompatActivity {
         Log.i("Reversation1", "onCreate: " + stat_id);
         Log.i("Reversation1", "onCreate: " + stat_nm);
         Log.i("Reversation1", "onCreate: " + stat_addr);
+
+
 
         spinnerStartH = findViewById(R.id.startSpinnerKara);
         spinnerStartM = findViewById(R.id.startSpinnerMade);

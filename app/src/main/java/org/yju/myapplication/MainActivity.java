@@ -30,6 +30,7 @@ import android.widget.Toolbar;
 
 import org.yju.myapplication.Community.CommunityAcitivty;
 import org.yju.myapplication.MyPage.MyPageActivity;
+import org.yju.myapplication.Reservation.ReserVationActivity;
 import org.yju.myapplication.data.Marker;
 import org.yju.myapplication.databinding.ActivityActionbarBinding;
 import org.yju.myapplication.databinding.ActivityDrawerBinding;

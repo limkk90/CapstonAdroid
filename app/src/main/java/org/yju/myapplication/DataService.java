@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import org.yju.myapplication.Community.BoardApi;
+import org.yju.myapplication.Reservation.ReservationApi;
 import org.yju.myapplication.data.Email;
 import org.yju.myapplication.data.Marker;
 import org.yju.myapplication.data.User;
@@ -42,6 +43,7 @@ public class DataService {
     UpdateAPI update = retrofitClient.create(UpdateAPI.class);
     DeleteAPI delete = retrofitClient.create(DeleteAPI.class);
     public BoardApi  boardApi = retrofitClient.create(BoardApi.class);
+    public ReservationApi reservationApi = retrofitClient.create(ReservationApi.class);
 }
 
 interface SelectAPI{
