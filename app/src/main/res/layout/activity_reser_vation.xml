@@ -31,13 +31,14 @@
         android:id="@+id/recyclerView2"
         android:layout_width="0dp"
         android:layout_height="100dp"
+        android:layout_marginTop="64dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_stationAddr" />
 
     <TextView
-        android:id="@+id/textView11"
+        android:id="@+id/txt_stationName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -52,7 +53,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="84dp"
-        android:layout_marginLeft="84dp"
         android:text="예약하기"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -92,5 +92,16 @@
             android:layout_weight="1" />
 <!--        android:entries="@array/startMin"-->
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/txt_stationAddr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="TextView"
+        android:textSize="23sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_stationName" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
