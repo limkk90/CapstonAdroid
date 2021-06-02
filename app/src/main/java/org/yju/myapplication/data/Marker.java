@@ -8,6 +8,26 @@ public class Marker {
     private String stat_lng;
     private String stat_lat;
     private String stat_nm;
+    private String stat_addr;
+
+    @Override
+    public String toString() {
+        return "Marker{" +
+                "stat_id='" + stat_id + '\'' +
+                ", stat_lng='" + stat_lng + '\'' +
+                ", stat_lat='" + stat_lat + '\'' +
+                ", stat_nm='" + stat_nm + '\'' +
+                ", stat_addr='" + stat_addr + '\'' +
+                '}';
+    }
+
+    public String getStat_addr() {
+        return stat_addr;
+    }
+
+    public void setStat_addr(String stat_addr) {
+        this.stat_addr = stat_addr;
+    }
 
     public String getStat_lng() {
         return stat_lng;
@@ -41,13 +61,4 @@ public class Marker {
         this.stat_id = stat_id;
     }
 
-    @Override
-    public String toString() {
-        return "Marker{" +
-                "stat_id='" + stat_id + '\'' +
-                ", stat_lng='" + stat_lng + '\'' +
-                ", stat_lat='" + stat_lat + '\'' +
-                ", stat_nm='" + stat_nm + '\'' +
-                '}';
-    }
 }

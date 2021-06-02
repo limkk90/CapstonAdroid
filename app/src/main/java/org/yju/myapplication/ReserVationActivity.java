@@ -29,6 +29,12 @@ public class ReserVationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_reser_vation);
         intent = getIntent();
         Log.i("Reversation1", "onCreate: " + intent.getStringExtra("statId").substring(10));
+        String stat_id = intent.getStringExtra("statId").substring(10);
+        String stat_nm = intent.getStringExtra("statNm");
+        String stat_addr = intent.getStringExtra("statAddr");
+        Log.i("Reversation1", "onCreate: " + stat_id);
+        Log.i("Reversation1", "onCreate: " + stat_nm);
+        Log.i("Reversation1", "onCreate: " + stat_addr);
 
         spinnerStartH = findViewById(R.id.startSpinnerKara);
         spinnerStartM = findViewById(R.id.startSpinnerMade);

@@ -69,6 +69,7 @@ interface SelectAPI{
 
     @GET("api/map/marker")
     Call<ArrayList<Marker>> getMarker();
+
     // 추가하기
 
 }
