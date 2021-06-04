@@ -107,6 +107,10 @@ public class MainActivity extends AppCompatActivity{
                     double stat_lng_d = Double.parseDouble(stat_lng);
                     double stat_lat_d = Double.parseDouble(stat_lat);
 
+                    Log.i("Reeservation", "onResponse: " + stat_nm);
+                    Log.i("Reeservation", "onResponse: " + stat_addr);
+
+
                     TMapPoint tMapPoint1 = new TMapPoint(stat_lat_d, stat_lng_d); // SKT타워
                     // 마커 아이콘
                     Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.pin_r_m_a);
@@ -115,8 +119,9 @@ public class MainActivity extends AppCompatActivity{
                     markerItem.setIcon(bitmap); // 마커 아이콘 지정
                     markerItem.setPosition(0.5f, 1.0f); // 마커의 중심점을 중앙, 하단으로 설정
                     markerItem.setTMapPoint( tMapPoint1 ); // 마커의 좌표 지정
-                    markerItem.setName("SKT타워"); // 마커의 타이틀 지정
+                    markerItem.setName(stat_addr); // 마커의 타이틀 지정
                     markerItem.setCanShowCallout(true); //풍선뷰 사용유무
+
                     Log.i("Reeservation1", "onResponse: " + markerItem.getID());
                     if(markerItem.getCanShowCallout()){
                         markerItem.setCalloutTitle(stat_nm); //풍선뷰 클릭 시 나올 내용
@@ -129,8 +134,8 @@ public class MainActivity extends AppCompatActivity{
                             Log.i("onCall", "onCalloutRightButton: "+tMapMarkerItem.getID());
                             intent = new Intent(MainActivity.this, ReserVationActivity.class);
                             intent.putExtra("statId", tMapMarkerItem.getID());
-                            intent.putExtra("statNm", stat_nm);
-                            intent.putExtra("statAddr", stat_addr);
+                            intent.putExtra("statNm", tMapMarkerItem.getCalloutTitle());
+                            intent.putExtra("statAddr", tMapMarkerItem.getName());
                             startActivity(intent);
                         }
                     });
