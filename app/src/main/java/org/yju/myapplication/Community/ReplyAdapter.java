@@ -62,11 +62,11 @@ public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.ViewHolder>{
 
     @NonNull
     @Override
-    public ReplyAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.reply_item, parent, false);
-        ReplyAdapter.ViewHolder vh = new ReplyAdapter.ViewHolder(view);
+        ViewHolder vh = new ViewHolder(view);
 
         return vh;
     }
