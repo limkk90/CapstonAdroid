@@ -1,16 +1,21 @@
 package org.yju.myapplication.Reservation;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import org.yju.myapplication.DataService;
 import org.yju.myapplication.R;
@@ -24,15 +29,21 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ReserVationActivity extends AppCompatActivity {
-    DataService dataService = new DataService();
+
     Intent intent;
     Spinner spinnerStartH, spinnerStartM, spinnerEndH, spinnerEndM;
     String hour[] = {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17",
                      "18", "19", "20", "21", "22", "23"};
-    
     String minute[] = {"00", "10", "20", "30", "40", "50"};
     TextView txt_station_name, txt_station_addr;
     String stat_id, stat_nm, stat_addr;
+
+    RecyclerView recyclerView = null;
+    ReservationAdapter adapter = null;
+    ArrayList<Charger> cList = new ArrayList<>();
+    LinearLayoutManager linearLayoutManager = null;
+    DataService dataService = new DataService();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,6 +129,35 @@ public class ReserVationActivity extends AppCompatActivity {
             }
         });
 
+        //=============리사이클러뷰 처리
+        recyclerView= findViewById(R.id.reservation_recyclerView);
+
+        adapter = new ReservationAdapter(cList);
+        recyclerView.setAdapter(adapter);
+        linearLayoutManager = new LinearLayoutManager(getApplicationContext());
+        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        recyclerView.setLayoutManager(linearLayoutManager);
+
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), linearLayoutManager.getOrientation());
+        recyclerView.addItemDecoration(dividerItemDecoration);
+        getListCharger();
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        cList.clear();
+        getListCharger();
+        adapter.notifyDataSetChanged();
+    }
+
+    public void addItem(String chargeuse){
+        Charger item = new Charger();
+        item.setChg_rsvt(chargeuse);
+        cList.add(item);
+        adapter.notifyDataSetChanged();
+
     }
 
     public void getListCharger(){
@@ -126,11 +166,14 @@ public class ReserVationActivity extends AppCompatActivity {
             public void onResponse(Call<List<Charger>> call, Response<List<Charger>> response) {
                 List<Charger> chargers = response.body();
                 Log.i("getListCharger", "onResponse: "+chargers);
+                for(int i=0; i<chargers.size(); i++){
+                    addItem(chargers.get(i).getChg_rsvt());
+                }
             }
 
             @Override
             public void onFailure(Call<List<Charger>> call, Throwable t) {
-
+                Log.i("getListCharger", "onFailure: 실패 ㅋㅋ");
             }
         });
 

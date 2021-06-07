@@ -33,6 +33,7 @@ import retrofit2.Response;
 public class CommunityFreeFrag extends Fragment {
     Intent intent;
     private View view;
+
     RecyclerView recyclerView = null;
     CommunityAdapter adapter = null;
     ArrayList<Board> bList = new ArrayList<Board>();

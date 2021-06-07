@@ -1,5 +1,9 @@
 package org.yju.myapplication.Reservation;
 
+import android.content.Context;
+import android.util.TypedValue;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -9,35 +13,52 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.yju.myapplication.R;
+import org.yju.myapplication.data.Charger;
+
+import java.util.ArrayList;
 
 public class ReservationAdapter extends RecyclerView.Adapter<ReservationAdapter.ViewHolder> {
+    private ArrayList<Charger> data = null;
 
-    @NonNull
-    @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+    ReservationAdapter(ArrayList<Charger> list){
+        data = list;
     }
-
-    @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
-    }
-
-    @Override
-    public int getItemCount() {
-        return 0;
-    }
-
     public class ViewHolder extends RecyclerView.ViewHolder{
         ImageView evImg;
         TextView chargeruse;
 
         ViewHolder(View itemView){
             super(itemView);
-
             evImg = itemView.findViewById(R.id.charger_img);
             chargeruse = itemView.findViewById(R.id.charger_use);
-
         }
+    }
+
+    @NonNull
+    @Override
+    public ReservationAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        Context context = parent.getContext();
+        LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.charger_item, parent, false);
+        ReservationAdapter.ViewHolder vh = new ReservationAdapter.ViewHolder(view);
+        return vh;
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        Charger item = data.get(position);
+
+        holder.evImg.setImageResource(R.drawable.ic_baseline_ev_station_24);
+        holder.chargeruse.setText(item.getChg_rsvt());
+
+        holder.chargeruse.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
+
+        holder.evImg.setForegroundGravity(Gravity.CENTER);
+        holder.chargeruse.setGravity(Gravity.CENTER);
+    }
+
+    @Override
+    public int getItemCount() {
+        return data.size();
     }
 }

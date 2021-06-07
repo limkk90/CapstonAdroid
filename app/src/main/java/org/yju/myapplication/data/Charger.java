@@ -11,7 +11,7 @@ public class Charger {
     private String chg_method;
     private char chg_st;
     private String chg_st_dt;
-    private char chg_rsvt;
+    private String chg_rsvt;
     private String stat_id;
 
     @Override
@@ -67,11 +67,11 @@ public class Charger {
         this.chg_st_dt = chg_st_dt;
     }
 
-    public char getChg_rsvt() {
+    public String getChg_rsvt() {
         return chg_rsvt;
     }
 
-    public void setChg_rsvt(char chg_rsvt) {
+    public void setChg_rsvt(String chg_rsvt) {
         this.chg_rsvt = chg_rsvt;
     }
 
