@@ -88,6 +88,11 @@ public class MainActivity extends AppCompatActivity{
         tmapview.setSKTMapApiKey("l7xx8ab0ebd2f81548f586a1838fdbe5bc1b");
         tmapview.setHttpsMode(true);
         linearLayoutTmap.addView(tmapview);
+
+        TMapPoint tMapPoint = new TMapPoint(35.855770, 128.620935);
+        TMapPoint tMapPointStart = new TMapPoint(35.855770, 128.606922);
+        FindCarPathTask findCarPathTask = new FindCarPathTask(getApplicationContext(), tmapview);
+        findCarPathTask.execute(tMapPointStart, tMapPoint);
         tmapview.setCenterPoint( 128.620935, 35.896463 ); //지도 띄울 떄 이쪽으로 띄우는듯
 //        ===============마커 추가======================
         dataService.select.getMarker().enqueue(new Callback<ArrayList<Marker>>() {
@@ -95,7 +100,8 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onResponse(Call<ArrayList<Marker>> call, Response<ArrayList<Marker>> response) {
                 ArrayList<Marker> body = response.body();
-                for(int i=0; i<body.size(); i++){
+                //원래 body.size()
+                for(int i=0; i<30; i++){
 //                    tMapMarkerItem2  = new TMapMarkerItem2();
                     TMapMarkerItem markerItem = new TMapMarkerItem();
                     id = body.get(i).getStat_id();
@@ -115,6 +121,7 @@ public class MainActivity extends AppCompatActivity{
                     // 마커 아이콘
                     Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.pin_r_m_a);
 
+
                     markerItem.setID(id);
                     markerItem.setIcon(bitmap); // 마커 아이콘 지정
                     markerItem.setPosition(0.5f, 1.0f); // 마커의 중심점을 중앙, 하단으로 설정
@@ -126,7 +133,9 @@ public class MainActivity extends AppCompatActivity{
                     if(markerItem.getCanShowCallout()){
                         markerItem.setCalloutTitle(stat_nm); //풍선뷰 클릭 시 나올 내용
                         Bitmap bitmapImage = createmarkerIcon(R.drawable.reservation);
+                        Bitmap roadImage = createmarkerLeftImage(R.drawable.road);
                         markerItem.setCalloutRightButtonImage(bitmapImage);
+                        markerItem.setCalloutLeftImage(roadImage);
                     }
                     tmapview.setOnCalloutRightButtonClickListener(new TMapView.OnCalloutRightButtonClickCallback() {
                         @Override
@@ -139,6 +148,7 @@ public class MainActivity extends AppCompatActivity{
                             startActivity(intent);
                         }
                     });
+
                     tmapview.addMarkerItem("markerItem" + id, markerItem); // 지도에 마커 추가
                 }
             }
@@ -161,7 +171,6 @@ public class MainActivity extends AppCompatActivity{
         txtCommunity = (TextView)findViewById(R.id.txt_community); // 네비게이션 커뮤니티 텍스트
         txtQna = (TextView)findViewById(R.id.txt_qna); //네비게이션 QNA텍스트
         txtIntro = (TextView)findViewById(R.id.txt_intro); //네비게이션 소개 텍스트
-        txtFeeInfo = (TextView)findViewById(R.id.txt_feeInfo);
         txtCard = (TextView)findViewById(R.id.txt_card);
         txtFacilReco = (TextView)findViewById(R.id.txt_facilReco);
         txtLogin = (TextView)findViewById(R.id.txt_Login);
@@ -210,13 +219,6 @@ public class MainActivity extends AppCompatActivity{
                 startActivity(intent);
             }
         });
-        txtFeeInfo.setOnClickListener(new View.OnClickListener() { //요금정보 이동
-            @Override
-            public void onClick(View v) {
-                intent = new Intent(MainActivity.this, FeeInfoAcitivty.class);
-                startActivity(intent);
-            }
-        });
         txtFacilReco.setOnClickListener(new View.OnClickListener() { //주변시설 추천 이동
             @Override
             public void onClick(View v) {
@@ -259,14 +261,21 @@ public class MainActivity extends AppCompatActivity{
 
 
     private Bitmap createmarkerIcon(int image){
-        Log.i("CreateMarkerIcon1", "createmarkerIcon: " + image);
 //        BitmapFactory.Options options = new BitmapFactory.Options();
 //        options.inJustDecodeBounds = true;
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), image);
-        Log.i("CreateMarkerIcon2", "createmarkerIcon: " +bitmap);
-        bitmap = Bitmap.createScaledBitmap(bitmap, 50, 50 ,false);
+        bitmap = Bitmap.createScaledBitmap(bitmap, 70, 70 ,false);
         return bitmap;
     }
+
+    private Bitmap createmarkerLeftImage(int image){
+//        BitmapFactory.Options options = new BitmapFactory.Options();
+//        options.inJustDecodeBounds = true;
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), image);
+        bitmap = Bitmap.createScaledBitmap(bitmap, 100, 100 ,false);
+        return bitmap;
+    }
+
 
     @Override
     protected void onStart() {

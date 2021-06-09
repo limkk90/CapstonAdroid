@@ -152,9 +152,6 @@ public class CommunityViewActivity extends AppCompatActivity {
                 Reply reply = new Reply();
                 for(int i=0; i<replylist.size(); i++){
                     reply = reply.ObjToReply(replylist.get(i));
-                    Log.i("SuccessboardView", "onResponse: "+ reply.getR_content());
-                    Log.i("SuccessboardView", "onResponse: "+ reply.getR_writer());
-                    Log.i("SuccessboardView", "onResponse: "+ reply.getR_dtt());
 
                     addItem(reply.getR_content(), reply.getR_writer(), reply.getR_dtt());
                 }
@@ -171,6 +168,7 @@ public class CommunityViewActivity extends AppCompatActivity {
 
             }
         });
+
     }
 
     @Override

@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -30,6 +31,7 @@ import retrofit2.Response;
 
 public class ReserVationActivity extends AppCompatActivity {
 
+    Button res_btn, res_cancle, res_facil, res_findRoad;
     Intent intent;
     Spinner spinnerStartH, spinnerStartM, spinnerEndH, spinnerEndM;
     String hour[] = {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17",
@@ -49,6 +51,10 @@ public class ReserVationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reser_vation);
+        res_btn = findViewById(R.id.res_reserBtn);
+        res_facil = findViewById(R.id.res_cancleBtn);
+        res_findRoad = findViewById(R.id.res_poiBtn);
+
         intent = getIntent();
         Log.i("Reversation1", "onCreate: " + intent.getStringExtra("statId").substring(10));
          stat_id = intent.getStringExtra("statId").substring(10);
@@ -128,6 +134,7 @@ public class ReserVationActivity extends AppCompatActivity {
 
             }
         });
+
 
         //=============리사이클러뷰 처리
         recyclerView= findViewById(R.id.reservation_recyclerView);

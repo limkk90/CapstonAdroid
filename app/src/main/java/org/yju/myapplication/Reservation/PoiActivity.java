@@ -1,14 +1,16 @@
-package org.yju.myapplication;
+package org.yju.myapplication.Reservation;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class FeeInfoAcitivty extends AppCompatActivity {
+import org.yju.myapplication.R;
+
+public class PoiActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fee_info_acitivty);
+        setContentView(R.layout.activity_poi);
     }
 }

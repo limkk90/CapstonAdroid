@@ -25,6 +25,7 @@ import org.json.JSONObject;
 import org.yju.myapplication.DataService;
 import org.yju.myapplication.R;
 import org.yju.myapplication.data.Board;
+import org.yju.myapplication.data.News;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,8 +39,8 @@ public class CommunityNewsFrag extends Fragment {
     Intent intent;
     private View view;
     RecyclerView recyclerView = null;
-    CommunityAdapter adapter = null;
-    ArrayList<Board> bList = new ArrayList<Board>();
+    NewsAdapter adapter = null;
+    ArrayList<News> bList = new ArrayList<News>();
     LinearLayoutManager linearLayoutManager = null;
     DataService dataService = new DataService();
     String u_id;
@@ -52,7 +53,7 @@ public class CommunityNewsFrag extends Fragment {
 
         recyclerView = view.findViewById(R.id.recyclerView);
         Log.i("notice", "onCreateView: " + bList);
-        adapter = new CommunityAdapter(bList);
+        adapter = new NewsAdapter(bList);
         recyclerView.setAdapter(adapter);
         linearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -60,34 +61,25 @@ public class CommunityNewsFrag extends Fragment {
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), linearLayoutManager.getOrientation());
         recyclerView.addItemDecoration(dividerItemDecoration);
 
-        adapter.setOnItemCLickListener(new CommunityAdapter.OnItemClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.O)
-            @Override
-            public void onItemCLick(View v, int pos) {
-                u_id = bundle3.getString("u_id");
-                Integer a = Integer.valueOf(pos);
-                adapter.getItem(pos).getB_no();
-                adapter.getItem(pos).getU_id();
-                intent = new Intent(getContext(), CommunityViewActivity.class);
-                intent.putExtra("b_no", adapter.getItem(pos).getB_no());
-                intent.putExtra("u_id", adapter.getItem(pos).getU_id());
-                startActivity(intent);
-            }
-        });
 
-        bList.clear();
-        getListBoard();
         adapter.notifyDataSetChanged();
         return view;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        bList.clear();
+        getListBoard();
+        adapter.notifyDataSetChanged();
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public void addItem(String title, String link, String description, String pubDate) {
-        Board item = new Board();
-        item.setB_title(title);
-        item.setB_content(link);
-        item.setU_id(description);
-        item.setB_no(pubDate);
+    public void addItem(String title, String pubDate) {
+        News item = new News();
+        item.setTitle(title);
+        item.setPubDate(pubDate);
+
         bList.add(item);
         adapter.notifyDataSetChanged();
     }
@@ -111,12 +103,12 @@ public class CommunityNewsFrag extends Fragment {
                     String link = jsonObject.get("link").toString();
                     String description = jsonObject.get("description").toString();
                     String pubDate = jsonObject.get("pubDate").toString();
-                    Log.i("TAG", "onResponse: ");
+                    Log.i("getListNews", "onResponse: "+ title + "pubDate:"+ pubDate);
 
-                    addItem(title, link, description, pubDate);
+                    addItem(title, pubDate);
 
                 }
-                addItem(null,null,null,null);
+                addItem(null,null);
 
             }
 
