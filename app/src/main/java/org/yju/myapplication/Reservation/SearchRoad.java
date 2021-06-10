@@ -8,6 +8,7 @@ import android.util.Log;
 import android.widget.LinearLayout;
 
 import com.skt.Tmap.TMapPoint;
+import com.skt.Tmap.TMapTapi;
 import com.skt.Tmap.TMapView;
 
 import org.yju.myapplication.FindCarPathTask;
@@ -29,6 +30,8 @@ public class SearchRoad extends AppCompatActivity {
         tmapview = new TMapView(this);
         tmapview.setSKTMapApiKey("l7xx8ab0ebd2f81548f586a1838fdbe5bc1b");
         tmapview.setHttpsMode(true);
+        TMapTapi tMapTapi = new TMapTapi(this);
+        tMapTapi.invokeRoute("T타워", 126.984098f, 37.566385f);
         linearLayoutTmap.addView(tmapview);
 
         TMapPoint tMapPointStart = new TMapPoint(35.855770, 128.606922);
