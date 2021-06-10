@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
 import org.yju.myapplication.data.Board;
+import org.yju.myapplication.data.Reply;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,4 +58,8 @@ public interface BoardApi {
     //댓글 삭제
     @DELETE("api/reply")
     Call<Void> replyDelete();
+
+    // 댓글 등록
+    @POST("api/reply")
+    Call<Void> replyAdd(@Body Reply reply);
 }

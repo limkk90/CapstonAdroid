@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,10 +40,10 @@ import retrofit2.Response;
 public class CommunityViewActivity extends AppCompatActivity {
 
     private TextView tv_b_title, tv_b_content;
-    private Button tv_view_update, tv_view_delete;
+    private Button tv_view_update, tv_view_delete, btn_reply;
     DataService dataService = new DataService();
-    private String title;
-    private String content;
+    private EditText et_reply;
+    private String title, content, r_content;
     private String b_no, b_u_id, u_id;
     Board board = new Board();
     RecyclerView recyclerView = null;
@@ -50,6 +51,7 @@ public class CommunityViewActivity extends AppCompatActivity {
     ArrayList<Reply> rList = new ArrayList<>();
     LinearLayoutManager linearLayoutManager = null;
     TextView reply_delete;
+    Reply reply = new Reply();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +62,8 @@ public class CommunityViewActivity extends AppCompatActivity {
         tv_b_content = findViewById(R.id.tv_b_content);
         tv_view_update = findViewById(R.id.tv_view_update);
         tv_view_delete = findViewById(R.id.tv_view_delete);
+        et_reply = findViewById(R.id.et_reply);
+        btn_reply = findViewById(R.id.btn_reply);
 
 
         final Intent[] intent = {getIntent()};
@@ -128,6 +132,33 @@ public class CommunityViewActivity extends AppCompatActivity {
             }
         });
 
+        // 댓글등록
+        btn_reply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                r_content = et_reply.getText().toString();
+
+                reply.setR_content(r_content);
+                reply.setR_writer(u_id);
+                Log.i("TAG", "onClick: u_id 찍히냐?" + u_id);
+                reply.setB_no(b_no);
+                Log.i("TAG", "onClick: b_no" + b_no);
+                dataService.boardApi.replyAdd(reply).enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+                        Toast.makeText(CommunityViewActivity.this, "작성완료되었습니다", Toast.LENGTH_SHORT).show();
+                        Log.i("TAG", "onResponse: 댓글등록성공" + response.body());
+                    }
+
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable t) {
+                        Log.i("TAG", "onResponse: 댓글등록실패" );
+
+                    }
+                });
+            }
+        });
+
 
     }
 
@@ -147,14 +178,21 @@ public class CommunityViewActivity extends AppCompatActivity {
                 ArrayList replylist = mapper.convertValue(o, ArrayList.class);
 
                 Log.i("boardView", "onResponse: " + board);
-                Log.i("boardView", "onResponse: " + replylist.get(0));
+//                Log.i("boardView", "onResponse: " + replylist.get(0));
 
-                Reply reply = new Reply();
-                for(int i=0; i<replylist.size(); i++){
-                    reply = reply.ObjToReply(replylist.get(i));
+                try {
+                    if (!replylist.equals(null)) {
+                        Reply reply = new Reply();
+                        for(int i=0; i<replylist.size(); i++){
+                            reply = reply.ObjToReply(replylist.get(i));
 
-                    addItem(reply.getR_content(), reply.getR_writer(), reply.getR_dtt());
+                            addItem(reply.getR_content(), reply.getR_writer(), reply.getR_dtt());
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
+
 
                 title =  board.getB_title();
                 content = board.getB_content();

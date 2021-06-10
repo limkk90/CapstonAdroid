@@ -39,6 +39,7 @@ public class ReserVationActivity extends AppCompatActivity {
     String minute[] = {"00", "10", "20", "30", "40", "50"};
     TextView txt_station_name, txt_station_addr;
     String stat_id, stat_nm, stat_addr;
+    double stat_lat, stat_Long;
 
     RecyclerView recyclerView = null;
     ReservationAdapter adapter = null;
@@ -53,16 +54,20 @@ public class ReserVationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_reser_vation);
         res_btn = findViewById(R.id.res_reserBtn);
         res_facil = findViewById(R.id.res_cancleBtn);
-        res_findRoad = findViewById(R.id.res_poiBtn);
+        res_findRoad = findViewById(R.id.res_searchRoad);
 
         intent = getIntent();
-        Log.i("Reversation1", "onCreate: " + intent.getStringExtra("statId").substring(10));
          stat_id = intent.getStringExtra("statId").substring(10);
          stat_nm = intent.getStringExtra("statNm");
          stat_addr = intent.getStringExtra("statAddr");
+        stat_lat = intent.getDoubleExtra("statLat", 0);
+        stat_Long = intent.getDoubleExtra("statLong", 0);
+
         Log.i("Reversation1", "onCreate: " + stat_id);
         Log.i("Reversation1", "onCreate: " + stat_nm);
         Log.i("Reversation1", "onCreate: " + stat_addr);
+        Log.i("Reversation1", "onCreate: " + stat_lat);
+        Log.i("Reversation1", "onCreate: " + stat_Long);
 
 
         txt_station_name = findViewById(R.id.txt_stationName);
@@ -89,7 +94,7 @@ public class ReserVationActivity extends AppCompatActivity {
         spinnerStartH.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(), "선택된 아이템:"+ spinnerStartH.getItemAtPosition(position), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), "선택된 아이템:"+ spinnerStartH.getItemAtPosition(position), Toast.LENGTH_SHORT).show();
 
             }
 
@@ -102,7 +107,7 @@ public class ReserVationActivity extends AppCompatActivity {
         spinnerStartM.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(), "선택된 아이템:"+ spinnerStartM.getItemAtPosition(position), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), "선택된 아이템:"+ spinnerStartM.getItemAtPosition(position), Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -114,7 +119,7 @@ public class ReserVationActivity extends AppCompatActivity {
         spinnerEndH.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(), "선택된 아이템:"+ spinnerEndH.getItemAtPosition(position), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), "선택된 아이템:"+ spinnerEndH.getItemAtPosition(position), Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -126,12 +131,24 @@ public class ReserVationActivity extends AppCompatActivity {
         spinnerEndM.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(), "선택된 아이템:"+ spinnerEndM.getItemAtPosition(position), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), "선택된 아이템:"+ spinnerEndM.getItemAtPosition(position), Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
+            }
+        });
+
+
+        //길 찾기 버튼 클릭 시에
+        res_findRoad.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ReserVationActivity.this, SearchRoad.class);
+                intent.putExtra("statLat", stat_lat);
+                intent.putExtra("statLong", stat_Long);
+                startActivity(intent);
             }
         });
 

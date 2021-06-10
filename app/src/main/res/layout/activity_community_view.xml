@@ -72,8 +72,33 @@
                 android:id="@+id/reply_RecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="50dp"
                 app:layout_constraintEnd_toEndOf="@+id/tv_b_content"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/tv_b_content"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout6" />
+
+            <EditText
+                android:id="@+id/et_reply"
+                android:layout_width="294dp"
+                android:layout_height="41dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:ems="10"
+                android:hint="댓글을 입력하시오"
+                android:inputType="textPersonName"
+                app:layout_constraintBottom_toTopOf="@+id/reply_RecyclerView"
+                app:layout_constraintEnd_toStartOf="@+id/btn_reply"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout6" />
+
+            <Button
+                android:id="@+id/btn_reply"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="등록"
+                app:layout_constraintBottom_toTopOf="@+id/reply_RecyclerView"
+                app:layout_constraintEnd_toEndOf="@+id/linearLayout6"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout6" />
 
 

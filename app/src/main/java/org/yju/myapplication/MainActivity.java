@@ -8,17 +8,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.PointF;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 
 import com.skt.Tmap.TMapData;
 import com.skt.Tmap.TMapMarkerItem;
 import com.skt.Tmap.TMapMarkerItem2;
-import com.skt.Tmap.TMapPOIItem;
 import com.skt.Tmap.TMapPoint;
-import com.skt.Tmap.TMapTapi;
 import com.skt.Tmap.TMapView;
 
 import android.util.Log;
@@ -37,7 +33,6 @@ import org.yju.myapplication.databinding.ActivityDrawerBinding;
 import org.yju.myapplication.databinding.ActivityMainBinding;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -101,7 +96,7 @@ public class MainActivity extends AppCompatActivity{
             public void onResponse(Call<ArrayList<Marker>> call, Response<ArrayList<Marker>> response) {
                 ArrayList<Marker> body = response.body();
                 //원래 body.size()
-                for(int i=0; i<30; i++){
+                for(int i=0; i<50; i++){
 //                    tMapMarkerItem2  = new TMapMarkerItem2();
                     TMapMarkerItem markerItem = new TMapMarkerItem();
                     id = body.get(i).getStat_id();
@@ -129,6 +124,7 @@ public class MainActivity extends AppCompatActivity{
                     markerItem.setName(stat_addr); // 마커의 타이틀 지정
                     markerItem.setCanShowCallout(true); //풍선뷰 사용유무
 
+
                     Log.i("Reeservation1", "onResponse: " + markerItem.getID());
                     if(markerItem.getCanShowCallout()){
                         markerItem.setCalloutTitle(stat_nm); //풍선뷰 클릭 시 나올 내용
@@ -141,10 +137,16 @@ public class MainActivity extends AppCompatActivity{
                         @Override
                         public void onCalloutRightButton(TMapMarkerItem tMapMarkerItem) {
                             Log.i("onCall", "onCalloutRightButton: "+tMapMarkerItem.getID());
+                            Log.i("onCall", "onCalloutRightButton: "+tMapMarkerItem.getTMapPoint());
+                            Log.i("onCall", "onCalloutRightButton: "+tMapMarkerItem.getTMapPoint().getLatitude());
+                            Log.i("onCall", "onCalloutRightButton: "+tMapMarkerItem.getTMapPoint().getLongitude());
                             intent = new Intent(MainActivity.this, ReserVationActivity.class);
                             intent.putExtra("statId", tMapMarkerItem.getID());
                             intent.putExtra("statNm", tMapMarkerItem.getCalloutTitle());
                             intent.putExtra("statAddr", tMapMarkerItem.getName());
+                            intent.putExtra("statLat", tMapMarkerItem.getTMapPoint().getLatitude());
+                            intent.putExtra("statLong", tMapMarkerItem.getTMapPoint().getLongitude());
+
                             startActivity(intent);
                         }
                     });
@@ -162,7 +164,7 @@ public class MainActivity extends AppCompatActivity{
         //=======================================
         context = getApplicationContext();
         //네비게이션 변수====================================
-        iv_menu = (ImageView)findViewById(R.id.iv_menu);
+        iv_menu = (ImageView)findViewById(R.id.iv_back);
         drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         drawerView = (View)findViewById(R.id.drawer);
         //==================================================
@@ -216,13 +218,6 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 intent = new Intent(MainActivity.this, IntroActivity.class);
-                startActivity(intent);
-            }
-        });
-        txtFacilReco.setOnClickListener(new View.OnClickListener() { //주변시설 추천 이동
-            @Override
-            public void onClick(View v) {
-                intent = new Intent(MainActivity.this, FacilRecoActivity.class);
                 startActivity(intent);
             }
         });
