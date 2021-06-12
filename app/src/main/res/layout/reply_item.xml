@@ -11,8 +11,8 @@
         android:layout_height="19dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
         android:text="TextView"
+        android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -21,9 +21,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
         android:layout_marginTop="12dp"
         android:text="본문내용"
+        android:textColor="#000000"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/reply_writer" />
 
@@ -32,9 +32,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:text="작성자"
+        android:textColor="#000000"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -44,8 +44,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="96dp"
         android:layout_marginEnd="25dp"
-        android:layout_marginRight="25dp"
         android:text="수정"
+        android:textColor="#000000"
         android:textSize="20sp"
         app:layout_constraintEnd_toStartOf="@+id/reply_delete"
         app:layout_constraintTop_toTopOf="parent" />
@@ -56,8 +56,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="96dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
         android:text="삭제"
+        android:textColor="#000000"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

@@ -11,7 +11,6 @@ import com.skt.Tmap.TMapPoint;
 import com.skt.Tmap.TMapTapi;
 import com.skt.Tmap.TMapView;
 
-import org.yju.myapplication.FindCarPathTask;
 import org.yju.myapplication.R;
 
 public class SearchRoad extends AppCompatActivity {

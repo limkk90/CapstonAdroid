@@ -235,6 +235,7 @@ public class CommunityViewActivity extends AppCompatActivity {
 //                }
 //            }
 //        });
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)

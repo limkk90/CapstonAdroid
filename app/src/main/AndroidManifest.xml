@@ -19,7 +19,6 @@
         <activity android:name=".Community.CommunityUpdateActivity" />
         <activity android:name=".Reservation.ReserVationActivity" />
         <activity android:name=".CardActivity" />
-        <activity android:name=".QnaAcitivty" />
         <activity android:name=".IntroActivity" />
         <activity android:name=".Community.CommunityAcitivty" />
         <activity android:name=".MyPage.MyPageActivity" />
@@ -45,6 +44,7 @@
             <!-- </intent-filter> -->
         </activity>
         <activity android:name=".RegisterActivity" />
+        <activity android:name=".qna.QnaAcitivty"/>
     </application>
 
 </manifest>

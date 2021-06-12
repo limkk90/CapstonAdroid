@@ -11,7 +11,7 @@
         android:title="1:1문의"
         android:visible="true" />
     <item
-        android:id="@+id/qna_"
+        android:id="@+id/qna_myQNA"
         android:iconTint="#000000"
         android:title="문의내역"
         android:visible="true" />

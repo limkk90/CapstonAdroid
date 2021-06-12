@@ -1,6 +1,7 @@
 package org.yju.myapplication.Reservation;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
@@ -166,6 +167,13 @@ public class ReserVationActivity extends AppCompatActivity {
         recyclerView.addItemDecoration(dividerItemDecoration);
         getListCharger();
         adapter.notifyDataSetChanged();
+
+        adapter.setOnItemClickListener(new ReservationAdapter.OnItemCLickListener() {
+            @Override
+            public void onItemClick(View v, int pos) {
+                v.setBackgroundColor(Color.BLACK);
+            }
+        });
     }
 
     @Override

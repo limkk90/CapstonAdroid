@@ -5,25 +5,26 @@
         android:id="@+id/action_notice"
         android:iconTint="#000000"
         android:title="공지사항"
+        android:icon="@drawable/ic_bell"
         android:visible="true" />
 
     <item
         android:id="@+id/action_freeBoard"
-        android:enabled="true"
+        android:icon="@drawable/ic_board"
         android:iconTint="#000000"
         android:title="자유게시판"
         android:visible="true" />
 
     <item
         android:id="@+id/action_tip"
-        android:enabled="true"
         android:iconTint="#000000"
         android:title="Tip"
+        android:icon="@drawable/ic_tip"
         android:visible="true" />
 
     <item
         android:id="@+id/action_news"
-        android:enabled="true"
+        android:icon="@drawable/ic_menubook"
         android:iconTint="#000000"
         android:title="뉴스"
         android:visible="true" />

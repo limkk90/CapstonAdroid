@@ -33,7 +33,8 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
         this.mListener = listener;
     }
     //리스너 객체 참조를 저장하는 변수
-    CommunityAdapter(ArrayList<Board> list){
+    CommunityAdapter(ArrayList<Board> list)
+    {
         mData = list;
     }
 
@@ -101,7 +102,8 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
         return mData.size();
     }
 
-    public Board getItem(int position){
+    public Board getItem(int position)
+    {
         return mData.get(position);
     }
 }

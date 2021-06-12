@@ -31,6 +31,7 @@ import org.yju.myapplication.data.Marker;
 import org.yju.myapplication.databinding.ActivityActionbarBinding;
 import org.yju.myapplication.databinding.ActivityDrawerBinding;
 import org.yju.myapplication.databinding.ActivityMainBinding;
+import org.yju.myapplication.qna.QnaAcitivty;
 
 import java.util.ArrayList;
 
@@ -86,8 +87,6 @@ public class MainActivity extends AppCompatActivity{
 
         TMapPoint tMapPoint = new TMapPoint(35.855770, 128.620935);
         TMapPoint tMapPointStart = new TMapPoint(35.855770, 128.606922);
-        FindCarPathTask findCarPathTask = new FindCarPathTask(getApplicationContext(), tmapview);
-        findCarPathTask.execute(tMapPointStart, tMapPoint);
         tmapview.setCenterPoint( 128.620935, 35.896463 ); //지도 띄울 떄 이쪽으로 띄우는듯
 //        ===============마커 추가======================
         dataService.select.getMarker().enqueue(new Callback<ArrayList<Marker>>() {

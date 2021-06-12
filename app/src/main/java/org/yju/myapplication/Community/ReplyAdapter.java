@@ -1,5 +1,6 @@
 package org.yju.myapplication.Community;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -12,12 +13,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.yju.myapplication.DataService;
 import org.yju.myapplication.R;
 import org.yju.myapplication.data.Reply;
 
 import java.util.ArrayList;
 
 public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.ViewHolder>{
+    BoardApi boardApi;
+    DataService dataService;
     private ArrayList<Reply> data = null;
 
     public interface OnItemClickListener{
@@ -93,6 +97,13 @@ public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.ViewHolder>{
         holder.rep_modify.setGravity(Gravity.CENTER);
         holder.rep_delete.setGravity(Gravity.CENTER);
 
+        holder.rep_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteThisView(position);
+            }
+        });
+
     }
     @Override
     public int getItemCount() {
@@ -101,5 +112,12 @@ public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.ViewHolder>{
 
     public Reply getItem(int position){
         return  data.get(position);
+    }
+
+    public void deleteThisView(int position){
+
+        data.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, data.size());
     }
 }

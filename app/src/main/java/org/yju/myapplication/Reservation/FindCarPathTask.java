@@ -1,4 +1,4 @@
-package org.yju.myapplication;
+package org.yju.myapplication.Reservation;
 
 import android.content.Context;
 import android.graphics.Color;

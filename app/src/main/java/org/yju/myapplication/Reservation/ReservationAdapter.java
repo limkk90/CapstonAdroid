@@ -20,6 +20,16 @@ import java.util.ArrayList;
 public class ReservationAdapter extends RecyclerView.Adapter<ReservationAdapter.ViewHolder> {
     private ArrayList<Charger> data = null;
 
+    public interface OnItemCLickListener{
+        void onItemClick(View v, int pos);
+    }
+
+    private ReservationAdapter.OnItemCLickListener listener = null;
+
+    public void setOnItemClickListener(ReservationAdapter.OnItemCLickListener listener){
+        this.listener = listener;
+    }
+
     ReservationAdapter(ArrayList<Charger> list){
         data = list;
     }
@@ -31,6 +41,19 @@ public class ReservationAdapter extends RecyclerView.Adapter<ReservationAdapter.
             super(itemView);
             evImg = itemView.findViewById(R.id.charger_img);
             chargeruse = itemView.findViewById(R.id.charger_use);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int pos = getAdapterPosition();
+                    Integer posStr = Integer.valueOf(pos);
+                    if(pos != RecyclerView.NO_POSITION){
+                        if(listener != null){
+                            listener.onItemClick(v, pos);
+                        }
+                    }
+                }
+            });
         }
     }
 
@@ -60,5 +83,9 @@ public class ReservationAdapter extends RecyclerView.Adapter<ReservationAdapter.
     @Override
     public int getItemCount() {
         return data.size();
+    }
+
+    public Charger getItem(int position) {
+        return data.get(position);
     }
 }

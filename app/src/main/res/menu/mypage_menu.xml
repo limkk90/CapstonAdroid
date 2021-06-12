@@ -8,13 +8,11 @@
         android:visible="true" />
     <item
         android:id="@+id/mp_useInfo"
-        android:enabled="true"
         android:iconTint="#000000"
         android:title="이용내역"
         android:visible="true" />
     <item
         android:id="@+id/mp_card"
-        android:enabled="true"
         android:iconTint="#000000"
         android:title="회원카드"
         android:visible="true" />
