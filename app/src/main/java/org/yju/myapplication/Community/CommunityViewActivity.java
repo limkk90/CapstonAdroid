@@ -243,6 +243,7 @@ public class CommunityViewActivity extends AppCompatActivity {
         Reply item = new Reply();
         item.setR_content(content);
         item.setR_writer(writer);
+        Log.i("ReplyAddItem", "addItem: " + regDate);
         item.setR_dtt(regDate);
         rList.add(item);
         replyAdapter.notifyDataSetChanged();

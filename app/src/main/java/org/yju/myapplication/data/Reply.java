@@ -70,11 +70,11 @@ public class Reply {
         Reply reply = new Reply();
         Log.i("ObjToReplyList1", "ObjToReplyList: " + result.get("r_content").toString());
         Log.i("ObjToReplyList1", "ObjToReplyList: " + result.get("r_writer").toString());
-        Log.i("ObjToReplyList1", "ObjToReplyList: " + result.get("date").toString());
+        Log.i("ObjToReplyList1", "ObjToReplyList: " + result.get("r_dtt").toString());
 
         reply.setR_content(result.get("r_content").toString());
         reply.setR_writer(result.get("r_writer").toString());
-        reply.setR_dtt(result.get("date").toString());
+        reply.setR_dtt(result.get("r_dtt").toString());
         Log.i("ObjToReplyList2", "ObjToReplyList: " + reply.toString());
 
         return reply;

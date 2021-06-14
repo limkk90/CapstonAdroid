@@ -2,6 +2,7 @@ package org.yju.myapplication.Community;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -18,6 +19,10 @@ import org.yju.myapplication.R;
 import org.yju.myapplication.data.Reply;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.ViewHolder>{
     BoardApi boardApi;
@@ -78,6 +83,8 @@ public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.ViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Reply item = data.get(position);
+//        Log.i("ReplyAdapter", "onClick: " + item);
+
 
         holder.rep_writer.setText(item.getR_writer());
         holder.rep_content.setText(item.getR_content());
@@ -103,21 +110,34 @@ public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.ViewHolder>{
                 deleteThisView(position);
             }
         });
-
     }
     @Override
     public int getItemCount() {
         return data.size();
     }
 
-    public Reply getItem(int position){
-        return  data.get(position);
+    public Reply getItem(int position) { return  data.get(position);
     }
 
     public void deleteThisView(int position){
+        Reply reply = data.get(position);
 
-        data.remove(position);
-        notifyItemRemoved(position);
-        notifyItemRangeChanged(position, data.size());
+        Log.i("ReplyAdapter", "onResponse: " + reply);
+        Log.i("ReplyAdapter1", "onResponse: " + reply.getR_dtt());
+        dataService.boardApi.replyDelete(reply).enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                Log.i("ReplyAdapter", "댓글삭제성공: ");
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+
+            }
+        });
+
+//        data.remove(position);
+//        notifyItemRemoved(position);
+//        notifyItemRangeChanged(position, data.size());
     }
 }

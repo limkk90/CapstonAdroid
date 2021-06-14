@@ -55,9 +55,10 @@ public interface BoardApi {
     // 뉴스
     @GET("api/main/news")
     Call<JsonArray> news();
+
     //댓글 삭제
     @DELETE("api/reply")
-    Call<Void> replyDelete();
+    Call<Void> replyDelete(Reply reply);
 
     // 댓글 등록
     @POST("api/reply")
