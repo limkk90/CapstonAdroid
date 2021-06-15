@@ -10,6 +10,7 @@ import org.yju.myapplication.R;
 
 public class ReservationDetail extends AppCompatActivity {
 
+
     Intent intent;
     String statid;
     String chg_id, chg_rsvt, chg_method;
@@ -30,6 +31,7 @@ public class ReservationDetail extends AppCompatActivity {
         chg_rsvt = intent.getStringExtra("chg_rsvt");
 
         Log.i("ReservationDetail", "addItem: " + chg_id + "," + chg_type + "," + chg_method + "," + chg_st + "," + chg_rsvt);
+
 
     }
 }
