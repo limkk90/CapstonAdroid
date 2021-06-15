@@ -143,15 +143,15 @@ public class CommunityViewActivity extends AppCompatActivity {
                 Log.i("TAG", "onClick: u_id 찍히냐?" + u_id);
                 reply.setB_no(b_no);
                 Log.i("TAG", "onClick: b_no" + b_no);
-                dataService.boardApi.replyAdd(reply).enqueue(new Callback<Void>() {
+                dataService.boardApi.replyAdd(reply).enqueue(new Callback<String>() {
                     @Override
-                    public void onResponse(Call<Void> call, Response<Void> response) {
+                    public void onResponse(Call<String> call, Response<String> response) {
                         Toast.makeText(CommunityViewActivity.this, "작성완료되었습니다", Toast.LENGTH_SHORT).show();
                         Log.i("TAG", "onResponse: 댓글등록성공" + response.body());
                     }
 
                     @Override
-                    public void onFailure(Call<Void> call, Throwable t) {
+                    public void onFailure(Call<String> call, Throwable t) {
                         Log.i("TAG", "onResponse: 댓글등록실패" );
 
                     }
@@ -159,13 +159,26 @@ public class CommunityViewActivity extends AppCompatActivity {
             }
         });
 
-
+//        // 댓글삭제
+//        dataService.boardApi.replyDelete(reply).enqueue(new Callback<Void>() {
+//            @Override
+//            public void onResponse(Call<Void> call, Response<Void> response) {
+//                Log.i("ReplyAdapter", "댓글삭제성공: ");
+//            }
+//
+//            @Override
+//            public void onFailure(Call<Void> call, Throwable t) {
+//
+//            }
+//        });
     }
 
+
     @Override
-    protected void onResume() {
-        super.onResume();
-        // 글 조회
+    protected void onStart() {
+        super.onStart();
+        // 글조회
+        reply_delete = findViewById(R.id.reply_delete);
         dataService.boardApi.gBoard(b_no).enqueue(new Callback<Map<String,Object>>() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
@@ -177,8 +190,8 @@ public class CommunityViewActivity extends AppCompatActivity {
                 ObjectMapper mapper = new ObjectMapper();
                 ArrayList replylist = mapper.convertValue(o, ArrayList.class);
 
-                Log.i("boardView", "onResponse: " + board);
-//                Log.i("boardView", "onResponse: " + replylist.get(0));
+                Log.i("boardView", "글조회: " + board);
+                Log.i("boardView", "댓글목록: " + replylist.get(0));
 
                 try {
                     if (!replylist.equals(null)) {
@@ -186,7 +199,7 @@ public class CommunityViewActivity extends AppCompatActivity {
                         for(int i=0; i<replylist.size(); i++){
                             reply = reply.ObjToReply(replylist.get(i));
 
-                            addItem(reply.getR_content(), reply.getR_writer(), reply.getR_dtt());
+                            addItem(reply.getR_content(), reply.getR_writer(), reply.getR_dtt(), reply.getB_no());
                         }
                     }
                 } catch (Exception e) {
@@ -207,44 +220,18 @@ public class CommunityViewActivity extends AppCompatActivity {
             }
         });
 
-    }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        reply_delete = findViewById(R.id.reply_delete);
-//        rList.clear();
-        //        댓글 삭제
-//        reply_delete.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (!b_u_id.equals(u_id)) {
-//                    Toast.makeText(CommunityViewActivity.this, "삭제할 권한이 없습니다", Toast.LENGTH_SHORT).show();
-//                } else {
-//                    dataService.boardApi.replyDelete().enqueue(new Callback<Void>() {
-//                        @Override
-//                        public void onResponse(Call<Void> call, Response<Void> response) {
-//                            finish();
-//                        }
-//
-//                        @Override
-//                        public void onFailure(Call<Void> call, Throwable t) {
-//
-//                        }
-//                    });
-//                }
-//            }
-//        });
 
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public void addItem(String content, String writer, String regDate){
+    public void addItem(String content, String writer, String regDate, String b_no){
         Reply item = new Reply();
         item.setR_content(content);
         item.setR_writer(writer);
         Log.i("ReplyAddItem", "addItem: " + regDate);
         item.setR_dtt(regDate);
+        item.setB_no(b_no);
         rList.add(item);
         replyAdapter.notifyDataSetChanged();
         // 리사이클러뷰 어뎁터로 값 넘겨주고, 새로고침 시켜줘야됨.

@@ -28,6 +28,7 @@ public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.ViewHolder>{
     BoardApi boardApi;
     DataService dataService;
     private ArrayList<Reply> data = null;
+    Reply reply = new Reply();
 
     public interface OnItemClickListener{
         void onItemClick(View v, int pos);
@@ -120,21 +121,22 @@ public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.ViewHolder>{
     }
 
     public void deleteThisView(int position){
-        Reply reply = data.get(position);
+        reply = data.get(position);
 
-        Log.i("ReplyAdapter", "onResponse: " + reply);
+        Log.i("ReplyAdapter", "포지션???: " + reply);
         Log.i("ReplyAdapter1", "onResponse: " + reply.getR_dtt());
-        dataService.boardApi.replyDelete(reply).enqueue(new Callback<Void>() {
+        dataService.boardApi.replyDelete(reply).enqueue(new Callback<Reply>() {
             @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
+            public void onResponse(Call<Reply> call, Response<Reply> response) {
                 Log.i("ReplyAdapter", "댓글삭제성공: ");
             }
 
             @Override
-            public void onFailure(Call<Void> call, Throwable t) {
+            public void onFailure(Call<Reply> call, Throwable t) {
 
             }
         });
+
 
 //        data.remove(position);
 //        notifyItemRemoved(position);

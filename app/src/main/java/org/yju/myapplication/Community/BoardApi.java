@@ -58,9 +58,9 @@ public interface BoardApi {
 
     //댓글 삭제
     @DELETE("api/reply")
-    Call<Void> replyDelete(Reply reply);
+    Call<Reply> replyDelete(@Body Reply reply);
 
     // 댓글 등록
     @POST("api/reply")
-    Call<Void> replyAdd(@Body Reply reply);
+    Call<String> replyAdd(@Body Reply reply);
 }
