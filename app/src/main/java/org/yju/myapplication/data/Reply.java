@@ -75,6 +75,7 @@ public class Reply {
         reply.setR_content(result.get("r_content").toString());
         reply.setR_writer(result.get("r_writer").toString());
         reply.setR_dtt(result.get("r_dtt").toString());
+        reply.setB_no(result.get("b_no").toString());
         Log.i("ObjToReplyList2", "ObjToReplyList: " + reply.toString());
 
         return reply;

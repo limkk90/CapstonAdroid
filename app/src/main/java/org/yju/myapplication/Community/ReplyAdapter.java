@@ -26,7 +26,7 @@ import retrofit2.Response;
 
 public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.ViewHolder>{
     BoardApi boardApi;
-    DataService dataService;
+    DataService dataService = new DataService();
     private ArrayList<Reply> data = null;
 
     public interface OnItemClickListener{
@@ -124,7 +124,7 @@ public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.ViewHolder>{
 
         Log.i("ReplyAdapter", "onResponse: " + reply);
         Log.i("ReplyAdapter1", "onResponse: " + reply.getR_dtt());
-        dataService.boardApi.replyDelete(reply).enqueue(new Callback<Void>() {
+        dataService.boardApi.replyDelete(reply.getR_dtt()).enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 Log.i("ReplyAdapter", "댓글삭제성공: ");

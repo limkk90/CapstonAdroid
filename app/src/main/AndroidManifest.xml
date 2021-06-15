@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
-        <activity android:name=".Reservation.SearchRoad"></activity>
+        <activity android:name=".Reservation.ReservationDetail"></activity>
+        <activity android:name=".Reservation.SearchRoad" />
         <activity android:name=".Community.CommunityViewActivity" />
         <activity android:name=".Community.CommunityInsertAcitivty" />
         <activity android:name=".Community.CommunityUpdateActivity" />
@@ -44,7 +45,7 @@
             <!-- </intent-filter> -->
         </activity>
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".qna.QnaAcitivty"/>
+        <activity android:name=".qna.QnaAcitivty" />
     </application>
 
 </manifest>

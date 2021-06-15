@@ -31,7 +31,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ReserVationActivity extends AppCompatActivity {
-
+    Charger charger;
     Button res_btn, res_cancle, res_facil, res_findRoad;
     Intent intent;
     Spinner spinnerStartH, spinnerStartM, spinnerEndH, spinnerEndM;
@@ -168,10 +168,21 @@ public class ReserVationActivity extends AppCompatActivity {
         getListCharger();
         adapter.notifyDataSetChanged();
 
+        //충전기 아이콘 클릭
         adapter.setOnItemClickListener(new ReservationAdapter.OnItemCLickListener() {
             @Override
             public void onItemClick(View v, int pos) {
-                v.setBackgroundColor(Color.BLACK);
+//                v.setBackgroundColor(Color.BLACK);
+                Intent intent = new Intent(ReserVationActivity.this, ReservationDetail.class);
+//                intent.putExtra("statid", stat_id);
+                charger = adapter.getItem(pos);
+                Log.i("charger", "onItemClick: " + charger);
+                intent.putExtra("chg_id", charger.getChg_id());
+                intent.putExtra("chg_type", charger.getChg_type());
+                intent.putExtra("chg_method", charger.getChg_method());
+                intent.putExtra("chg_st", charger.getChg_st());
+                intent.putExtra("chg_rsvt", charger.getChg_rsvt());
+                startActivity(intent);
             }
         });
     }
@@ -184,12 +195,16 @@ public class ReserVationActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
     }
 
-    public void addItem(String chargeuse){
+    public void addItem(String chg_id, char chg_type, String chg_method, char chg_st, String chg_rsvt){
         Charger item = new Charger();
-        item.setChg_rsvt(chargeuse);
+        Log.i("Reservation addItem", "addItem: " + chg_id + "," + chg_type + "," + chg_method + "," + chg_st + "," + chg_rsvt);
+        item.setChg_id(chg_id);
+        item.setChg_type(chg_type);
+        item.setChg_method(chg_method);
+        item.setChg_st(chg_st);
+        item.setChg_rsvt(chg_rsvt);
         cList.add(item);
         adapter.notifyDataSetChanged();
-
     }
 
     public void getListCharger(){
@@ -199,8 +214,10 @@ public class ReserVationActivity extends AppCompatActivity {
                 List<Charger> chargers = response.body();
                 Log.i("getListCharger", "onResponse: "+chargers);
                 for(int i=0; i<chargers.size(); i++){
-                    addItem(chargers.get(i).getChg_rsvt());
+//                    addItem(chargers.get(i).getChg_rsvt());
+                    addItem(chargers.get(i).getChg_id(), chargers.get(i).getChg_type(), chargers.get(i).getChg_method(), chargers.get(i).getChg_st(), chargers.get(i).getChg_rsvt());
                 }
+
             }
 
             @Override

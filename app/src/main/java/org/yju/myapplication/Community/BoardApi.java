@@ -57,8 +57,8 @@ public interface BoardApi {
     Call<JsonArray> news();
 
     //댓글 삭제
-    @DELETE("api/reply")
-    Call<Void> replyDelete(Reply reply);
+    @POST("api/reply/remove")
+    Call<Void> replyDelete(String r_dtt);
 
     // 댓글 등록
     @POST("api/reply")
