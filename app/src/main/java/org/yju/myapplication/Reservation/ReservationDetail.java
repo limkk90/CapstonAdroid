@@ -12,8 +12,9 @@ public class ReservationDetail extends AppCompatActivity {
 
     Intent intent;
     String statid;
-    String chg_id;
-    char chg_type, chg_method, chg_st, chg_rsvt;
+    String chg_id, chg_rsvt, chg_method;
+    char chg_st;
+    char chg_type;
 
 
     @Override
@@ -24,9 +25,9 @@ public class ReservationDetail extends AppCompatActivity {
         statid = intent.getStringExtra("statid");
         chg_id = intent.getStringExtra("chg_id");
         chg_type = intent.getCharExtra("chg_type", 'a');
-        chg_method = intent.getCharExtra("chg_method", 'a');
+        chg_method = intent.getStringExtra("chg_method");
         chg_st = intent.getCharExtra("chg_st", 'a');
-        chg_rsvt = intent.getCharExtra("chg_rsvt", 'a');
+        chg_rsvt = intent.getStringExtra("chg_rsvt");
 
         Log.i("ReservationDetail", "addItem: " + chg_id + "," + chg_type + "," + chg_method + "," + chg_st + "," + chg_rsvt);
 
