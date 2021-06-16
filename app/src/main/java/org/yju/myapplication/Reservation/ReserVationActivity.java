@@ -185,9 +185,9 @@ public class ReserVationActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        cList.clear();
-        getListCharger();
-        adapter.notifyDataSetChanged();
+//        cList.clear();
+//        getListCharger();
+//        adapter.notifyDataSetChanged();
     }
 
     public void addItem(String chg_id, String chargeuse, char chg_type, String chg_method, char chg_st){
