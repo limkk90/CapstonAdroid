@@ -5,18 +5,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
+import org.yju.myapplication.DataService;
 import org.yju.myapplication.R;
 
 public class ReservationDetail extends AppCompatActivity {
-
+    DataService dataService;
     TextView txt_chg_id, txt_chg_type, txt_chg_method, txt_chg_st;
     Intent intent;
     String statid;
     String chg_id, chg_rsvt, chg_method;
     char chg_st;
     char chg_type;
+    Button btn_reservation, btn_reserCancle;
 
 
     @Override
@@ -27,6 +31,10 @@ public class ReservationDetail extends AppCompatActivity {
         txt_chg_method = findViewById(R.id.txt_chg_method);
         txt_chg_type = findViewById(R.id.txt_chg_type);
         txt_chg_st = findViewById(R.id.txt_chg_st);
+        btn_reservation = findViewById(R.id.btn_reservation);
+        btn_reserCancle = findViewById(R.id.btn_reserCancel);
+
+
 
         intent= getIntent();
         statid = intent.getStringExtra("statid");
@@ -65,7 +73,7 @@ public class ReservationDetail extends AppCompatActivity {
         }
 
         if(chg_method == null){
-            txt_chg_method.equals("Unknown");
+            txt_chg_method.setText("Unknown");
         }if(chg_method.equals("1")){
             txt_chg_method.setText("B타입(5핀)");
         }if(chg_method.equals("2")){
@@ -101,5 +109,12 @@ public class ReservationDetail extends AppCompatActivity {
         }else if(chg_st == '5'){
             txt_chg_st.setText("통신미연결");
         }
+
+        btn_reservation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                
+            }
+        });
     }
 }

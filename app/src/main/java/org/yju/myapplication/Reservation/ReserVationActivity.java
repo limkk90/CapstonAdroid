@@ -80,7 +80,7 @@ public class ReserVationActivity extends AppCompatActivity {
 
         txt_station_name.setText(stat_nm);
         txt_station_addr.setText(stat_addr);
-        getListCharger();
+//        getListCharger();
         ArrayAdapter<String> startHouradapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, hour);
         startHouradapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerStartH.setAdapter(startHouradapter);
@@ -165,8 +165,8 @@ public class ReserVationActivity extends AppCompatActivity {
 
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), linearLayoutManager.getOrientation());
         recyclerView.addItemDecoration(dividerItemDecoration);
-        getListCharger();
-        adapter.notifyDataSetChanged();
+//        getListCharger();
+//        adapter.notifyDataSetChanged();
 
         adapter.setOnItemClickListener(new ReservationAdapter.OnItemCLickListener() {
             @Override
@@ -185,9 +185,9 @@ public class ReserVationActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-//        cList.clear();
-//        getListCharger();
-//        adapter.notifyDataSetChanged();
+        cList.clear();
+        getListCharger();
+        adapter.notifyDataSetChanged();
     }
 
     public void addItem(String chg_id, String chargeuse, char chg_type, String chg_method, char chg_st){

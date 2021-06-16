@@ -41,7 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="56dp"
-        android:text="TextView"
+        android:text="Unknown"
         android:textColor="#000000"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -77,7 +77,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="30dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -85,14 +86,15 @@
         app:layout_constraintTop_toBottomOf="@+id/txt_chg_st">
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/btn_reservation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:shadowColor="#FFFFFF"
             android:text="예약하기" />
 
         <Button
-            android:id="@+id/button4"
+            android:id="@+id/btn_reserCancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
