@@ -24,28 +24,30 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.ViewHolder>{
+public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.ViewHolder> {
     BoardApi boardApi;
     DataService dataService = new DataService();
     private ArrayList<Reply> data = null;
+    Reply reply = new Reply();
 
-    public interface OnItemClickListener{
+    public interface OnItemClickListener {
         void onItemClick(View v, int pos);
     }
 
     private OnItemClickListener listener = null;
 
-    public void setOnItemClickListener(OnItemClickListener listener){
+    public void setOnItemClickListener(OnItemClickListener listener) {
         this.listener = listener;
     }
 
-    ReplyAdapter(ArrayList<Reply> list){
+    ReplyAdapter(ArrayList<Reply> list) {
         data = list;
     }
-    public class ViewHolder extends RecyclerView.ViewHolder{
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
         TextView rep_writer, rep_content, rep_regDate, rep_modify, rep_delete;
 
-        ViewHolder(View itemView){
+        ViewHolder(View itemView) {
             super(itemView);
 
             rep_writer = itemView.findViewById(R.id.reply_writer);
@@ -59,8 +61,8 @@ public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.ViewHolder>{
                 public void onClick(View v) {
                     int pos = getAdapterPosition();
                     Integer posStr = Integer.valueOf(pos);
-                    if(pos != RecyclerView.NO_POSITION){
-                        if(listener != null){
+                    if (pos != RecyclerView.NO_POSITION) {
+                        if (listener != null) {
                             listener.onItemClick(v, pos);
                         }
                     }
@@ -73,7 +75,7 @@ public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.ViewHolder>{
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
-        LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.reply_item, parent, false);
         ViewHolder vh = new ViewHolder(view);
 
@@ -111,33 +113,31 @@ public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.ViewHolder>{
             }
         });
     }
+
     @Override
     public int getItemCount() {
         return data.size();
     }
 
-    public Reply getItem(int position) { return  data.get(position);
+    public Reply getItem(int position) {
+        return data.get(position);
     }
 
-    public void deleteThisView(int position){
-        Reply reply = data.get(position);
+    public void deleteThisView(int position) {
+        reply = data.get(position);
 
-        Log.i("ReplyAdapter", "onResponse: " + reply);
+        Log.i("ReplyAdapter", "포지션???: " + reply);
         Log.i("ReplyAdapter1", "onResponse: " + reply.getR_dtt());
-        dataService.boardApi.replyDelete(reply.getR_dtt()).enqueue(new Callback<Void>() {
+        dataService.boardApi.replyDelete(reply).enqueue(new Callback<Reply>() {
             @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
+            public void onResponse(Call<Reply> call, Response<Reply> response) {
                 Log.i("ReplyAdapter", "댓글삭제성공: ");
             }
 
             @Override
-            public void onFailure(Call<Void> call, Throwable t) {
+            public void onFailure(Call<Reply> call, Throwable t) {
 
             }
         });
-
-//        data.remove(position);
-//        notifyItemRemoved(position);
-//        notifyItemRangeChanged(position, data.size());
     }
 }

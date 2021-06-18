@@ -8,6 +8,7 @@ import org.yju.myapplication.Reservation.ReservationApi;
 import org.yju.myapplication.data.Email;
 import org.yju.myapplication.data.Marker;
 import org.yju.myapplication.data.User;
+import org.yju.myapplication.qna.QnaApi;
 
 import java.lang.reflect.Member;
 import java.util.ArrayList;
@@ -44,6 +45,7 @@ public class DataService {
     DeleteAPI delete = retrofitClient.create(DeleteAPI.class);
     public BoardApi  boardApi = retrofitClient.create(BoardApi.class);
     public ReservationApi reservationApi = retrofitClient.create(ReservationApi.class);
+    public QnaApi qnaApi = retrofitClient.create(QnaApi.class);
 }
 
 interface SelectAPI{

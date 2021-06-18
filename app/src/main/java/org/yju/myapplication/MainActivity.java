@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity{
         TMapPoint tMapPoint = new TMapPoint(35.855770, 128.620935);
         TMapPoint tMapPointStart = new TMapPoint(35.855770, 128.606922);
         tmapview.setCenterPoint( 128.620935, 35.896463 ); //지도 띄울 떄 이쪽으로 띄우는듯
-//        ===============마커 추가======================
+////        ===============마커 추가======================
         dataService.select.getMarker().enqueue(new Callback<ArrayList<Marker>>() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
@@ -210,6 +210,9 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 intent = new Intent(MainActivity.this, QnaAcitivty.class);
+                u_id = getIntent().getStringExtra("u_id");
+                intent.putExtra("u_id", u_id);
+                Log.i("TAG", "onClick: 메인 -> QNA id값이동" + u_id);
                 startActivity(intent);
             }
         });
