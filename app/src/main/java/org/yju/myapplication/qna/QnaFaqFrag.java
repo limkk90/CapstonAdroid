@@ -42,7 +42,7 @@ public class QnaFaqFrag extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.qna_faq, container, false);
-
+        Log.i("TAG", "onCreateView: in");
         Bundle bundle = getArguments();
         Log.i("TAG", "onCreateView: 아이디 넘어옴??" + bundle);
 
@@ -73,17 +73,9 @@ public class QnaFaqFrag extends Fragment {
         });
         bList.clear();
         getListBoard();
-        adapter.notifyDataSetChanged();
         return view;
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        bList.clear();
-        getListBoard();
-        adapter.notifyDataSetChanged();
-    }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void addItem(String title, String content, String writer, String q_dtt) {
@@ -98,6 +90,7 @@ public class QnaFaqFrag extends Fragment {
 
     public void getListBoard() {
         //dataService api 호출
+        Log.i("TAG", "getListBoard: in");
         dataService.qnaApi.qList().enqueue(new Callback<ArrayList<Question>>() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
@@ -108,6 +101,8 @@ public class QnaFaqFrag extends Fragment {
                     addItem(body.get(i).getQ_title(), body.get(i).getQ_content(), body.get(i).getU_id(), body.get(i).getQ_dtt());
                 }
                 addItem(null, null, null, null);
+                adapter.notifyDataSetChanged();
+
             }
 
             @Override

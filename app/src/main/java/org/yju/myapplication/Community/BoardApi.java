@@ -57,13 +57,9 @@ public interface BoardApi {
     Call<JsonArray> news();
 
     //댓글 삭제
-
-    @POST("api/reply/remove")
-    Call<Void> replyDelete(String r_dtt);
-
-    @DELETE("api/reply")
-    Call<Reply> replyDelete(@Body Reply reply);
-
+    @POST("api/reply/delete")
+    Call<Void> replyDelete(@Body Reply reply);
+    // post로 바꾼후 fragment확인하기!
 
     // 댓글 등록
     @POST("api/reply")

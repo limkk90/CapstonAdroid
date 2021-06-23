@@ -1,9 +1,12 @@
 package org.yju.myapplication.data;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.Map;
 
 @Data
 public class Question {
@@ -72,5 +75,19 @@ public class Question {
 
     public void setAnswerCnt(int answerCnt) {
         this.answerCnt = answerCnt;
+    }
+
+    public Question ObjToQuestion(Object o) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        Map result = objectMapper.convertValue(o, Map.class);
+
+        Question question = new Question();
+
+        question.setQ_dtt(result.get("q_dtt").toString());
+        question.setQ_title(result.get("q_title").toString());
+        question.setQ_content(result.get("q_content").toString());
+        question.setQ_cat(result.get("q_cat").toString().charAt(0));
+        question.setU_id(result.get("u_id").toString());
+        return question;
     }
 }
