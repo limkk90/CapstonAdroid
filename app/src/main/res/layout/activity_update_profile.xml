@@ -44,6 +44,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:backgroundTint="#000000"
         android:text="비밀번호 변경"
         app:layout_constraintEnd_toEndOf="@+id/et_rePwd"
         app:layout_constraintStart_toStartOf="@+id/et_rePwd"

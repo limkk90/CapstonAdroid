@@ -8,6 +8,7 @@ public class User {
     private String u_email;
     private String u_pwd;
     private String u_phone;
+    private String u_car;
 
     @Override
     public String toString() {
@@ -16,6 +17,7 @@ public class User {
                 ", u_email='" + u_email + '\'' +
                 ", u_pwd='" + u_pwd + '\'' +
                 ", u_phone='" + u_phone + '\'' +
+                ", u_car='" + u_car + '\'' +
                 '}';
     }
 
@@ -53,6 +55,14 @@ public class User {
 
     public void setU_phone(String u_phone) {
         this.u_phone = u_phone;
+    }
+
+    public String getU_car() {
+        return u_car;
+    }
+
+    public void setU_car(String u_car) {
+        this.u_car = u_car;
     }
 
 

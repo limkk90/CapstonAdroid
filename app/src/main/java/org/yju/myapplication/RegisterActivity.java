@@ -21,7 +21,7 @@ import retrofit2.Response;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private EditText et_id, et_pass, et_email, et_phone, et_emailOk;
+    private EditText et_id, et_pass, et_email, et_phone, et_emailOk, et_car;
     private Button btn_register, btn_emailSend, btn_emailOk;
     DataService dataService = new DataService();
     private User user = new User();
@@ -41,6 +41,7 @@ public class RegisterActivity extends AppCompatActivity {
         et_email = findViewById(R.id.et_email);
         et_phone = findViewById(R.id.et_phone);
         et_emailOk = findViewById(R.id.et_emailOk);
+        et_car = findViewById(R.id.et_car);
 
         et_id.addTextChangedListener(new TextWatcher() {
             @Override
@@ -148,11 +149,14 @@ public class RegisterActivity extends AppCompatActivity {
                 String u_email = et_email.getText().toString();
                 String u_phone = et_phone.getText().toString();
                 String u_ok = et_emailOk.getText().toString();
+                String u_car = et_car.getText().toString();
 
                 user.setU_id(u_id);
                 user.setU_email(u_email);
                 user.setU_pwd(u_pwd);
                 user.setU_phone(u_phone);
+                user.setU_car(u_car);
+
 
                 if (u_id.isEmpty()) {
                     Toast.makeText(RegisterActivity.this, "아이디가 없습니다", Toast.LENGTH_SHORT).show();

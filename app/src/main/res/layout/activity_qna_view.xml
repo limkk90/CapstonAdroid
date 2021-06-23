@@ -58,12 +58,14 @@
                     android:layout_width="70dp"
                     android:layout_height="50dp"
                     android:layout_marginRight="5dp"
+                    android:backgroundTint="#000000"
                     android:text="수정" />
 
                 <Button
                     android:id="@+id/tv_q_delete"
                     android:layout_width="70dp"
                     android:layout_height="50dp"
+                    android:backgroundTint="#000000"
                     android:text="삭제" />
             </LinearLayout>
 
@@ -94,6 +96,7 @@
                 android:id="@+id/btn_ans"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:backgroundTint="#000000"
                 android:text="등록"
                 app:layout_constraintBottom_toTopOf="@+id/reply_RecyclerView"
                 app:layout_constraintEnd_toEndOf="@+id/linearLayout6"

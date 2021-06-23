@@ -48,8 +48,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="88dp"
-        android:layout_marginLeft="88dp"
         android:layout_marginTop="48dp"
+        android:backgroundTint="#000000"
         android:text="수정"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cm_imageView" />
@@ -60,7 +60,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="76dp"
         android:layout_marginEnd="76dp"
-        android:layout_marginRight="76dp"
+        android:backgroundTint="#000000"
         android:text="취소"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.971"
@@ -82,8 +82,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="44dp"
-        android:layout_marginLeft="44dp"
         android:layout_marginTop="56dp"
+        android:backgroundTint="#000000"
         android:text="파일첨부"
         app:layout_constraintStart_toEndOf="@+id/cm_imageView"
         app:layout_constraintTop_toBottomOf="@+id/cm_ud_editContent" />

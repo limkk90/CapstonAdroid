@@ -4,7 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context=".RegisterActivity">
+
+    <EditText
+        android:id="@+id/et_car"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:ems="10"
+        android:hint="차량번호"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/et_emailOk"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/et_emailOk"
+        app:layout_constraintTop_toBottomOf="@+id/et_emailOk" />
 
     <EditText
         android:id="@+id/et_id"
@@ -71,31 +85,39 @@
         app:layout_constraintTop_toBottomOf="@+id/et_emailOk" />
 
     <Button
+        android:id="@+id/btn_emailOk"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:backgroundTint="#000000"
+        android:text="확인"
+        app:layout_constraintEnd_toEndOf="@+id/btn_emailSend"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/btn_emailSend"
+        app:layout_constraintTop_toBottomOf="@+id/btn_emailSend" />
+
+    <Button
         android:id="@+id/btn_register"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="28dp"
+        android:backgroundTint="#000000"
         android:text="회원가입"
         app:layout_constraintEnd_toEndOf="@+id/et_phone"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/et_phone"
-        app:layout_constraintTop_toBottomOf="@+id/et_phone" />
+        app:layout_constraintTop_toBottomOf="@+id/et_car" />
 
     <Button
         android:id="@+id/btn_emailSend"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:backgroundTint="#000000"
         android:text="인증번호"
         app:layout_constraintEnd_toEndOf="@+id/btn_register"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/btn_register"
         app:layout_constraintTop_toBottomOf="@+id/btn_register" />
-
-    <Button
-        android:id="@+id/btn_emailOk"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="확인"
-        app:layout_constraintEnd_toEndOf="@+id/btn_emailSend"
-        app:layout_constraintStart_toStartOf="@+id/btn_emailSend"
-        app:layout_constraintTop_toBottomOf="@+id/btn_emailSend" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
