@@ -9,6 +9,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Path;
 
 public interface ReservationApi {
+
     //충전소안에 충전기 가져오기
     @GET("api/{stat_id}/chargerlist")
     Call<List<Charger>> getCharger(@Path("stat_id") String stat_id);

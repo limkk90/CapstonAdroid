@@ -13,6 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
+
+        <activity android:name=".Reservation.ReservationDetail"></activity>
         <activity android:name=".qna.QnaViewActivity"></activity>
         <activity android:name=".Reservation.SearchRoad" />
         <activity android:name=".Community.CommunityViewActivity" />

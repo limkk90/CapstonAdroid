@@ -36,7 +36,7 @@ public class ReserVationActivity extends AppCompatActivity {
     Intent intent;
     Spinner spinnerStartH, spinnerStartM, spinnerEndH, spinnerEndM;
     String hour[] = {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17",
-                     "18", "19", "20", "21", "22", "23"};
+            "18", "19", "20", "21", "22", "23"};
     String minute[] = {"00", "10", "20", "30", "40", "50"};
     TextView txt_station_name, txt_station_addr;
     String stat_id, stat_nm, stat_addr;
@@ -58,9 +58,9 @@ public class ReserVationActivity extends AppCompatActivity {
         res_findRoad = findViewById(R.id.res_searchRoad);
 
         intent = getIntent();
-         stat_id = intent.getStringExtra("statId").substring(10);
-         stat_nm = intent.getStringExtra("statNm");
-         stat_addr = intent.getStringExtra("statAddr");
+        stat_id = intent.getStringExtra("statId").substring(10);
+        stat_nm = intent.getStringExtra("statNm");
+        stat_addr = intent.getStringExtra("statAddr");
         stat_lat = intent.getDoubleExtra("statLat", 0);
         stat_Long = intent.getDoubleExtra("statLong", 0);
 
@@ -80,7 +80,7 @@ public class ReserVationActivity extends AppCompatActivity {
 
         txt_station_name.setText(stat_nm);
         txt_station_addr.setText(stat_addr);
-        getListCharger();
+//        getListCharger();
         ArrayAdapter<String> startHouradapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, hour);
         startHouradapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerStartH.setAdapter(startHouradapter);
@@ -165,13 +165,19 @@ public class ReserVationActivity extends AppCompatActivity {
 
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), linearLayoutManager.getOrientation());
         recyclerView.addItemDecoration(dividerItemDecoration);
-        getListCharger();
-        adapter.notifyDataSetChanged();
+//        getListCharger();
+//        adapter.notifyDataSetChanged();
 
         adapter.setOnItemClickListener(new ReservationAdapter.OnItemCLickListener() {
             @Override
             public void onItemClick(View v, int pos) {
-                v.setBackgroundColor(Color.BLACK);
+                Intent intent = new Intent(ReserVationActivity.this, ReservationDetail.class);
+                intent.putExtra("chg_id", adapter.getItem(pos).getChg_id());
+                intent.putExtra("chg_rsvt", adapter.getItem(pos).getChg_rsvt());
+                intent.putExtra("chg_type", adapter.getItem(pos).getChg_type());
+                intent.putExtra("chg_method", adapter.getItem(pos).getChg_method());
+                intent.putExtra("chg_st", adapter.getItem(pos).getChg_st());
+                startActivity(intent);
             }
         });
     }
@@ -184,9 +190,13 @@ public class ReserVationActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
     }
 
-    public void addItem(String chargeuse){
+    public void addItem(String chg_id, String chargeuse, char chg_type, String chg_method, char chg_st){
         Charger item = new Charger();
+        item.setChg_id(chg_id);
         item.setChg_rsvt(chargeuse);
+        item.setChg_type(chg_type);
+        item.setChg_method(chg_method);
+        item.setChg_st(chg_st);
         cList.add(item);
         adapter.notifyDataSetChanged();
 
@@ -199,7 +209,8 @@ public class ReserVationActivity extends AppCompatActivity {
                 List<Charger> chargers = response.body();
                 Log.i("getListCharger", "onResponse: "+chargers);
                 for(int i=0; i<chargers.size(); i++){
-                    addItem(chargers.get(i).getChg_rsvt());
+                    addItem(chargers.get(i).getChg_id(), chargers.get(i).getChg_rsvt(), chargers.get(i).getChg_type(), chargers.get(i).getChg_method(),
+                            chargers.get(i).getChg_st());
                 }
             }
 
@@ -209,5 +220,5 @@ public class ReserVationActivity extends AppCompatActivity {
             }
         });
 
-        }
+    }
 }

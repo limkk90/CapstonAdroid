@@ -205,8 +205,6 @@ public class CommunityViewActivity extends AppCompatActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
-
                 title =  board.getB_title();
                 content = board.getB_content();
                 tv_b_title.setText(title);
@@ -219,9 +217,6 @@ public class CommunityViewActivity extends AppCompatActivity {
 
             }
         });
-
-
-
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
