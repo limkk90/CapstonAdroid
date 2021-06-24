@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Community.CommunityWarningActivity">
+
+    <include
+        android:id="@+id/include2"
+        layout="@layout/activity_backactionbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <EditText
+        android:id="@+id/cm_ud_editContent"
+        android:layout_width="407dp"
+        android:layout_height="147dp"
+        android:layout_marginTop="50dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="내용을 입력하세요"
+        android:inputType="textMultiLine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cm_radioGroup" />
+
+    <Button
+        android:id="@+id/cm_btnInsert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="88dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#000000"
+        android:text="등록"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cm_ud_editContent" />
+
+    <Button
+        android:id="@+id/cm_btnCancle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="76dp"
+        android:backgroundTint="#000000"
+        android:text="취소"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.971"
+        app:layout_constraintStart_toEndOf="@+id/cm_ud_btnInsert"
+        app:layout_constraintTop_toBottomOf="@+id/cm_ud_editContent" />
+
+
+    <RadioGroup
+        android:id="@+id/cm_radioGroup"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/include2">
+
+        <RadioButton
+            android:id="@+id/cm_w_a"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="욕설" />
+
+        <RadioButton
+            android:id="@+id/cm_w_b"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="도배" />
+
+        <RadioButton
+            android:id="@+id/cm_w_c"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="광고" />
+
+        <RadioButton
+            android:id="@+id/cm_w_d"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="부적절" />
+
+        <RadioButton
+            android:id="@+id/cm_w_e"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="기타" />
+
+    </RadioGroup>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -103,6 +103,17 @@
                 app:layout_constraintEnd_toEndOf="@+id/linearLayout6"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout6" />
 
+            <Button
+                android:id="@+id/btn_warn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:backgroundTint="#000000"
+                android:text="신고"
+                app:layout_constraintBottom_toTopOf="@+id/et_reply"
+                app:layout_constraintStart_toStartOf="@+id/et_reply"
+                app:layout_constraintTop_toBottomOf="@+id/tv_b_content" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

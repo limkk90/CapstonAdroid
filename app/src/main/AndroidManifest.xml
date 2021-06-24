@@ -6,8 +6,6 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
-
-    <!-- 앱키 배포받기 -->
     <application
         android:name=".GlobalApplication"
         android:allowBackup="true"
@@ -16,13 +14,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
+        <activity android:name=".Community.CommunityWarningActivity"></activity>
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="8aed129972f1253dee29332d6291a455" />
 
-        <activity android:name=".Reservation.ReservationDetail"></activity>
-        <activity android:name=".qna.QnaViewActivity"></activity>
+        <activity android:name=".Reservation.ReservationDetail" />
+        <activity android:name=".qna.QnaViewActivity" />
         <activity android:name=".Reservation.SearchRoad" />
         <activity android:name=".Community.CommunityViewActivity" />
         <activity android:name=".Community.CommunityInsertAcitivty" />

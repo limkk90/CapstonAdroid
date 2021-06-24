@@ -6,6 +6,7 @@ import com.google.gson.JsonObject;
 import org.json.JSONArray;
 import org.yju.myapplication.data.Board;
 import org.yju.myapplication.data.Reply;
+import org.yju.myapplication.data.Warning;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,4 +65,8 @@ public interface BoardApi {
     // 댓글 등록
     @POST("api/reply")
     Call<String> replyAdd(@Body Reply reply);
+
+    // 신고 하기
+    @POST("api/user/warning")
+    Call<Void> warning(@Body Warning warning);
 }

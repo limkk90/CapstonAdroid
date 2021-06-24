@@ -40,7 +40,7 @@ import retrofit2.Response;
 public class CommunityViewActivity extends AppCompatActivity {
 
     private TextView tv_b_title, tv_b_content;
-    private Button tv_view_update, tv_view_delete, btn_reply;
+    private Button tv_view_update, tv_view_delete, btn_reply, btn_warn;
     DataService dataService = new DataService();
     private EditText et_reply;
     private String title, content, r_content;
@@ -64,6 +64,7 @@ public class CommunityViewActivity extends AppCompatActivity {
         tv_view_delete = findViewById(R.id.tv_view_delete);
         et_reply = findViewById(R.id.et_reply);
         btn_reply = findViewById(R.id.btn_reply);
+        btn_warn = findViewById(R.id.btn_warn);
 
 
         final Intent[] intent = {getIntent()};
@@ -156,6 +157,16 @@ public class CommunityViewActivity extends AppCompatActivity {
 
                     }
                 });
+            }
+        });
+
+        // 신고
+        btn_warn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent3 = new Intent(CommunityViewActivity.this, CommunityWarningActivity.class);
+                intent3.putExtra("u_id", b_u_id);
+                startActivity(intent3);
             }
         });
 
