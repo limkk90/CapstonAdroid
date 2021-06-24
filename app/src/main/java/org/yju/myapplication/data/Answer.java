@@ -8,7 +8,7 @@ import java.util.Date;
 public class Answer {
     private String q_cd;
     private String ans_content;
-    private Date ans_dt;
+    private String ans_dt;
     private String ans_writer;
 
     @Override
@@ -16,7 +16,7 @@ public class Answer {
         return "Answer{" +
                 "q_cd='" + q_cd + '\'' +
                 ", ans_content='" + ans_content + '\'' +
-                ", ans_dt=" + ans_dt +
+                ", ans_dt='" + ans_dt + '\'' +
                 ", ans_writer='" + ans_writer + '\'' +
                 '}';
     }
@@ -37,11 +37,11 @@ public class Answer {
         this.ans_content = ans_content;
     }
 
-    public Date getAns_dt() {
+    public String getAns_dt() {
         return ans_dt;
     }
 
-    public void setAns_dt(Date ans_dt) {
+    public void setAns_dt(String ans_dt) {
         this.ans_dt = ans_dt;
     }
 

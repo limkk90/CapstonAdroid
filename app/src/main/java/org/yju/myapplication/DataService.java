@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import org.yju.myapplication.Community.BoardApi;
+import org.yju.myapplication.MyPage.MyPageApi;
 import org.yju.myapplication.Reservation.ReservationApi;
 import org.yju.myapplication.data.Email;
 import org.yju.myapplication.data.Marker;
@@ -26,7 +27,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public class DataService {
-    private String BASE_URL = "http://172.26.2.207:7777/"; // TODO REST API 퍼블릭 IP로 변경
+    private String BASE_URL = "http://172.26.3.28:7777/"; // TODO REST API 퍼블릭 IP로 변경
 
     Gson gson = new GsonBuilder()
             .setLenient()
@@ -46,6 +47,7 @@ public class DataService {
     public BoardApi  boardApi = retrofitClient.create(BoardApi.class);
     public ReservationApi reservationApi = retrofitClient.create(ReservationApi.class);
     public QnaApi qnaApi = retrofitClient.create(QnaApi.class);
+    public MyPageApi myPageApi = retrofitClient.create(MyPageApi.class);
 }
 
 interface SelectAPI{

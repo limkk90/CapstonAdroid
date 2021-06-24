@@ -154,7 +154,6 @@ public class RegisterActivity extends AppCompatActivity {
                 user.setU_id(u_id);
                 user.setU_email(u_email);
                 user.setU_pwd(u_pwd);
-                user.setU_phone(u_phone);
                 user.setU_car(u_car);
 
 

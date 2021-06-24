@@ -21,7 +21,7 @@ public class UserProfileActivity extends AppCompatActivity {
 
     private TextView tv_id, tv_pass, tv_email, tv_phone;
     DataService dataService = new DataService();
-    private String u_id1, u_pwd, u_email, u_phone;
+    private String u_id1, u_pwd, u_email;
     private Button btn_user, btn_home;
 
     @Override
@@ -52,12 +52,12 @@ public class UserProfileActivity extends AppCompatActivity {
                 u_id1 = response.body().getU_id();
                 u_pwd = response.body().getU_pwd();
                 u_email = response.body().getU_email();
-                u_phone = response.body().getU_phone();
+
 
                 tv_id.setText(u_id1);
                 tv_pass.setText(u_pwd);
                 tv_email.setText(u_email);
-                tv_phone.setText(u_phone);
+
 
             }
 

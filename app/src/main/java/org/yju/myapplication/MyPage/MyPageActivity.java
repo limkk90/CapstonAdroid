@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -21,11 +23,17 @@ public class MyPageActivity extends AppCompatActivity {
     private MyPageUserInfoFrag mp_userInfo;
     private MyPageCardFrag mp_card;
     private MyPageSetFrag mp_set;
+    private String u_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_page);
+
+        Intent intent = getIntent();
+        u_id = intent.getStringExtra("u_id");
+        Log.i("TAG", "onCreate: 마이페이지 엑티비티 유저아이디받기" + u_id);
+
 
         mp_userInfo = new MyPageUserInfoFrag();
         mp_useInfo = new MyPageUseInfoFrag();
@@ -40,15 +48,28 @@ public class MyPageActivity extends AppCompatActivity {
                 switch (item.getItemId()){
                     case R.id.mp_userInfo:
                         setFrag(0);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("u_id", u_id);
+                        mp_userInfo.setArguments(bundle);
+                        Log.i("TAG", "onCreate: u_id 확인확인" + u_id);
                         break;
                     case R.id.mp_useInfo:
                         setFrag(1);
+                        Bundle bundle2 = new Bundle();
+                        bundle2.putString("u_id", u_id);
+                        mp_useInfo.setArguments(bundle2);
                         break;
                     case R.id.mp_card:
                         setFrag(2);
+                        Bundle bundle3 = new Bundle();
+                        bundle3.putString("u_id", u_id);
+                        mp_card.setArguments(bundle3);
                         break;
                     case R.id.mp_set:
                         setFrag(3);
+                        Bundle bundle4 = new Bundle();
+                        bundle4.putString("u_id", u_id);
+                        mp_set.setArguments(bundle4);
                         break;
                 }
                 return true;
