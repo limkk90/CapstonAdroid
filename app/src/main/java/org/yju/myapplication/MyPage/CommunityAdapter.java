@@ -1,8 +1,7 @@
-package org.yju.myapplication.Community;
+package org.yju.myapplication.MyPage;
 
 import android.content.Context;
 import android.os.Build;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -33,7 +32,7 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
         this.mListener = listener;
     }
     //리스너 객체 참조를 저장하는 변수
-    public CommunityAdapter(ArrayList<Board> list)
+    CommunityAdapter(ArrayList<Board> list)
     {
         mData = list;
     }
@@ -66,11 +65,11 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
 
     @NonNull
     @Override
-    public CommunityAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.community_item, parent, false);
-        CommunityAdapter.ViewHolder vh = new CommunityAdapter.ViewHolder(view);
+        ViewHolder vh = new ViewHolder(view);
         return vh;
     }
 

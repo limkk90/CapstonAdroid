@@ -33,9 +33,10 @@
                 android:layout_marginTop="30dp"
                 android:text="TextView"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recyclerView2" />
+                app:layout_constraintTop_toBottomOf="@+id/board_record" />
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rsvt_record"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -43,11 +44,11 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView2"
+                android:id="@+id/board_record"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView9"
-                tools:layout_editor_absoluteX="12dp" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView9" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
