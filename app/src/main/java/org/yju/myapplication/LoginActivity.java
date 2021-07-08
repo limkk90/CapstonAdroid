@@ -1,5 +1,6 @@
 package org.yju.myapplication;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.kakao.auth.AuthType;
@@ -19,11 +21,13 @@ import com.kakao.auth.Session;
 import com.kakao.network.ErrorResult;
 import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.MeV2ResponseCallback;
+import com.kakao.usermgmt.callback.UnLinkResponseCallback;
 import com.kakao.usermgmt.response.MeV2Response;
 import com.kakao.usermgmt.response.model.Profile;
 import com.kakao.usermgmt.response.model.UserAccount;
 import com.kakao.util.OptionalBoolean;
 import com.kakao.util.exception.KakaoException;
+import com.kakao.util.helper.log.Logger;
 
 import org.yju.myapplication.data.User;
 
@@ -35,7 +39,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
-    private TextView txt_findId, txt_findPwd, txt_Join;
+    private TextView txt_findId, txt_findPwd, txt_Join, txt_logout;
     private EditText et_id, et_pass;
     private Button btn_login, btn_register, btn_find, btn_pwFind, testButton;
     DataService dataService = new DataService();
@@ -59,9 +63,10 @@ public class LoginActivity extends AppCompatActivity {
         btn_register = findViewById(R.id.btn_register);
 //        btn_find = findViewById(R.id.btn_find);
 //        btn_pwFind = findViewById(R.id.btn_pwFind);
-        txt_findId = (TextView)findViewById(R.id.txt_findId);
-        txt_findPwd = (TextView)findViewById(R.id.txt_findPwd);
-        txt_Join = (TextView)findViewById(R.id.txt_Join);
+        txt_findId = (TextView) findViewById(R.id.txt_findId);
+        txt_findPwd = (TextView) findViewById(R.id.txt_findPwd);
+        txt_Join = (TextView) findViewById(R.id.txt_Join);
+        txt_logout = (TextView) findViewById(R.id.txt_logout);
 
 //     ======================변경전 코드===============
 //        // 회원가입 버튼을 클릭 시 수행
@@ -144,9 +149,15 @@ public class LoginActivity extends AppCompatActivity {
             session.open(AuthType.KAKAO_LOGIN_ALL, LoginActivity.this);
 
         });
-
+        txt_logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickUnlink();
+            }
+        });
 
     }
+
     public void findId(View view) {
         Intent intent = new Intent(LoginActivity.this, FindUserActivity.class);
         startActivity(intent);
@@ -163,7 +174,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onDestroy () {
+    protected void onDestroy() {
         super.onDestroy();
 
         // 세션 콜백 삭제
@@ -171,7 +182,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult ( int requestCode, int resultCode, @Nullable Intent data){
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 
 
         // 카카오톡|스토리 간편로그인 실행 결과를 받아서 SDK로 전달
@@ -254,5 +265,50 @@ public class LoginActivity extends AppCompatActivity {
 
                     }
                 });
+    }
+
+    private void onClickUnlink() {
+        // 앱 연결 해제는 카카오 플랫폼에 연결된 사용자와 앱의 연결을 영구 해제함으로서 일반적으로 사용자가 앱 탈퇴 요청을 하는 경우와 비슷하다.
+        // 앱 연결 해제가 수행된 사용자는 영구적으로 복구가 불가능하며 카카오 플랫폼 서비스를 더이상 사용할 수 없다.
+        // 단, 다시 앱 연결을 통해 새로운 데이터로 카카오 플랫폼 서비스를 이용할 수는 있다.
+        final String appendMessage = getString(R.string.com_kakao_confirm_unlink);
+        new AlertDialog.Builder(this)
+                .setMessage(appendMessage)
+                .setPositiveButton(getString(R.string.com_kakao_ok_button),
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                UserManagement.getInstance().requestUnlink(new UnLinkResponseCallback() {
+                                    @Override
+                                    public void onFailure(ErrorResult errorResult) {
+                                        Logger.e(errorResult.toString());
+                                    }
+
+                                    @Override
+                                    public void onSessionClosed(ErrorResult errorResult) {
+//                                        redirectLoginActivity();
+                                    }
+
+                                    @Override
+                                    public void onNotSignedUp() {
+                                        LoginActivity loginActivity = new LoginActivity();
+//                                        loginActivity.redirectSignupActivity();
+                                    }
+
+                                    @Override
+                                    public void onSuccess(Long userId) {
+//                                        redirectLoginActivity();
+                                    }
+                                });
+                                dialog.dismiss();
+                            }
+                        })
+                .setNegativeButton(getString(R.string.com_kakao_cancel_button),
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        }).show();
     }
 }

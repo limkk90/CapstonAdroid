@@ -3,9 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/action_notice"
+        android:icon="@drawable/ic_bell"
         android:iconTint="#000000"
         android:title="공지사항"
-        android:icon="@drawable/ic_bell"
         android:visible="true" />
 
     <item

@@ -18,7 +18,7 @@
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"
-            android:value="8aed129972f1253dee29332d6291a455" />
+            android:value="f8ff8cf3b4f50579bf50faaa12156b54" />
 
         <activity android:name=".Reservation.ReservationDetail" />
         <activity android:name=".qna.QnaViewActivity" />
