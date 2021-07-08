@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity{
             public void onResponse(Call<ArrayList<Marker>> call, Response<ArrayList<Marker>> response) {
                 ArrayList<Marker> body = response.body();
                 //원래 body.size()
-                for(int i=0; i<50; i++){
+                for(int i=0; i<100; i++){
 //                    tMapMarkerItem2  = new TMapMarkerItem2();
                     TMapMarkerItem markerItem = new TMapMarkerItem();
                     id = body.get(i).getStat_id();

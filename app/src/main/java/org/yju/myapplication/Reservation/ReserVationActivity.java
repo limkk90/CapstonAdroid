@@ -53,8 +53,8 @@ public class ReserVationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reser_vation);
-        res_btn = findViewById(R.id.res_reserBtn);
-        res_facil = findViewById(R.id.res_cancleBtn);
+//        res_btn = findViewById(R.id.res_reserBtn);
+//        res_facil = findViewById(R.id.res_cancleBtn);
         res_findRoad = findViewById(R.id.res_searchRoad);
 
         intent = getIntent();

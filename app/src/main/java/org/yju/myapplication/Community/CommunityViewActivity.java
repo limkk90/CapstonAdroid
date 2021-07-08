@@ -134,6 +134,7 @@ public class CommunityViewActivity extends AppCompatActivity {
         });
 
         // 댓글등록
+        //로그인 안하면 댓글 못달게 수정
         btn_reply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -141,6 +142,9 @@ public class CommunityViewActivity extends AppCompatActivity {
 
                 reply.setR_content(r_content);
                 reply.setR_writer(u_id);
+                if(u_id.equals(null)){
+                    Toast.makeText(CommunityViewActivity.this, "로그인을 해주세요", Toast.LENGTH_SHORT).show();
+                }
                 Log.i("TAG", "onClick: u_id 찍히냐?" + u_id);
                 reply.setB_no(b_no);
                 Log.i("TAG", "onClick: b_no" + b_no);
@@ -202,7 +206,7 @@ public class CommunityViewActivity extends AppCompatActivity {
                 ArrayList replylist = mapper.convertValue(o, ArrayList.class);
 
                 Log.i("boardView", "글조회: " + board);
-                Log.i("boardView", "댓글목록: " + replylist.get(0));
+//                Log.i("boardView", "댓글목록: " + replylist.get(0));
 
                 try {
                     if (!replylist.equals(null)) {

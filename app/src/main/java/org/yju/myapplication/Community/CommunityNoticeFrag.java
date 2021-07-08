@@ -62,7 +62,7 @@ public class CommunityNoticeFrag extends Fragment {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onItemCLick(View v, int pos) {
-                u_id = bundle2.getString("u_id");
+//                u_id = bundle2.getString("u_id");
                 Integer a = Integer.valueOf(pos);
                 adapter.getItem(pos).getB_no();
                 adapter.getItem(pos).getU_id();
