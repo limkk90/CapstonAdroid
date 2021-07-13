@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -49,10 +50,10 @@ public class MyPageUseInfoFrag extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.mypage_useinfo, container, false);
 
+
         Bundle bundle2 = getArguments();
         u_id = bundle2.getString("u_id").replace("[", "").replace("{", "").replace("u_id=", "");
         Log.i("TAG", "onCreateView: u_id?" + u_id);
-
         // board RecyclerView
         board_record = view.findViewById(R.id.board_record);
 

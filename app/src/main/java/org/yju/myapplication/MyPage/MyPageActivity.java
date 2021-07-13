@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -54,6 +55,10 @@ public class MyPageActivity extends AppCompatActivity {
                         Log.i("TAG", "onCreate: u_id 확인확인" + u_id);
                         break;
                     case R.id.mp_useInfo:
+                        if(u_id == null){
+                            Toast.makeText(MyPageActivity.this, "로그인을 해주세요", Toast.LENGTH_SHORT).show();
+                            break;
+                        }
                         setFrag(1);
                         Bundle bundle2 = new Bundle();
                         bundle2.putString("u_id", u_id);
