@@ -84,6 +84,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_chg_st">
 
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center|end"
+            android:text="시작 :"
+            android:textColor="#000000" />
+
         <Spinner
             android:id="@+id/startSpinnerKara"
             android:layout_width="wrap_content"
@@ -95,6 +104,15 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="종료 :"
+            android:textColor="#000000" />
 
         <Spinner
             android:id="@+id/endSpinnerKara"

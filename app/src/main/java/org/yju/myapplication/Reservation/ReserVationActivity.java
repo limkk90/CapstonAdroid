@@ -34,10 +34,13 @@ public class ReserVationActivity extends AppCompatActivity {
 
     Button res_btn, res_cancle, res_facil, res_findRoad;
     Intent intent;
-    Spinner spinnerStartH, spinnerStartM, spinnerEndH, spinnerEndM;
-    String hour[] = {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17",
-            "18", "19", "20", "21", "22", "23"};
-    String minute[] = {"00", "10", "20", "30", "40", "50"};
+
+    //=====스피너
+//    Spinner spinnerStartH, spinnerStartM, spinnerEndH, spinnerEndM;
+//    String hour[] = {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17",
+//            "18", "19", "20", "21", "22", "23"};
+//    String minute[] = {"00", "10", "20", "30", "40", "50"};
+    //=====스피너
     TextView txt_station_name, txt_station_addr;
     String stat_id, stat_nm, stat_addr;
     double stat_lat, stat_Long;
@@ -73,73 +76,77 @@ public class ReserVationActivity extends AppCompatActivity {
 
         txt_station_name = findViewById(R.id.txt_stationName);
         txt_station_addr = findViewById(R.id.txt_stationAddr);
-        spinnerStartH = findViewById(R.id.startSpinnerKara);
-        spinnerStartM = findViewById(R.id.startSpinnerMade);
-        spinnerEndH = findViewById(R.id.endSpinnerKara);
-        spinnerEndM = findViewById(R.id.endSpinnerMade);
+        //스피너
+//        spinnerStartH = findViewById(R.id.startSpinnerKara);
+//        spinnerStartM = findViewById(R.id.startSpinnerMade);
+//        spinnerEndH = findViewById(R.id.endSpinnerKara);
+//        spinnerEndM = findViewById(R.id.endSpinnerMade);
+        //스피너
 
         txt_station_name.setText(stat_nm);
         txt_station_addr.setText(stat_addr);
 //        getListCharger();
-        ArrayAdapter<String> startHouradapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, hour);
-        startHouradapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerStartH.setAdapter(startHouradapter);
-        spinnerEndH.setAdapter(startHouradapter);
-
-
-        ArrayAdapter<String> startMinAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, minute);
-        startMinAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerStartM.setAdapter(startMinAdapter);
-        spinnerEndM.setAdapter(startMinAdapter);
-
-        spinnerStartH.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                Toast.makeText(getApplicationContext(), "선택된 아이템:"+ spinnerStartH.getItemAtPosition(position), Toast.LENGTH_SHORT).show();
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-        spinnerStartM.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                Toast.makeText(getApplicationContext(), "선택된 아이템:"+ spinnerStartM.getItemAtPosition(position), Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-        spinnerEndH.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                Toast.makeText(getApplicationContext(), "선택된 아이템:"+ spinnerEndH.getItemAtPosition(position), Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-        spinnerEndM.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                Toast.makeText(getApplicationContext(), "선택된 아이템:"+ spinnerEndM.getItemAtPosition(position), Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
+        //스피너
+//        ArrayAdapter<String> startHouradapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, hour);
+//        startHouradapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        spinnerStartH.setAdapter(startHouradapter);
+//        spinnerEndH.setAdapter(startHouradapter);
+//
+//
+//        ArrayAdapter<String> startMinAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, minute);
+//        startMinAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        spinnerStartM.setAdapter(startMinAdapter);
+//        spinnerEndM.setAdapter(startMinAdapter);
+//
+//        spinnerStartH.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+////                Toast.makeText(getApplicationContext(), "선택된 아이템:"+ spinnerStartH.getItemAtPosition(position), Toast.LENGTH_SHORT).show();
+//
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//
+//            }
+//        });
+//
+//        spinnerStartM.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+////                Toast.makeText(getApplicationContext(), "선택된 아이템:"+ spinnerStartM.getItemAtPosition(position), Toast.LENGTH_SHORT).show();
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//
+//            }
+//        });
+//
+//        spinnerEndH.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+////                Toast.makeText(getApplicationContext(), "선택된 아이템:"+ spinnerEndH.getItemAtPosition(position), Toast.LENGTH_SHORT).show();
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//
+//            }
+//        });
+//
+//        spinnerEndM.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+////                Toast.makeText(getApplicationContext(), "선택된 아이템:"+ spinnerEndM.getItemAtPosition(position), Toast.LENGTH_SHORT).show();
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//
+//            }
+//        });
+        //스피너
 
 
         //길 찾기 버튼 클릭 시에
