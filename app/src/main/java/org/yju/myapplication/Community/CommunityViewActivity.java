@@ -140,11 +140,17 @@ public class CommunityViewActivity extends AppCompatActivity {
             public void onClick(View v) {
                 r_content = et_reply.getText().toString();
 
+                if(r_content == null){
+                    Toast.makeText(CommunityViewActivity.this, "내용을 입력 해주세요", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 reply.setR_content(r_content);
                 reply.setR_writer(u_id);
-                if(u_id.equals(null)){
+                if(u_id ==null){
                     Toast.makeText(CommunityViewActivity.this, "로그인을 해주세요", Toast.LENGTH_SHORT).show();
+                    return;
                 }
+
                 Log.i("TAG", "onClick: u_id 찍히냐?" + u_id);
                 reply.setB_no(b_no);
                 Log.i("TAG", "onClick: b_no" + b_no);
