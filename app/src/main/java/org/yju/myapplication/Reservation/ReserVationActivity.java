@@ -179,6 +179,7 @@ public class ReserVationActivity extends AppCompatActivity {
             @Override
             public void onItemClick(View v, int pos) {
                 Intent intent = new Intent(ReserVationActivity.this, ReservationDetail.class);
+                intent.putExtra("stat_id", stat_id);
                 intent.putExtra("chg_id", adapter.getItem(pos).getChg_id());
                 intent.putExtra("chg_rsvt", adapter.getItem(pos).getChg_rsvt());
                 intent.putExtra("chg_type", adapter.getItem(pos).getChg_type());

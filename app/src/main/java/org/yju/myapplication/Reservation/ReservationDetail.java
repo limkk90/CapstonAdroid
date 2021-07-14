@@ -16,11 +16,18 @@ import android.widget.Toast;
 import org.yju.myapplication.DataService;
 import org.yju.myapplication.R;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
+
 public class ReservationDetail extends AppCompatActivity {
+    LocalDate startTime;
+    String strStart;
     DataService dataService;
     TextView txt_chg_id, txt_chg_type, txt_chg_method, txt_chg_st;
     Intent intent;
-    String statid;
+    String stat_id;
     String chg_id, chg_rsvt, chg_method;
     char chg_st;
     char chg_type;
@@ -50,7 +57,7 @@ public class ReservationDetail extends AppCompatActivity {
 
 
         intent= getIntent();
-        statid = intent.getStringExtra("statid");
+        stat_id = intent.getStringExtra("stat_id");
         chg_id = intent.getStringExtra("chg_id");
         chg_type = intent.getCharExtra("chg_type", 'a');
         chg_method = intent.getStringExtra("chg_method");
@@ -183,11 +190,29 @@ public class ReservationDetail extends AppCompatActivity {
             }
         });
 
+
         btn_reservation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+                //충전기 아이디
+                Log.i("ReservationDetail", "onCreate: " + chg_id);
+                //충전소 아이디
+                Log.i("ReservationDetail", "onCreate: " + stat_id);
+                //시작시간
+                //=======날짜 구하기=====
+                long now = System.currentTimeMillis();
+                Date date = new Date(now);
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                String year = simpleDateFormat.format(date);
+                //=======날짜구하기======
+                Log.i("ReservationDetail", "onCreate: " + year);
+//                startTime = LocalDate.now();
+//                strStart = startTime.toString() + spinnerStartH + ":" + spinnerStartM;
+//                Log.i("ReservationDetail", "onCreate: " + strStart);
+                //끝나는시간
             }
         });
+
+
     }
 }

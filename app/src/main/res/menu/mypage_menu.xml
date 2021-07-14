@@ -9,6 +9,7 @@
     <item
         android:id="@+id/mp_useInfo"
         android:iconTint="#000000"
+        android:icon="@drawable/ic_board"
         android:title="이용내역"
         android:visible="true" />
     <item
@@ -20,6 +21,7 @@
         android:id="@+id/mp_set"
         android:enabled="true"
         android:iconTint="#000000"
+        android:icon="@drawable/ic_tip"
         android:title="환경설정"
         android:visible="true" />
 </menu>
