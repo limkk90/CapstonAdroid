@@ -2,6 +2,7 @@ package org.yju.myapplication;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -39,6 +40,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
+    public static String userID = null;
     private TextView txt_findId, txt_findPwd, txt_Join, txt_logout;
     private EditText et_id, et_pass;
     private Button btn_login, btn_register, btn_find, btn_pwFind, testButton;
@@ -49,6 +51,7 @@ public class LoginActivity extends AppCompatActivity {
     com.kakao.auth.Session session;
     public static final int RC_SIGN_IN = 1;
     private Button kButton;
+    private SharedPreferences preferences;
 
 
     @Override
@@ -112,12 +115,12 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<String> call, Response<String> response) {
 
-                        Log.i("TAG", "onResponse: 이지아 병" + response.body());
                         try {
                             if (!response.body().isEmpty()) {
                                 Log.i("TAG", "onResponse: " + response.body());
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 intent.putExtra("u_id", u_id);
+
                                 startActivity(intent);
                             }
                         } catch (NullPointerException e) {

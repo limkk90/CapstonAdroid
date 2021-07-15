@@ -6,6 +6,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
@@ -58,7 +59,8 @@ public class MainActivity extends AppCompatActivity{
     private DrawerLayout drawerLayout;
     private View drawerView;
     private String u_id;
-    TMapMarkerItem2 tMapMarkerItem2;
+    SharedPreferences preferences;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +79,8 @@ public class MainActivity extends AppCompatActivity{
 //            }
 //        });
 //        myAlert.create().show();
+
+
 
 
         LinearLayout linearLayoutTmap = (LinearLayout)findViewById(R.id.tmap);
@@ -145,7 +149,8 @@ public class MainActivity extends AppCompatActivity{
                             intent.putExtra("statAddr", tMapMarkerItem.getName());
                             intent.putExtra("statLat", tMapMarkerItem.getTMapPoint().getLatitude());
                             intent.putExtra("statLong", tMapMarkerItem.getTMapPoint().getLongitude());
-
+                            u_id = getIntent().getStringExtra("u_id");
+                            intent.putExtra("user_id", u_id);
                             startActivity(intent);
                         }
                     });
@@ -177,6 +182,15 @@ public class MainActivity extends AppCompatActivity{
         txtLogin = (TextView)findViewById(R.id.txt_Login);
         txtJoin = (TextView)findViewById(R.id.txt_Join);
         //===================================================
+//        intent = new Intent(MainActivity.this, MyPageActivity.class);
+//        u_id = getIntent().getStringExtra("u_id");
+//        if(u_id != null){
+//            Log.i("찍혀라찍혀라:", "onCreate: " + u_id);
+//            SharedPreferences.Editor editor = preferences.edit();
+//            editor.putString("userid", u_id);
+//            editor.commit();
+//        }
+
 
 
 //        drawerBinding.txtMyPage.setOnClickListener(new View.OnClickListener() {

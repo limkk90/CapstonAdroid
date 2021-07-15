@@ -3,6 +3,7 @@ package org.yju.myapplication.Reservation;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,7 +15,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.yju.myapplication.DataService;
+import org.yju.myapplication.LoginActivity;
 import org.yju.myapplication.R;
+import org.yju.myapplication.data.Rsvt;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -22,9 +25,9 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 public class ReservationDetail extends AppCompatActivity {
-    String a;
-    LocalDate startTime;
-    String strStart;
+    SharedPreferences preferences;
+    Rsvt rsvt;
+    String strStartTime, strendTime;
     DataService dataService;
     TextView txt_chg_id, txt_chg_type, txt_chg_method, txt_chg_st;
     Intent intent;
@@ -37,11 +40,8 @@ public class ReservationDetail extends AppCompatActivity {
     String hour[] = {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17",
             "18", "19", "20", "21", "22", "23"};
     String minute[] = {"00", "10", "20", "30", "40", "50"};
-    String strSpinStartH;
-    String strSpinStartM;
-    String strSpinEndH;
-    String strSpinEndM;
-
+    String strSpinStartH, strSpinStartM, strSpinEndH, strSpinEndM;
+    String user_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +68,7 @@ public class ReservationDetail extends AppCompatActivity {
         chg_method = intent.getStringExtra("chg_method");
         chg_st = intent.getCharExtra("chg_st", 'a');
         chg_rsvt = intent.getStringExtra("chg_rsvt");
+        user_id = intent.getStringExtra("user_id");
 
         Log.i("ReservationDetail", "addItem: " + chg_id + "," + chg_type + "," + chg_method + "," + chg_st + "," + chg_rsvt);
 
@@ -203,6 +204,11 @@ public class ReservationDetail extends AppCompatActivity {
         btn_reservation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                rsvt = new Rsvt();
+                if(user_id == null){
+                    Toast.makeText(getApplicationContext(), "로그인을 해주세요", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 //충전기 아이디
                 Log.i("ReservationDetail", "onCreate: " + chg_id);
                 //충전소 아이디
@@ -211,19 +217,31 @@ public class ReservationDetail extends AppCompatActivity {
                 //=======날짜 구하기=====
                 long now = System.currentTimeMillis();
                 Date date = new Date(now);
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd");
                 String year = simpleDateFormat.format(date);
                 //=======날짜구하기======
 
                 Log.i("ReservationDetail", "onCreate: " + year);
-                strStart = year + spinnerStartH + ":" + spinnerStartM;
-                Log.i("ReservationDetail", "onCreate: " + strStart);
-                Log.i("ReservationDetail", "onCreate: " + strSpinStartH);
-                Log.i("ReservationDetail", "onCreate: " + strSpinStartM);
-                Log.i("ReservationDetail", "onCreate: " + strSpinEndH);
-                Log.i("ReservationDetail", "onCreate: " + strSpinEndM);
-                Log.i("ReservationDetail", "onCreate: " + a);
+                strStartTime = year + " " +strSpinStartH + ":" + strSpinStartM;
+                strendTime  = year + " " +strSpinEndH + ":" + strSpinEndM;
 
+
+//                Log.i("ReservationDetail", "onCreate: " + strStart);
+//                //스피너값
+//                Log.i("ReservationDetail", "onCreate: " + strSpinStartH);
+//                Log.i("ReservationDetail", "onCreate: " + strSpinStartM);
+//                Log.i("ReservationDetail", "onCreate: " + strSpinEndH);
+//                Log.i("ReservationDetail", "onCreate: " + strSpinEndM);
+//                //스피너값
+                Log.i("ReservationDetail", "onCreate: " + strStartTime);
+                Log.i("ReservationDetail", "onCreate: " + strendTime);
+                Log.i("ReservationDetail", "onCreate: " + user_id);
+                rsvt.setChg_id(chg_id);
+                rsvt.setStat_id(stat_id);
+                rsvt.setRsvt_start(strStartTime);
+                rsvt.setRsvt_end(strendTime);
+
+//                dataService.reservationApi.insertRsvt()
                 //끝나는시간
             }
         });

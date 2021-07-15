@@ -31,7 +31,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ReserVationActivity extends AppCompatActivity {
-
+    String user_id;
     Button res_btn, res_cancle, res_facil, res_findRoad;
     Intent intent;
 
@@ -66,6 +66,7 @@ public class ReserVationActivity extends AppCompatActivity {
         stat_addr = intent.getStringExtra("statAddr");
         stat_lat = intent.getDoubleExtra("statLat", 0);
         stat_Long = intent.getDoubleExtra("statLong", 0);
+        user_id = intent.getStringExtra("user_id");
 
         Log.i("Reversation1", "onCreate: " + stat_id);
         Log.i("Reversation1", "onCreate: " + stat_nm);
@@ -174,7 +175,7 @@ public class ReserVationActivity extends AppCompatActivity {
         recyclerView.addItemDecoration(dividerItemDecoration);
 //        getListCharger();
 //        adapter.notifyDataSetChanged();
-
+        //충전소 이미지뷰 클릭 했을 때
         adapter.setOnItemClickListener(new ReservationAdapter.OnItemCLickListener() {
             @Override
             public void onItemClick(View v, int pos) {
@@ -185,6 +186,7 @@ public class ReserVationActivity extends AppCompatActivity {
                 intent.putExtra("chg_type", adapter.getItem(pos).getChg_type());
                 intent.putExtra("chg_method", adapter.getItem(pos).getChg_method());
                 intent.putExtra("chg_st", adapter.getItem(pos).getChg_st());
+                intent.putExtra("user_id", user_id);
                 startActivity(intent);
             }
         });
