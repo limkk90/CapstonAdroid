@@ -22,6 +22,7 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 public class ReservationDetail extends AppCompatActivity {
+    String a;
     LocalDate startTime;
     String strStart;
     DataService dataService;
@@ -36,6 +37,10 @@ public class ReservationDetail extends AppCompatActivity {
     String hour[] = {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17",
             "18", "19", "20", "21", "22", "23"};
     String minute[] = {"00", "10", "20", "30", "40", "50"};
+    String strSpinStartH;
+    String strSpinStartM;
+    String strSpinEndH;
+    String strSpinEndM;
 
 
     @Override
@@ -144,7 +149,8 @@ public class ReservationDetail extends AppCompatActivity {
         spinnerStartH.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(), "선택된 아이템:"+ spinnerStartH.getItemAtPosition(position), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), "선택된 아이템:"+ spinnerStartH.getItemAtPosition(position), Toast.LENGTH_SHORT).show();
+                strSpinStartH = (String) spinnerStartH.getItemAtPosition(position);
 
             }
 
@@ -158,6 +164,7 @@ public class ReservationDetail extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(getApplicationContext(), "선택된 아이템:"+ spinnerStartM.getItemAtPosition(position), Toast.LENGTH_SHORT).show();
+                strSpinStartM = (String) spinnerStartM.getItemAtPosition(position);
             }
 
             @Override
@@ -169,7 +176,8 @@ public class ReservationDetail extends AppCompatActivity {
         spinnerEndH.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(), "선택된 아이템:"+ spinnerEndH.getItemAtPosition(position), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), "선택된 아이템:"+ spinnerEndH.getItemAtPosition(position), Toast.LENGTH_SHORT).show();
+                strSpinEndH = (String) spinnerEndH.getItemAtPosition(position);
             }
 
             @Override
@@ -181,7 +189,8 @@ public class ReservationDetail extends AppCompatActivity {
         spinnerEndM.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(), "선택된 아이템:"+ spinnerEndM.getItemAtPosition(position), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), "선택된 아이템:"+ spinnerEndM.getItemAtPosition(position), Toast.LENGTH_SHORT).show();
+                strSpinEndM = (String) spinnerEndM.getItemAtPosition(position);
             }
 
             @Override
@@ -205,14 +214,18 @@ public class ReservationDetail extends AppCompatActivity {
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
                 String year = simpleDateFormat.format(date);
                 //=======날짜구하기======
+
                 Log.i("ReservationDetail", "onCreate: " + year);
-//                startTime = LocalDate.now();
-//                strStart = startTime.toString() + spinnerStartH + ":" + spinnerStartM;
-//                Log.i("ReservationDetail", "onCreate: " + strStart);
+                strStart = year + spinnerStartH + ":" + spinnerStartM;
+                Log.i("ReservationDetail", "onCreate: " + strStart);
+                Log.i("ReservationDetail", "onCreate: " + strSpinStartH);
+                Log.i("ReservationDetail", "onCreate: " + strSpinStartM);
+                Log.i("ReservationDetail", "onCreate: " + strSpinEndH);
+                Log.i("ReservationDetail", "onCreate: " + strSpinEndM);
+                Log.i("ReservationDetail", "onCreate: " + a);
+
                 //끝나는시간
             }
         });
-
-
     }
 }
