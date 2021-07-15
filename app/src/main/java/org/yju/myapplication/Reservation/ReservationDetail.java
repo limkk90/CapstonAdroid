@@ -24,6 +24,10 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class ReservationDetail extends AppCompatActivity {
     SharedPreferences preferences;
     Rsvt rsvt;
@@ -241,7 +245,17 @@ public class ReservationDetail extends AppCompatActivity {
                 rsvt.setRsvt_start(strStartTime);
                 rsvt.setRsvt_end(strendTime);
 
-//                dataService.reservationApi.insertRsvt()
+                dataService.reservationApi.insertRsvt(rsvt).enqueue(new Callback<Boolean>() {
+                    @Override
+                    public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                        Log.i("ReservationDetail", "성공");
+                    }
+
+                    @Override
+                    public void onFailure(Call<Boolean> call, Throwable t) {
+                        Log.i("ReservationDetail", "실패");
+                    }
+                });
                 //끝나는시간
             }
         });
