@@ -244,6 +244,7 @@ public class ReservationDetail extends AppCompatActivity {
                 rsvt.setStat_id(stat_id);
                 rsvt.setRsvt_start(strStartTime);
                 rsvt.setRsvt_end(strendTime);
+                rsvt.setU_id(user_id);
 
                 dataService.reservationApi.insertRsvt(rsvt).enqueue(new Callback<Boolean>() {
                     @Override
