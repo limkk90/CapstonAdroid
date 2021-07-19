@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
-        <activity android:name=".Community.CommunityWarningActivity"></activity>
+        <activity android:name=".Reservation.CheckTodayRsvt"></activity>
+        <activity android:name=".Community.CommunityWarningActivity" />
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"

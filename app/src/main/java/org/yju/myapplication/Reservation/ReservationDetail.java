@@ -19,9 +19,11 @@ import org.yju.myapplication.LoginActivity;
 import org.yju.myapplication.R;
 import org.yju.myapplication.data.Rsvt;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 import retrofit2.Call;
@@ -32,7 +34,7 @@ public class ReservationDetail extends AppCompatActivity {
     SharedPreferences preferences;
     Rsvt rsvt;
     String strStartTime, strendTime;
-    DataService dataService;
+    DataService dataService = new DataService();
     TextView txt_chg_id, txt_chg_type, txt_chg_method, txt_chg_st;
     Intent intent;
     String stat_id;
@@ -221,7 +223,7 @@ public class ReservationDetail extends AppCompatActivity {
                 //=======날짜 구하기=====
                 long now = System.currentTimeMillis();
                 Date date = new Date(now);
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd");
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
                 String year = simpleDateFormat.format(date);
                 //=======날짜구하기======
 
@@ -240,21 +242,24 @@ public class ReservationDetail extends AppCompatActivity {
                 Log.i("ReservationDetail", "onCreate: " + strStartTime);
                 Log.i("ReservationDetail", "onCreate: " + strendTime);
                 Log.i("ReservationDetail", "onCreate: " + user_id);
+
                 rsvt.setChg_id(chg_id);
                 rsvt.setStat_id(stat_id);
                 rsvt.setRsvt_start(strStartTime);
                 rsvt.setRsvt_end(strendTime);
                 rsvt.setU_id(user_id);
 
+                Log.i("ReservationDetail", "onCreate: " + rsvt);
+//                ReservationApi reservationApi = dataService.reservationApi;
                 dataService.reservationApi.insertRsvt(rsvt).enqueue(new Callback<Boolean>() {
                     @Override
                     public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-                        Log.i("ReservationDetail", "성공");
+
                     }
 
                     @Override
                     public void onFailure(Call<Boolean> call, Throwable t) {
-                        Log.i("ReservationDetail", "실패");
+
                     }
                 });
                 //끝나는시간
