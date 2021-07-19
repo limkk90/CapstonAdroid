@@ -3,6 +3,7 @@ package org.yju.myapplication.Reservation;
 import org.yju.myapplication.data.Charger;
 import org.yju.myapplication.data.Rsvt;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -19,6 +20,9 @@ public interface ReservationApi {
 
     @POST("api/reservation")
     Call<Boolean> insertRsvt(@Body Rsvt rsvt);
+
+    @GET("api/todays-reservation/{chg_id}/{stat_id}")
+    Call<List<Rsvt>> getTodaysRsvt(@Path("chg_id") String chg_id, @Path("stat_id") String stat_id);
 
 
 }
