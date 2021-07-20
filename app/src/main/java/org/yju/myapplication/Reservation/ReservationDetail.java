@@ -262,6 +262,7 @@ public class ReservationDetail extends AppCompatActivity {
 
                     }
                 });
+
                 //끝나는시간
             }
         });

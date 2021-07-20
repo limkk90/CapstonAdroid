@@ -15,11 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
         <activity android:name=".Reservation.KakaoPay">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".Reservation.CheckTodayRsvt" />
         <activity android:name=".Community.CommunityWarningActivity" />
@@ -40,7 +36,11 @@
         <activity android:name=".Community.CommunityAcitivty" />
         <activity android:name=".MyPage.MyPageActivity" />
         <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".UserProfileActivity" />
         <activity android:name=".UpdatePwActivity" />
