@@ -19,6 +19,10 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.skt.Tmap.TMapData;
+import com.skt.Tmap.TMapPOIItem;
+import com.skt.Tmap.TMapPoint;
+
 import org.yju.myapplication.DataService;
 import org.yju.myapplication.R;
 import org.yju.myapplication.data.Charger;
@@ -32,7 +36,7 @@ import retrofit2.Response;
 
 public class ReserVationActivity extends AppCompatActivity {
     String user_id;
-    Button res_btn, res_cancle, res_facil, res_findRoad;
+    Button res_btn, res_cancle, res_poiBtn, res_findRoad;
     Intent intent;
 
     //=====스피너
@@ -59,6 +63,7 @@ public class ReserVationActivity extends AppCompatActivity {
 //        res_btn = findViewById(R.id.res_reserBtn);
 //        res_facil = findViewById(R.id.res_cancleBtn);
         res_findRoad = findViewById(R.id.res_searchRoad);
+        res_poiBtn = findViewById(R.id.res_poiBtn);
 
         intent = getIntent();
         stat_id = intent.getStringExtra("statId").substring(10);
@@ -91,69 +96,31 @@ public class ReserVationActivity extends AppCompatActivity {
         txt_station_name.setText(stat_nm);
         txt_station_addr.setText(stat_addr);
 //        getListCharger();
-        //스피너
-//        ArrayAdapter<String> startHouradapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, hour);
-//        startHouradapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        spinnerStartH.setAdapter(startHouradapter);
-//        spinnerEndH.setAdapter(startHouradapter);
-//
-//
-//        ArrayAdapter<String> startMinAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, minute);
-//        startMinAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        spinnerStartM.setAdapter(startMinAdapter);
-//        spinnerEndM.setAdapter(startMinAdapter);
-//
-//        spinnerStartH.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-////                Toast.makeText(getApplicationContext(), "선택된 아이템:"+ spinnerStartH.getItemAtPosition(position), Toast.LENGTH_SHORT).show();
-//
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//
-//            }
-//        });
-//
-//        spinnerStartM.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-////                Toast.makeText(getApplicationContext(), "선택된 아이템:"+ spinnerStartM.getItemAtPosition(position), Toast.LENGTH_SHORT).show();
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//
-//            }
-//        });
-//
-//        spinnerEndH.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-////                Toast.makeText(getApplicationContext(), "선택된 아이템:"+ spinnerEndH.getItemAtPosition(position), Toast.LENGTH_SHORT).show();
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//
-//            }
-//        });
-//
-//        spinnerEndM.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-////                Toast.makeText(getApplicationContext(), "선택된 아이템:"+ spinnerEndM.getItemAtPosition(position), Toast.LENGTH_SHORT).show();
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//
-//            }
-//        });
-        //스피너
 
+        //주변시설 버튼 클릭 시에
+        res_poiBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ReserVationActivity.this, FacilRecoActivity.class);
+                intent.putExtra("statLat", stat_lat);
+                intent.putExtra("statLong", stat_Long);
 
+                TMapPoint tMapPoint =new TMapPoint(stat_lat ,stat_Long);
+                TMapData tMapData = new TMapData();
+                tMapData.findAroundNamePOI(tMapPoint, "편의점, PC방, 노래방, 카페, 목욕탕" , new TMapData.FindAroundNamePOIListenerCallback() {
+                    @Override
+                    public void onFindAroundNamePOI(ArrayList<TMapPOIItem> arrayList) {
+                        Log.i("Reversation1", "onFindAroundNamePOI: "+ arrayList);
+//                        for(int i=0; i<arrayList.size(); i++){
+//                            TMapPOIItem item = arrayList.get(i);
+//                            Log.i("Reversation1", "POI Name: " + item.getPOIName().toString() + ", " +
+//                                    "Address: " + item.getPOIAddress().replace("null", "")  + ", " +
+//                                    "Point: " + item.getPOIPoint().toString());
+//                        }
+                    }
+                });
+            }
+        });
         //길 찾기 버튼 클릭 시에
         res_findRoad.setOnClickListener(new View.OnClickListener() {
             @Override
