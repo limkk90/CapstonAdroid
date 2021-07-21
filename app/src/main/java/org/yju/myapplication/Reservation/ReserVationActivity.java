@@ -68,11 +68,15 @@ public class ReserVationActivity extends AppCompatActivity {
         stat_Long = intent.getDoubleExtra("statLong", 0);
         user_id = intent.getStringExtra("user_id");
 
+
+
         Log.i("Reversation1", "onCreate: " + stat_id);
         Log.i("Reversation1", "onCreate: " + stat_nm);
         Log.i("Reversation1", "onCreate: " + stat_addr);
         Log.i("Reversation1", "onCreate: " + stat_lat);
         Log.i("Reversation1", "onCreate: " + stat_Long);
+        Log.i("Reversation1", "onCreate: " + (float)stat_Long);
+        Log.i("Reversation1", "onCreate: " + (float)stat_Long);
 
 
         txt_station_name = findViewById(R.id.txt_stationName);
@@ -155,6 +159,7 @@ public class ReserVationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ReserVationActivity.this, SearchRoad.class);
+
                 intent.putExtra("statLat", stat_lat);
                 intent.putExtra("statLong", stat_Long);
                 startActivity(intent);
