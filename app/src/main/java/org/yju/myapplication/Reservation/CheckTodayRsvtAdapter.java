@@ -1,6 +1,8 @@
 package org.yju.myapplication.Reservation;
 
 import android.content.Context;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,12 +48,24 @@ public class CheckTodayRsvtAdapter extends RecyclerView.Adapter<CheckTodayRsvtAd
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Rsvt rsvt = rsvtData.get(position);
 
+        holder.rsvt_start.setText(rsvt.getRsvt_start());
+        holder.rsvt_end.setText(rsvt.getRsvt_end());
+        holder.rsvt_user_id.setText(rsvt.getU_id());
+
+        holder.rsvt_start.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
+        holder.rsvt_end.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
+        holder.rsvt_user_id.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
+
+        holder.rsvt_start.setGravity(Gravity.CENTER);
+        holder.rsvt_end.setGravity(Gravity.CENTER);
+        holder.rsvt_user_id.setGravity(Gravity.CENTER);
+
 
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return rsvtData.size();
     }
 
 

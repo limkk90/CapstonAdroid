@@ -12,5 +12,11 @@ public class FacilRecoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_facil_reco);
+
+        //1.인텐트로 넘겨준 lat,long 가져온다
+
+        //tmapPoint를 만든다
+
+        //
     }
 }
