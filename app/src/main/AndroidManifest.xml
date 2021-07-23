@@ -14,9 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
-        <activity android:name=".Reservation.KakaoPay">
-
-        </activity>
+        <activity android:name=".Reservation.FacilRecoActivity"></activity>
+        <activity android:name=".Reservation.KakaoPay" />
         <activity android:name=".Reservation.CheckTodayRsvt" />
         <activity android:name=".Community.CommunityWarningActivity" />
 

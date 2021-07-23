@@ -63,7 +63,7 @@ public interface BoardApi {
     // post로 바꾼후 fragment확인하기!
 
     // 댓글 등록
-    @POST("api/reply/remove")
+    @POST("api/reply")
     Call<String> replyAdd(@Body Reply reply);
 
     // 신고 하기

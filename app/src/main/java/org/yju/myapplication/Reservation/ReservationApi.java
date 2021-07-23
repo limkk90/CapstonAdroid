@@ -24,7 +24,7 @@ public interface ReservationApi {
 
     //충전 싹 다 조회
     @GET("api/todays-reservation/{chg_id}/{stat_id}")
-    Call<List<Rsvt>> getTodaysRsvt(@Path("chg_id") String chg_id, @Path("stat_id") String stat_id);
+    Call<ArrayList<Rsvt>> getTodaysRsvt(@Path("chg_id") String chg_id, @Path("stat_id") String stat_id);
 
 
 }

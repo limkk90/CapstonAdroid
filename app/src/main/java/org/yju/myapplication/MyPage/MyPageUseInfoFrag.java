@@ -87,7 +87,7 @@ public class MyPageUseInfoFrag extends Fragment {
         bList.clear();
         rList.clear();
         getListBoard();
-        getRsvt();
+//        getRsvt();
         cAdapter.notifyDataSetChanged();
         rAdapter.notifyDataSetChanged();
     }
@@ -132,22 +132,22 @@ public class MyPageUseInfoFrag extends Fragment {
         });
     }
 
-    public void getRsvt(){
-        dataService.myPageApi.myRsvt(u_id).enqueue(new Callback<ArrayList<Rsvt>>() {
-            @Override
-            public void onResponse(Call<ArrayList<Rsvt>> call, Response<ArrayList<Rsvt>> response) {
-                ArrayList<Rsvt> body = response.body();
-                Log.i("TAG", "onResponse: reservation" + body);
-                for (int i=0; i<body.size(); i++) {
-                    addItem2(body.get(i).getChg_id(), body.get(i).getStat_id(), body.get(i).getRsvt_start(), body.get(i).getRsvt_end());
-                }
-                addItem(null, null, null, null);
-            }
-
-            @Override
-            public void onFailure(Call<ArrayList<Rsvt>> call, Throwable t) {
-
-            }
-        });
-    }
+//    public void getRsvt(){
+//        dataService.myPageApi.myRsvt(u_id).enqueue(new Callback<ArrayList<Rsvt>>() {
+//            @Override
+//            public void onResponse(Call<ArrayList<Rsvt>> call, Response<ArrayList<Rsvt>> response) {
+//                ArrayList<Rsvt> body = response.body();
+//                Log.i("TAG", "onResponse: reservation" + body);
+//                for (int i=0; i<body.size(); i++) {
+//                    addItem2(body.get(i).getChg_id(), body.get(i).getStat_id(), body.get(i).getRsvt_start(), body.get(i).getRsvt_end());
+//                }
+//                addItem(null, null, null, null);
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ArrayList<Rsvt>> call, Throwable t) {
+//
+//            }
+//        });
+//    }
 }

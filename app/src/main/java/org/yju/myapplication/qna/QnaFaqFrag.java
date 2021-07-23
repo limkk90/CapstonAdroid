@@ -47,7 +47,6 @@ public class QnaFaqFrag extends Fragment {
         Log.i("TAG", "onCreateView: 아이디 넘어옴??" + bundle);
 
         recyclerView = view.findViewById(R.id.recyclerView);
-
         adapter = new QnaAdapter(bList);
         recyclerView.setAdapter(adapter);
         linearLayoutManager = new LinearLayoutManager(getActivity());
@@ -102,7 +101,6 @@ public class QnaFaqFrag extends Fragment {
                 }
                 addItem(null, null, null, null);
                 adapter.notifyDataSetChanged();
-
             }
 
             @Override

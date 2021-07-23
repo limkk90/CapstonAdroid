@@ -1,6 +1,7 @@
 package org.yju.myapplication.Reservation;
 
 import android.content.Context;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -16,12 +17,18 @@ import org.yju.myapplication.data.Charger;
 import org.yju.myapplication.data.Rsvt;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CheckTodayRsvtAdapter extends RecyclerView.Adapter<CheckTodayRsvtAdapter.ViewHolder> {
-        private ArrayList<Rsvt> rsvtData = null;
+        private ArrayList<Rsvt> mData = null;
+
     CheckTodayRsvtAdapter(ArrayList<Rsvt> list){
-        rsvtData = list;
+        this.mData = list;
     }
+
+//    public void addList(ArrayList<Rsvt> mData) {
+//        this.mData = mData;
+//    }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView rsvt_start, rsvt_end, rsvt_user_id;
@@ -39,18 +46,18 @@ public class CheckTodayRsvtAdapter extends RecyclerView.Adapter<CheckTodayRsvtAd
     public CheckTodayRsvtAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.charger_item, parent, false);
+        View view = inflater.inflate(R.layout.rsvt_todayrsvtcheck, parent, false);
         CheckTodayRsvtAdapter.ViewHolder vh = new CheckTodayRsvtAdapter.ViewHolder(view);
         return vh;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Rsvt rsvt = rsvtData.get(position);
+    public void onBindViewHolder(@NonNull CheckTodayRsvtAdapter.ViewHolder holder, int position) {
+        Rsvt item = mData.get(position);
 
-        holder.rsvt_start.setText(rsvt.getRsvt_start());
-        holder.rsvt_end.setText(rsvt.getRsvt_end());
-        holder.rsvt_user_id.setText(rsvt.getU_id());
+        holder.rsvt_start.setText(item.getRsvt_start());
+        holder.rsvt_end.setText(item.getRsvt_end());
+        holder.rsvt_user_id.setText(item.getU_id());
 
         holder.rsvt_start.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
         holder.rsvt_end.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
@@ -65,7 +72,8 @@ public class CheckTodayRsvtAdapter extends RecyclerView.Adapter<CheckTodayRsvtAd
 
     @Override
     public int getItemCount() {
-        return rsvtData.size();
+        return (mData != null ? mData.size() : 0);
+//        return mData.size();
     }
 
 

@@ -38,6 +38,7 @@ public class ReserVationActivity extends AppCompatActivity {
     String user_id;
     Button res_btn, res_cancle, res_poiBtn, res_findRoad;
     Intent intent;
+    ArrayList<TMapPOIItem> poiList = null;
 
     //=====스피너
 //    Spinner spinnerStartH, spinnerStartM, spinnerEndH, spinnerEndM;
@@ -105,20 +106,10 @@ public class ReserVationActivity extends AppCompatActivity {
                 intent.putExtra("statLat", stat_lat);
                 intent.putExtra("statLong", stat_Long);
 
-                TMapPoint tMapPoint =new TMapPoint(stat_lat ,stat_Long);
-                TMapData tMapData = new TMapData();
-                tMapData.findAroundNamePOI(tMapPoint, "편의점, PC방, 노래방, 카페, 목욕탕" , new TMapData.FindAroundNamePOIListenerCallback() {
-                    @Override
-                    public void onFindAroundNamePOI(ArrayList<TMapPOIItem> arrayList) {
-                        Log.i("Reversation1", "onFindAroundNamePOI: "+ arrayList);
-//                        for(int i=0; i<arrayList.size(); i++){
-//                            TMapPOIItem item = arrayList.get(i);
-//                            Log.i("Reversation1", "POI Name: " + item.getPOIName().toString() + ", " +
-//                                    "Address: " + item.getPOIAddress().replace("null", "")  + ", " +
-//                                    "Point: " + item.getPOIPoint().toString());
-//                        }
-                    }
-                });
+
+//                Log.i("Reversation1", "onFindAroundNamePOI제: "+ poiList);
+//                intent.putExtra("poi", poiList);
+                startActivity(intent);
             }
         });
         //길 찾기 버튼 클릭 시에

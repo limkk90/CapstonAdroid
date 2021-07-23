@@ -48,6 +48,7 @@ public class ReservationDetail extends AppCompatActivity {
     String minute[] = {"00", "10", "20", "30", "40", "50"};
     String strSpinStartH, strSpinStartM, strSpinEndH, strSpinEndM;
     String user_id;
+    TextView txt_check_todayRsvt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,11 +60,13 @@ public class ReservationDetail extends AppCompatActivity {
         txt_chg_st = findViewById(R.id.txt_chg_st);
         btn_reservation = findViewById(R.id.res_reserBtn);
         btn_reserCancle = findViewById(R.id.res_reserCancle);
+        txt_check_todayRsvt = findViewById(R.id.txt_todayRsvt);
 
         spinnerStartH = findViewById(R.id.startSpinnerKara);
         spinnerStartM = findViewById(R.id.startSpinnerMade);
         spinnerEndH = findViewById(R.id.endSpinnerKara);
         spinnerEndM = findViewById(R.id.endSpinnerMade);
+
 
 
 
@@ -77,6 +80,7 @@ public class ReservationDetail extends AppCompatActivity {
         user_id = intent.getStringExtra("user_id");
 
         Log.i("ReservationDetail", "addItem: " + chg_id + "," + chg_type + "," + chg_method + "," + chg_st + "," + chg_rsvt);
+        Log.i("ReservationDetail", "onCreate: " + stat_id);
 
 
         if(chg_id.equals("1")){
@@ -205,8 +209,18 @@ public class ReservationDetail extends AppCompatActivity {
 
             }
         });
+        //예약현황 클릭
+        txt_check_todayRsvt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ReservationDetail.this, CheckTodayRsvt.class);
+                intent.putExtra("stat_id", stat_id);
+                intent.putExtra("chg_id", chg_id);
+                startActivity(intent);
+            }
+        });
 
-
+        //예약 버튼 클릭
         btn_reservation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -263,6 +277,10 @@ public class ReservationDetail extends AppCompatActivity {
                     }
                 });
 
+                Intent intent = new Intent(ReservationDetail.this, KakaoPay.class);
+                intent.putExtra("start_time", strStartTime);
+                intent.putExtra("end_time", strendTime);
+                startActivity(intent); //KakaoPay.class
                 //끝나는시간
             }
         });
