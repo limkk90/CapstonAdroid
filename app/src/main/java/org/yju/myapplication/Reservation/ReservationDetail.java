@@ -132,6 +132,8 @@ public class ReservationDetail extends AppCompatActivity {
             txt_chg_method.setText("DC차데모 +AC3상");
         }if(chg_method.equals("11")){
             txt_chg_method.setText("DC차데모 +DC콤보+AC3상");
+        }if(chg_method.equals("12")){
+            txt_chg_method.setText("AC완속+AC3상");
         }
 
         if(chg_st =='1'){

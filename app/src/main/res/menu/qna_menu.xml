@@ -4,14 +4,17 @@
         android:id="@+id/qna_FAQ"
         android:iconTint="#000000"
         android:title="FAQ"
+        android:icon="@drawable/ic_board"
         android:visible="true" />
     <item
         android:id="@+id/qna_oneQNA"
         android:iconTint="#000000"
+        android:icon="@drawable/ic_baseline_person_24"
         android:title="1:1문의"
         android:visible="true" />
     <item
         android:id="@+id/qna_myQNA"
+        android:icon="@drawable/ic_menubook"
         android:iconTint="#000000"
         android:title="문의내역"
         android:visible="true" />

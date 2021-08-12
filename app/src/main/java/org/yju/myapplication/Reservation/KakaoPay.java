@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import org.yju.myapplication.R;
 
@@ -39,12 +40,14 @@ public class KakaoPay extends AppCompatActivity {
     Calendar calendarStart, calendarEnd;
     double chargingPay;
     long diff, diffMinutes;
+    EditText inputKW;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kakao_pay);
         //yyyy-MM-dd HH:mm:ss
         btn_kakaoPay = findViewById(R.id.btn_kakaoPay);
+
         intent = getIntent();
         strStartTime = intent.getStringExtra("start_time");
         strEndTime = intent.getStringExtra("end_time");
