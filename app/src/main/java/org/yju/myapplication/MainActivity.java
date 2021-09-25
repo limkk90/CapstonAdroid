@@ -305,4 +305,9 @@ public class MainActivity extends AppCompatActivity{
         super.onDestroy();
     }
 
+    public void test(){
+        TMapData tMapData;
+        Log.i("test", "test: "+tmapdata);
+    }
+
 }
